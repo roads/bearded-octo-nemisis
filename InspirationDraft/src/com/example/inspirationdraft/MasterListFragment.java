@@ -3,12 +3,10 @@ package com.example.inspirationdraft;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -103,7 +101,7 @@ public class MasterListFragment extends ListFragment {
     	ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_single_choice);
     	inspirations.clear();
     	File appDir = getActivity().getFilesDir();
-    	inspirations.load(new File(appDir, "profiles.bin"));
+    	inspirations.load(new File(appDir, "inspirations.bin"));
     	for (String id : inspirations) {
     		adapter.add(id);
     	}
