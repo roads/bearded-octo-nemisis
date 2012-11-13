@@ -1,0 +1,12 @@
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_new_profile"
+        android:title="@string/menu_new_profile"
+        android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/menu_delete_profile"
+        android:title="@string/menu_delete_profile"
+        android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/menu_edit_profile"
+        android:title="@string/menu_edit_profile"
+        android:showAsAction="ifRoom|withText" />
+</menu>
