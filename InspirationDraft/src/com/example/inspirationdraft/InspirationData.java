@@ -5,7 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class Inspiration implements Serializable{
+public class InspirationData implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -13,13 +13,13 @@ public class Inspiration implements Serializable{
 	private int inspirationID;
 	private String content;
 	
-	public Inspiration() {
+	public InspirationData() {
 		this.inspirationID = inspirationCount;
 		inspirationCount++;
 		this.content = "A man who does not read good books has no advantage over the man who can't read them. -Mark Twain";
 	}
 	
-	public Inspiration(String content){
+	public InspirationData(String content){
 		this.inspirationID = inspirationCount;
 		inspirationCount++;
 		this.content = content;

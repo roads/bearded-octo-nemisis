@@ -16,17 +16,17 @@ import android.util.Log;
 
 public class InspirationList implements Iterable<Integer> {
 
-	private Map<Integer,Inspiration> inspirations;
+	private Map<Integer,InspirationData> inspirations;
 	
 	public InspirationList() {
-		inspirations = new TreeMap<Integer,Inspiration>();
+		inspirations = new TreeMap<Integer,InspirationData>();
 	}
 	
 	public void addInspiration(Integer id) {
-		inspirations.put(id, new Inspiration());
+		inspirations.put(id, new InspirationData());
 	}
 	
-	public void addInspiration(Integer id, Inspiration data) {
+	public void addInspiration(Integer id, InspirationData data) {
 		inspirations.put(id, data);
 	}
 	
@@ -42,7 +42,7 @@ public class InspirationList implements Iterable<Integer> {
 		inspirations.remove(id);
 	}
 	
-	public Inspiration getID(Integer id) {
+	public InspirationData getID(Integer id) {
 		return inspirations.get(id);
 	}
 	
@@ -78,7 +78,7 @@ public class InspirationList implements Iterable<Integer> {
 					new ObjectInputStream(
 							new FileInputStream(f));
 			
-			inspirations = (TreeMap<Integer,Inspiration>) input.readObject();
+			inspirations = (TreeMap<Integer,InspirationData>) input.readObject();
 			
 			input.close();
 			

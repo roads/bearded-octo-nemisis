@@ -29,7 +29,7 @@ public class Lesson {
 		return lessonID;
 	}
 	
-	public void addInspirationID(Inspiration newInspiration){
+	public void addInspirationID(InspirationData newInspiration){
 		idList.add(newInspiration.getID());
 		lessonLength++;
 	}
