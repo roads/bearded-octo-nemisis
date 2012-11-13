@@ -41,6 +41,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.inspirationdraft" />
         </activity>
+        <activity
+            android:name=".EditInspiration"
+            android:label="@string/title_activity_edit_inspiration" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="android.support.v4.app.FragmentActivity" />
+        </activity>
     </application>
 
 </manifest>

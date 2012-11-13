@@ -48,7 +48,7 @@ public class MasterListFragment extends ListFragment {
 	
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
-		MenuItem delete = menu.fineItem(R.id.menu_delete_inspiration);
+		MenuItem delete = menu.findItem(R.id.menu_delete_inspiration);
 		MenuItem edit = menu.findItem(R.id.menu_edit_inspiration);
 		if (itemSelected != -1) {
 			delete.setEnabled(true);
@@ -66,7 +66,7 @@ public class MasterListFragment extends ListFragment {
 		}
 		if (item.getItemId() == R.id.menu_edit_inspiration) {
 			TextView text = (TextView) getListView().getChildAt(itemSelected);
-			intent.putExtra("content", text.getText().toString());
+			intent.putExtra("id", text.getText().toString());
 	        getActivity().startActivity(intent);
 	        itemSelected = -1;
     			getActivity().invalidateOptionsMenu();
@@ -92,22 +92,22 @@ public class MasterListFragment extends ListFragment {
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);   
     }
 	
-    public void remove_id(Integer id) {
-    	inspirations.removeID(id);
+    public void remove_id(String id) {
+    	inspirations.removeID(Integer.parseInt(id));
     	inspirations.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
     	setListAdapter(getCurrentInspirations());
     	itemSelected = -1;
     	getActivity().invalidateOptionsMenu();
     }
     
-    public ArrayAdapter<String> getCurrentInspirations() {
+    public ArrayAdapter<Integer> getCurrentInspirations() {
     	
-    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_single_choice);
+    	ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_list_item_single_choice);
     	inspirations.clear();
     	File appDir = getActivity().getFilesDir();
     	inspirations.load(new File(appDir, "profiles.bin"));
-    	for (String content : inspirations) {
-    		adapter.add(content);
+    	for (Integer id : inspirations) {
+    		adapter.add(id);
     	}
     	return adapter;
     }
