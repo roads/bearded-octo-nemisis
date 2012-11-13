@@ -28,13 +28,6 @@
                 android:value="com.example.inspirationDraft" />
         </activity>
         <activity
-            android:name=".CreateInspirationActivity"
-            android:label="@string/title_activity_create_inspiration" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.inspirationdraft" />
-        </activity>
-        <activity
             android:name=".DetailsActivity"
             android:label="@string/title_activity_details" >
             <meta-data
@@ -46,7 +39,7 @@
             android:label="@string/title_activity_edit_inspiration" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="android.support.v4.app.FragmentActivity" />
+                android:value="com.example.inspirationdraft" />
         </activity>
     </application>
 

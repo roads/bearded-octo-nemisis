@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <fragment class="edu.colorado.profileviewer.InspirationDetailFragment"
+    <fragment class="com.example.inspirationdraft.InspirationDetailFragment"
             android:id="@+id/detail"
             android:layout_weight="1"
             android:layout_width="0dp"

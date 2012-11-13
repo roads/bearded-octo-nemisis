@@ -83,8 +83,6 @@ public class MasterListFragment extends ListFragment {
 		getActivity().invalidateOptionsMenu();
 	}
 	
-    
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setEmptyText("No Inspirations");
@@ -93,20 +91,20 @@ public class MasterListFragment extends ListFragment {
     }
 	
     public void remove_id(String id) {
-    	inspirations.removeID(Integer.parseInt(id));
+    	inspirations.removeID(id);
     	inspirations.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
     	setListAdapter(getCurrentInspirations());
     	itemSelected = -1;
     	getActivity().invalidateOptionsMenu();
     }
     
-    public ArrayAdapter<Integer> getCurrentInspirations() {
+    public ArrayAdapter<String> getCurrentInspirations() {
     	
-    	ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_list_item_single_choice);
+    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_single_choice);
     	inspirations.clear();
     	File appDir = getActivity().getFilesDir();
     	inspirations.load(new File(appDir, "profiles.bin"));
-    	for (Integer id : inspirations) {
+    	for (String id : inspirations) {
     		adapter.add(id);
     	}
     	return adapter;

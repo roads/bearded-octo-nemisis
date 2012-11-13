@@ -4,13 +4,13 @@ import android.util.SparseArray;
 
 public class LessonList {
 
-	private SparseArray<Lesson> lessonMap = new SparseArray<Lesson>();
+	private SparseArray<LessonData> lessonMap = new SparseArray<LessonData>();
 	
-	public Lesson getLesson(int lessonID) {
+	public LessonData getLesson(int lessonID) {
 		return lessonMap.get(lessonID);
 	}
 
-	public void putLesson(Lesson newLesson) {
+	public void putLesson(LessonData newLesson) {
 		lessonMap.put(newLesson.getID(), newLesson);
 	}
 	

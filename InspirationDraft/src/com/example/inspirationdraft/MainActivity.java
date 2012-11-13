@@ -73,12 +73,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
     
-    // Called when the user clicks the Create Inspiration button
-    public void createInspiration(View view) {
-    	Intent intent = new Intent(this, CreateInspirationActivity.class);
-    	startActivity(intent);
-    }
-    
     // Called when the user clicks the Create Activity button
     public void createActivity(View view) {
     	Intent intent = new Intent(this, CreateLessonActivity.class);

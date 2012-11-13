@@ -2,7 +2,7 @@ package com.example.inspirationdraft;
 
 import java.util.ArrayList;
 
-public class Lesson {
+public class LessonData {
 
 	static int lessonCount;
 	private int lessonID;
@@ -12,7 +12,7 @@ public class Lesson {
 	//private SelectionBehavior selectionBehavior;
 	//private AlertBehavior alertBehavior;
 	
-	public Lesson() {
+	public LessonData() {
 		this.lessonID = lessonCount;
 		lessonCount++;
 	}
@@ -30,8 +30,8 @@ public class Lesson {
 	}
 	
 	public void addInspirationID(InspirationData newInspiration){
-		idList.add(newInspiration.getID());
-		lessonLength++;
+//		idList.add(newInspiration.getID());
+//		lessonLength++;
 	}
 	
 	public int getNextInspirationID(){

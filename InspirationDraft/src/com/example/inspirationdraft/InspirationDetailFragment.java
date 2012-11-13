@@ -15,14 +15,14 @@ import android.widget.EditText;
 public class InspirationDetailFragment extends Fragment {
 	
 	private InspirationList inspirations = new InspirationList();
-	private Integer id;
+	private String id;
 	private boolean saveData = true;
 	
 	public void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 
-		id = getActivity().getIntent().getIntExtra("id", 1);
+		id = getActivity().getIntent().getStringExtra("id");
 
 	}
 	

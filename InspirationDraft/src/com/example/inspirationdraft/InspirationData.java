@@ -10,22 +10,22 @@ public class InspirationData implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	static int inspirationCount;
-	private int inspirationID;
+	private String inspirationID;
 	private String content;
 	
 	public InspirationData() {
-		this.inspirationID = inspirationCount;
+		this.inspirationID = Integer.toString(inspirationCount);
 		inspirationCount++;
 		this.content = "A man who does not read good books has no advantage over the man who can't read them. -Mark Twain";
 	}
 	
 	public InspirationData(String content){
-		this.inspirationID = inspirationCount;
+		this.inspirationID = Integer.toString(inspirationCount);
 		inspirationCount++;
 		this.content = content;
 	}
 
-	public int getID() {
+	public String getID() {
 		return this.inspirationID;
 	}
 	
@@ -38,7 +38,7 @@ public class InspirationData implements Serializable{
 	}
 	
 	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
-		this.inspirationID = (Integer) stream.readObject();
+		this.inspirationID = (String) stream.readObject();
 		this.content = (String) stream.readObject();
 	}
 	

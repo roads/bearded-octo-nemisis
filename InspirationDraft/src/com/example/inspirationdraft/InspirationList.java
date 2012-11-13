@@ -14,19 +14,19 @@ import java.util.TreeMap;
 
 import android.util.Log;
 
-public class InspirationList implements Iterable<Integer> {
+public class InspirationList implements Iterable<String> {
 
-	private Map<Integer,InspirationData> inspirations;
+	private Map<String,InspirationData> inspirations;
 	
 	public InspirationList() {
-		inspirations = new TreeMap<Integer,InspirationData>();
+		inspirations = new TreeMap<String,InspirationData>();
 	}
 	
-	public void addInspiration(Integer id) {
+	public void addInspiration(String id) {
 		inspirations.put(id, new InspirationData());
 	}
 	
-	public void addInspiration(Integer id, InspirationData data) {
+	public void addInspiration(String id, InspirationData data) {
 		inspirations.put(id, data);
 	}
 	
@@ -34,19 +34,19 @@ public class InspirationList implements Iterable<Integer> {
 		inspirations.clear();
 	}
 	
-	public boolean containsID(Integer id) {
+	public boolean containsID(String id) {
 		return inspirations.keySet().contains(id);
 	}
 	
-	public void removeID(Integer id) {
+	public void removeID(String id) {
 		inspirations.remove(id);
 	}
 	
-	public InspirationData getID(Integer id) {
+	public InspirationData getID(String id) {
 		return inspirations.get(id);
 	}
 	
-	public Iterator<Integer> iterator() {
+	public Iterator<String> iterator() {
 		return inspirations.keySet().iterator();
 	}
 
@@ -78,7 +78,7 @@ public class InspirationList implements Iterable<Integer> {
 					new ObjectInputStream(
 							new FileInputStream(f));
 			
-			inspirations = (TreeMap<Integer,InspirationData>) input.readObject();
+			inspirations = (TreeMap<String,InspirationData>) input.readObject();
 			
 			input.close();
 			
