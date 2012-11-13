@@ -11,6 +11,8 @@
     <string name="activities">Lessons</string>
     <string name="empty_lessonlist">No Lessons</string>
     
+    <string name="title_activity_details">Shakespeare Details</string>
+    
     <string name="add_inspiration">Create Inspiration  +</string>
     <string name="inspirations">Inspirations</string>
     <string name="empty_masterlist">No Inspirations</string>

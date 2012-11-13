@@ -2,7 +2,6 @@ package com.example.inspirationdraft;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -57,10 +56,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     	
     	if (tab.getPosition() == 0) {
 	        // When the given tab is selected, show the tab contents in the container
-	        ListFragment fragment = new ListFragment();
-	        Fragment f = fragment;
+	        LessonListFragment fragment = new LessonListFragment();	  
 	        getSupportFragmentManager().beginTransaction()
-	                .replace(R.id.container, f)
+	                .replace(R.id.container, fragment)
 	                .commit();
     	} else {
     		
@@ -75,7 +73,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
     
-    // Called when the user clicks the Create Activity button
+    // Called when the user clicks the Create Inspiration button
     public void createInspiration(View view) {
     	Intent intent = new Intent(this, CreateInspirationActivity.class);
     	startActivity(intent);

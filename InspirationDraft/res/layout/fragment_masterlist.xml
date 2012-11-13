@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:text="@string/add_inspiration"
         android:onClick="createInspiration" />
-    
+    
     <TextView
         android:id="@+id/text"
         android:layout_width="fill_parent"
