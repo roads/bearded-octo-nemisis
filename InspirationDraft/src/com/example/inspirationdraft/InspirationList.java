@@ -67,7 +67,7 @@ public class InspirationList implements Iterable<String> {
 			Log.i("Inspiration Viewer", "Attempt to save inspirations aborted.");
 		} catch (IOException ex) {
 			Log.i("Inspiration Viewer", "Fatal error while saving inspirations.");
-			Log.i("Inspiration Viewer", "Attempt to save profiles aborted.");
+			Log.i("Inspiration Viewer", "Attempt to save inspirations aborted.");
 		}
 	}
 	
