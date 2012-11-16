@@ -4,9 +4,6 @@ import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -16,7 +13,7 @@ import android.widget.ListView;
 public class LessonListFragment extends ListFragment {
 	
 	int mCurCheckPosition = 0;
-	private int itemSelected = -1;
+//	private int itemSelected = -1;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
