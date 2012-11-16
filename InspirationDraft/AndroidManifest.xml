@@ -28,7 +28,7 @@
                 android:value="com.example.inspirationdraft" />
         </activity>
         <activity
-            android:name=".EditInspiration"
+            android:name=".EditInspirationActivity"
             android:label="@string/title_activity_edit_inspiration" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

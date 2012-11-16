@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.io.File;
 
-public class MasterListFragment extends ListFragment {
+public class InspirationListFragment extends ListFragment {
 	
 	private InspirationList inspirations = new InspirationList();
 	private int itemSelected = -1;
@@ -58,7 +58,7 @@ public class MasterListFragment extends ListFragment {
 	}
 	
 	public boolean onOptionsItemSelected (MenuItem item) {
-        Intent intent = new Intent(getActivity(), EditInspiration.class);
+        Intent intent = new Intent(getActivity(), EditInspirationActivity.class);
 		if (item.getItemId() == R.id.menu_new_inspiration) {
 	        getActivity().startActivity(intent);			
 		}

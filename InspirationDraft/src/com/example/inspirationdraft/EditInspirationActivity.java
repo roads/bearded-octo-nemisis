@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class EditInspiration extends Activity {
+public class EditInspirationActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

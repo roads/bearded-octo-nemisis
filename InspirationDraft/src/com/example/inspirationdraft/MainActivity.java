@@ -61,7 +61,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 	                .commit();
     	} else {
     		
-	        Fragment fragment = new MasterListFragment();	    	
+	        Fragment fragment = new InspirationListFragment();	    	
 	        getFragmentManager().beginTransaction()
 	                .replace(R.id.container, fragment)
 	                .commit();
