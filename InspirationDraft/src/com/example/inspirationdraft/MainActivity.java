@@ -1,15 +1,14 @@
 package com.example.inspirationdraft;
 
 import android.app.ActionBar;
+import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import android.app.Fragment;
+import android.app.Activity;
 import android.view.Menu;
-import android.view.View;
 
-public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
+public class MainActivity extends Activity implements ActionBar.TabListener {
 
     private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
 
@@ -48,34 +47,29 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     }
 
     @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+    public void onTabUnselected(Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
     @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+    public void onTabSelected(Tab tab, FragmentTransaction fragmentTransaction) {
     	
     	if (tab.getPosition() == 0) {
 	        // When the given tab is selected, show the tab contents in the container
 	        LessonListFragment fragment = new LessonListFragment();	  
-	        getSupportFragmentManager().beginTransaction()
+	        getFragmentManager().beginTransaction()
 	                .replace(R.id.container, fragment)
 	                .commit();
     	} else {
     		
 	        Fragment fragment = new MasterListFragment();	    	
-	        getSupportFragmentManager().beginTransaction()
+	        getFragmentManager().beginTransaction()
 	                .replace(R.id.container, fragment)
 	                .commit();
     	}	
     }
 
     @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+    public void onTabReselected(Tab tab, FragmentTransaction fragmentTransaction) {
     }
-    
-    // Called when the user clicks the Create Activity button
-    public void createActivity(View view) {
-    	Intent intent = new Intent(this, CreateLessonActivity.class);
-    	startActivity(intent);
-    }
+
 }
