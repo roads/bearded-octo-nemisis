@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-public class DetailsFragment extends Fragment {
+public class ShakespeareFragment extends Fragment {
     /**
      * Create a new instance of DetailsFragment, initialized to
      * show the text at 'index'.
      */
-    public static DetailsFragment newInstance(int index) {
-        DetailsFragment f = new DetailsFragment();
+    public static ShakespeareFragment newInstance(int index) {
+        ShakespeareFragment f = new ShakespeareFragment();
 
         // Supply index input as an argument.
         Bundle args = new Bundle();

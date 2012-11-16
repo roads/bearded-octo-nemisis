@@ -4,6 +4,9 @@ import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -11,7 +14,9 @@ import android.widget.ListView;
 
 
 public class LessonListFragment extends ListFragment {
+	
 	int mCurCheckPosition = 0;
+	private int itemSelected = -1;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -21,6 +26,22 @@ public class LessonListFragment extends ListFragment {
     	return inflater.inflate(R.layout.fragment_lessonlist, container, false);
     }
 	
+//	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//		inflater.inflate(R.menu.fragment_lessonlist,menu);
+//	}
+//	
+//	public void onPrepareOptionsMenu(Menu menu) {
+//		super.onPrepareOptionsMenu(menu);
+//		MenuItem delete = menu.findItem(R.id.menu_delete_lesson);
+//		MenuItem edit = menu.findItem(R.id.menu_edit_lesson);
+//		if (itemSelected != -1) {
+//			delete.setEnabled(true);
+//			edit.setEnabled(true);
+//		} else {
+//			delete.setEnabled(false);
+//			edit.setEnabled(false);
+//		}
+//	}
 	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -53,7 +74,7 @@ public class LessonListFragment extends ListFragment {
         // launch a new activity to display
         // the dialog fragment with selected text.
         Intent intent = new Intent();
-        intent.setClass(getActivity(), DetailsActivity.class);
+        intent.setClass(getActivity(), ShakespeareActivity.class);
         intent.putExtra("index", index);
         startActivity(intent);
 
