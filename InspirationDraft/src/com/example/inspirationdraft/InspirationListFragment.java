@@ -41,7 +41,7 @@ public class InspirationListFragment extends ListFragment {
 //    }
 	
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.fragment_masterlist,menu);
+		inflater.inflate(R.menu.fragment_inspirationlist,menu);
 	}
 	
 	public void onPrepareOptionsMenu(Menu menu) {
