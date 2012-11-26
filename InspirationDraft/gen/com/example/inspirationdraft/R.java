@@ -42,6 +42,7 @@ public final class R {
         public static final int fragment_edit_inspiration=0x7f060002;
         public static final int fragment_inspirationlist=0x7f060003;
         public static final int fragment_lessonlist=0x7f060004;
+        public static final int fragment_shakespeare=0x7f060005;
     }
     public static final class string {
         public static final int activities=0x7f040007;
