@@ -99,6 +99,10 @@ public class InspirationListFragment extends ListFragment {
     	getActivity().invalidateOptionsMenu();
     }
     
+//    public TwoLineArrayAdapter getCurrentInspirations() {
+//    	
+//    }
+//    
     public ArrayAdapter<String> getCurrentInspirations() {
     	
     	ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_single_choice);
