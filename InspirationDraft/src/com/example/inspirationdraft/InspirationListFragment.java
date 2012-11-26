@@ -111,7 +111,8 @@ public class InspirationListFragment extends ListFragment {
 //    	InspirationArrayAdapter adapter = new InspirationArrayAdapter(getActivity(), inspirationArray);
 //    	return adapter;
 //    }
-//    
+//
+    
     public ArrayAdapter<String> getCurrentInspirations() {
     	
     	ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_single_choice);
@@ -119,13 +120,28 @@ public class InspirationListFragment extends ListFragment {
     	File appDir = getActivity().getFilesDir();
     	inspirations.load(new File(appDir, "inspirations.bin"));
     	for (String inspirationKey : inspirations) {
-    		//String text = inspirationKey;
-    		InspirationData inspirationData = inspirations.getInspiration(inspirationKey);
-    		String text = inspirationKey + "\n" + inspirationData.getContent();
+    		String text = inspirationKey;
+    		//InspirationData inspirationData = inspirations.getInspiration(inspirationKey);
+    		//String text = inspirationData.toListFormatting();
     		adapter.add(text);
     	}
     	return adapter;
     }
+    
+//    public ArrayAdapter<String> getCurrentInspirations() {
+//    	
+//    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_inspiration_single_choice);
+//    	inspirations.clear();
+//    	File appDir = getActivity().getFilesDir();
+//    	inspirations.load(new File(appDir, "inspirations.bin"));
+//    	for (String inspirationKey : inspirations) {
+//    		//String text = inspirationKey;
+//    		InspirationData inspirationData = inspirations.getInspiration(inspirationKey);
+//    		String text = inspirationData.toListFormatting();
+//    		adapter.add(text);
+//    	}
+//    	return adapter;
+//    }
     
     
      	

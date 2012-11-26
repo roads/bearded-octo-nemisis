@@ -60,6 +60,12 @@ public class InspirationData implements Serializable{
 		}
 	}
 	
+
+	public String toListFormatting() {
+		String text = this.inspirationID + "\n" + this.content + "\n" + this.lessonAssignments;
+		return text;
+	}
+	
 	@SuppressWarnings("unchecked")
 	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
 		this.inspirationID = (String) stream.readObject();
@@ -72,10 +78,4 @@ public class InspirationData implements Serializable{
 		stream.writeObject(this.content);
 		stream.writeObject(this.lessonAssignments);
 	}
-	
-//	@Override
-//	public String toString() {
-//		String text = this.inspirationID + "\n" + this.content;
-//		return text;
-//	}
 }
