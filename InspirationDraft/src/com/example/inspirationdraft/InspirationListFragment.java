@@ -87,6 +87,8 @@ public class InspirationListFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         setEmptyText(getText(R.string.empty_inspirationlist));
         setListAdapter(getCurrentInspirations());
+  //      ListView inspirationListView = getListView(); // added
+//		inspirationListView.setAdapter(getCurrentInspirations());	// added
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);  
         
     }
@@ -99,8 +101,15 @@ public class InspirationListFragment extends ListFragment {
     	getActivity().invalidateOptionsMenu();
     }
     
-//    public TwoLineArrayAdapter getCurrentInspirations() {
+//    public InspirationArrayAdapter getCurrentInspirations() {
 //    	
+//    	InspirationData[] inspirationArray = new InspirationData[14];
+//    	for (int inspirationID = 1; inspirationID < 15; inspirationID++) {
+//    		inspirationArray[(inspirationID - 1)] = inspirations.getInspiration("" + inspirationID);
+//    	}
+//    	
+//    	InspirationArrayAdapter adapter = new InspirationArrayAdapter(getActivity(), inspirationArray);
+//    	return adapter;
 //    }
 //    
     public ArrayAdapter<String> getCurrentInspirations() {
@@ -109,8 +118,11 @@ public class InspirationListFragment extends ListFragment {
     	inspirations.clear();
     	File appDir = getActivity().getFilesDir();
     	inspirations.load(new File(appDir, "inspirations.bin"));
-    	for (String idName : inspirations) {
-    		adapter.add(idName);
+    	for (String inspirationKey : inspirations) {
+    		//String text = inspirationKey;
+    		InspirationData inspirationData = inspirations.getInspiration(inspirationKey);
+    		String text = inspirationKey + "\n" + inspirationData.getContent();
+    		adapter.add(text);
     	}
     	return adapter;
     }

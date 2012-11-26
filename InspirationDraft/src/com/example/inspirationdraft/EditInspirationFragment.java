@@ -36,7 +36,7 @@ public class EditInspirationFragment extends Fragment {
 		inspirations.load(new File(getActivity().getFilesDir(), "inspirations.bin"));
 		
 		if (idName != null) {
-			InspirationData data = inspirations.getID(idName);
+			InspirationData data = inspirations.getInspiration(idName);
 			
 			EditText content_field = (EditText) getActivity().findViewById(R.id.content_field);
 			

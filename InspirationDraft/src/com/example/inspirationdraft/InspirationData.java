@@ -72,4 +72,10 @@ public class InspirationData implements Serializable{
 		stream.writeObject(this.content);
 		stream.writeObject(this.lessonAssignments);
 	}
+	
+//	@Override
+//	public String toString() {
+//		String text = this.inspirationID + "\n" + this.content;
+//		return text;
+//	}
 }
