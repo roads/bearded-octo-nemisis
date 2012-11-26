@@ -18,15 +18,24 @@
     <string name="toast_inspiration_saved">Inspiration Saved</string>
     <string name="menu_ok">OK</string>
     <string name="menu_cancel">Cancel</string>
-    <string name="menu_new_lesson">New</string>
-    <string name="menu_edit_lesson">Edit</string>
-    <string name="menu_delete_lesson">Delete</string>
     <string name="label_content">Content:</string>
     <string name="hint_content">Enter the content of your inspiration.</string>
     <string name="title_activity_create_inspiration">New Inspiration</string>
     <string name="inspiration_edit_message">Enter your inspiration here</string>
+    
+    <string name="menu_new_lesson">New</string>
+    <string name="menu_edit_lesson">Edit</string>
+    <string name="menu_delete_lesson">Delete</string>
+    <string name="toast_lesson_saved">Lesson Saved</string>
+    <string name="label_suffix_name">Lesson Suffix:</string>
+    <string name="hint_suffix_name">Enter a suffix for the lesson.</string>
+    <string name="title_activity_create_lesson">New Lesson</string>
+    <string name="lesson_edit_message">Enter your lesson suffix here</string>
+    
     <string name="button_save_inspiration">Save</string>
     <string name="title_activity_create_grouping">New Lesson</string>
     <string name="title_activity_edit_inspiration">EditInspiration</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_edit_lesson">EditLessonActivity</string>
 
 </resources>

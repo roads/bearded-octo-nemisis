@@ -1,46 +1,75 @@
 package com.example.inspirationdraft;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LessonData {
-
-	static int lessonCount;
-	private int lessonID;
-	private int lessonLength;
-	private int lessonCounter;
-	private ArrayList<Integer> idList;
-	//private SelectionBehavior selectionBehavior;
-	//private AlertBehavior alertBehavior;
+public class LessonData implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
+	private final String EMPTY = "Empty";
+	static int lessonCount = 1;
+	private String lessonID;
+	private String lessonName;
+	private ArrayList<String> inspirationAssignments;
 	
 	public LessonData() {
-		this.lessonID = lessonCount;
+		this.lessonID = Integer.toString(lessonCount);
 		lessonCount++;
+		this.lessonName = "Lesson " + this.lessonID;
+		this.inspirationAssignments = new ArrayList<String>();
+		this.inspirationAssignments.add(EMPTY);
 	}
 	
-	public void setSelectionBehavior(){
-		//stub
+	public LessonData(String content){
+		this.lessonID = Integer.toString(lessonCount);
+		lessonCount++;
+		this.lessonName = "Lesson " + this.lessonID + ":  " + content;
+		this.inspirationAssignments = new ArrayList<String>();
+		this.inspirationAssignments.add(EMPTY);
+	}
+
+	public String getLessonID() {
+		return this.lessonID;
 	}
 	
-	public void setAlertBehavior(){
-		//stub
+	public String getLessonName() {
+		return this.lessonName;
 	}
 	
-	public int getID() {
-		return lessonID;
+	public ArrayList<String> getLessonInspirations() {
+		return this.inspirationAssignments;
 	}
 	
-	public void addInspirationID(InspirationData newInspiration){
-//		idList.add(newInspiration.getID());
-//		lessonLength++;
+	public void setLessonName(String lessonName) {
+		this.lessonName = lessonName;
 	}
 	
-	public int getNextInspirationID(){
-		int nextID = idList.get(lessonCounter);
-		lessonCounter = (lessonCounter + 1)%lessonLength;
-		return nextID;
+	public void addInspiration(String inspirationID) {
+		inspirationAssignments.remove(EMPTY);
+		inspirationAssignments.add(lessonID);
 	}
 	
+	public void removeLesson(String lessonID) {
+		inspirationAssignments.remove(lessonID);
+		if (inspirationAssignments.size() == 0) {
+			inspirationAssignments.add(EMPTY);
+		}
+	}
 	
+	@SuppressWarnings("unchecked")
+	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+		this.lessonID = (String) stream.readObject();
+		this.lessonName = (String) stream.readObject();
+		this.inspirationAssignments = (ArrayList<String>) stream.readObject();
+	}
 	
-	
+	private void writeObject(ObjectOutputStream stream) throws IOException {
+		stream.writeObject(this.lessonID);
+		stream.writeObject(this.lessonName);
+		stream.writeObject(this.inspirationAssignments);
+	}
 }

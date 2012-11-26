@@ -14,6 +14,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
     private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
     private InspirationList inspirations = new InspirationList();
+    private LessonList lessons = new LessonList();
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,14 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 		inspirations.addInspiration(idName3, data3);
 		
 		inspirations.save(new File(getFilesDir(), "inspirations.bin"));
+		
+		// Create some starter Lessons
+		String suffixName1 = "Qoutes";        
+        LessonData lessonData1 = new LessonData(suffixName1);
+        String lessonName1 = lessonData1.getLessonName();
+		lessons.addLesson(lessonName1, lessonData1);
+		
+		lessons.save(new File(getFilesDir(), "lessons.bin"));
 	
     }
 
