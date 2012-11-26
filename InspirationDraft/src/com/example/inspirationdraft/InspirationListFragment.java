@@ -85,7 +85,7 @@ public class InspirationListFragment extends ListFragment {
 	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setEmptyText("No Inspirations");
+        setEmptyText(getText(R.string.empty_inspirationlist));
         setListAdapter(getCurrentInspirations());
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);  
         

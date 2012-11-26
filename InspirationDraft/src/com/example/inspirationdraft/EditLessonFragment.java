@@ -63,7 +63,8 @@ public class EditLessonFragment extends Fragment {
 				lessons.removeLesson(lessonName);
 			} else {
 				// new lesson
-				lessonName = data.getLessonName();
+				suffixName = data.getLessonName();
+				lessonName = "Lesson " + data.getLessonID() + ":  " + suffixName;
 			}
 		
 			lessons.addLesson(lessonName, data);

@@ -85,7 +85,7 @@ public class LessonListFragment extends ListFragment {
 	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setEmptyText("No Lessons");
+        setEmptyText(getText(R.string.empty_lessonlist));
         setListAdapter(getCurrentLessons());
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);  
         

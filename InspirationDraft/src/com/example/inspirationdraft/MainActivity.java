@@ -46,12 +46,17 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         String idName3 = data3.getID();
 		inspirations.addInspiration(idName3, data3);
 		
+		String content4 = "Don't complicate it by hesitating.";        
+        InspirationData data4 = new InspirationData(content4);
+        String idName4 = data4.getID();
+		inspirations.addInspiration(idName4, data4);
+		
 		inspirations.save(new File(getFilesDir(), "inspirations.bin"));
 		
 		// Create some starter Lessons
 		String suffixName1 = "Qoutes";        
         LessonData lessonData1 = new LessonData(suffixName1);
-        String lessonName1 = lessonData1.getLessonName();
+        String lessonName1 = "Lesson " + lessonData1.getLessonID() + ":  " + lessonData1.getLessonName();
 		lessons.addLesson(lessonName1, lessonData1);
 		
 		lessons.save(new File(getFilesDir(), "lessons.bin"));

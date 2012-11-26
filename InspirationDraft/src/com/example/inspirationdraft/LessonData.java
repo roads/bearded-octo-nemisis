@@ -19,15 +19,15 @@ public class LessonData implements Serializable{
 	public LessonData() {
 		this.lessonID = Integer.toString(lessonCount);
 		lessonCount++;
-		this.lessonName = "Lesson " + this.lessonID;
+		this.lessonName = ""; //"Lesson " + this.lessonID;
 		this.inspirationAssignments = new ArrayList<String>();
 		this.inspirationAssignments.add(EMPTY);
 	}
 	
-	public LessonData(String content){
+	public LessonData(String suffixName){
 		this.lessonID = Integer.toString(lessonCount);
 		lessonCount++;
-		this.lessonName = "Lesson " + this.lessonID + ":  " + content;
+		this.lessonName = suffixName;//"Lesson " + this.lessonID + ":  " + suffixName;
 		this.inspirationAssignments = new ArrayList<String>();
 		this.inspirationAssignments.add(EMPTY);
 	}
