@@ -51,6 +51,56 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         String idName4 = data4.getID();
 		inspirations.addInspiration(idName4, data4);
 		
+		String content5 = "";        
+        InspirationData data5 = new InspirationData(content5);
+        String idName5 = data5.getID();
+		inspirations.addInspiration(idName5, data5);
+		
+		String content6 = "";        
+        InspirationData data6 = new InspirationData(content6);
+        String idName6 = data6.getID();
+		inspirations.addInspiration(idName6, data6);
+		
+		String content7 = "";        
+        InspirationData data7 = new InspirationData(content7);
+        String idName7 = data7.getID();
+		inspirations.addInspiration(idName7, data7);
+		
+		String content8 = "";        
+        InspirationData data8 = new InspirationData(content8);
+        String idName8 = data8.getID();
+		inspirations.addInspiration(idName8, data8);
+		
+		String content9 = "";        
+        InspirationData data9 = new InspirationData(content9);
+        String idName9 = data9.getID();
+		inspirations.addInspiration(idName9, data9);
+		
+		String content10 = "";        
+        InspirationData data10 = new InspirationData(content10);
+        String idName10 = data10.getID();
+		inspirations.addInspiration(idName10, data10);
+		
+		String content11 = "";        
+        InspirationData data11 = new InspirationData(content11);
+        String idName11 = data11.getID();
+		inspirations.addInspiration(idName11, data11);
+		
+		String content12 = "";        
+        InspirationData data12 = new InspirationData(content12);
+        String idName12 = data12.getID();
+		inspirations.addInspiration(idName12, data12);
+		
+		String content13 = "";        
+        InspirationData data13 = new InspirationData(content13);
+        String idName13 = data13.getID();
+		inspirations.addInspiration(idName13, data13);
+		
+		String content14 = "";        
+        InspirationData data14 = new InspirationData(content14);
+        String idName14 = data14.getID();
+		inspirations.addInspiration(idName14, data14);
+		
 		inspirations.save(new File(getFilesDir(), "inspirations.bin"));
 		
 		// Create some starter Lessons
