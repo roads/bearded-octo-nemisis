@@ -71,7 +71,7 @@ public class InspirationListFragment extends ListFragment {
 		}
 		if (item.getItemId() == R.id.menu_edit_inspiration) {
 			TextView text = (TextView) getListView().getChildAt(itemSelected);
-			intent.putExtra("id", text.getText().toString());
+			intent.putExtra("idName", text.getText().toString());
 	        getActivity().startActivity(intent);
 	        itemSelected = -1;
     			getActivity().invalidateOptionsMenu();
@@ -92,9 +92,7 @@ public class InspirationListFragment extends ListFragment {
 	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        
         setEmptyText("No Inspirations");
-        
         setListAdapter(getCurrentInspirations());
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);  
         
@@ -106,8 +104,8 @@ public class InspirationListFragment extends ListFragment {
 //        //outState.putInt("curChoice", mCurCheckPosition);
 //    }
     
-    public void remove_id(String id) {
-    	inspirations.removeID(id);
+    public void remove_id(String idName) {
+    	inspirations.removeID(idName);
     	inspirations.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
     	setListAdapter(getCurrentInspirations());
     	itemSelected = -1;
@@ -120,8 +118,8 @@ public class InspirationListFragment extends ListFragment {
     	inspirations.clear();
     	File appDir = getActivity().getFilesDir();
     	inspirations.load(new File(appDir, "inspirations.bin"));
-    	for (String id : inspirations) {
-    		adapter.add(id);
+    	for (String idName : inspirations) {
+    		adapter.add(idName);
     	}
     	return adapter;
     }

@@ -15,7 +15,7 @@ import android.widget.EditText;
 public class EditInspirationFragment extends Fragment {
 	
 	private InspirationList inspirations = new InspirationList();
-	private String id;
+	private String idName;
 	private boolean saveData = true;
 	
 	@Override
@@ -23,7 +23,7 @@ public class EditInspirationFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 
-		id = getActivity().getIntent().getStringExtra("id");
+		idName = getActivity().getIntent().getStringExtra("idName");
 		
 	}
 	
@@ -33,8 +33,8 @@ public class EditInspirationFragment extends Fragment {
 		saveData = true;
 		inspirations.load(new File(getActivity().getFilesDir(), "inspirations.bin"));
 		
-		if (id != null) {
-			InspirationData data = inspirations.getID(id);
+		if (idName != null) {
+			InspirationData data = inspirations.getID(idName);
 			
 			EditText content_field = (EditText) getActivity().findViewById(R.id.content_field);
 			
@@ -54,12 +54,17 @@ public class EditInspirationFragment extends Fragment {
 			
 			String content = content_field.getText().toString();
 			
-			if (id != null) {
-				inspirations.removeID(id);
-			}
-			
 			data = new InspirationData(content);
-			inspirations.addInspiration(id, data);
+			
+			if (idName != null) {
+				// editing existing
+				inspirations.removeID(idName);
+			} else {
+				// new inspiration
+				idName = data.getID();
+			}
+		
+			inspirations.addInspiration(idName, data);
 			
 			inspirations.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
 		
