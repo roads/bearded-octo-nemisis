@@ -36,13 +36,6 @@ public class InspirationListFragment extends ListFragment {
 		setHasOptionsMenu(true);
 	}
 	
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
-//    		Bundle savedInstanceState) {
-//        
-//    	// Inflate the layout for this fragment
-//    	return inflater.inflate(R.layout.fragment_masterlist, container, false);
-//    }
-	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// menu with new, delete, and edit options
@@ -97,12 +90,6 @@ public class InspirationListFragment extends ListFragment {
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);  
         
     }
-	
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        //outState.putInt("curChoice", mCurCheckPosition);
-//    }
     
     public void remove_id(String idName) {
     	inspirations.removeID(idName);

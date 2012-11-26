@@ -3,6 +3,7 @@ package com.example.inspirationdraft;
 import java.io.File;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class EditInspirationFragment extends Fragment {
 	
@@ -67,6 +69,13 @@ public class EditInspirationFragment extends Fragment {
 			inspirations.addInspiration(idName, data);
 			
 			inspirations.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
+			
+			Context context = getActivity();
+			CharSequence text = getText(R.string.toast_inspiration_saved);
+			int duration = Toast.LENGTH_SHORT;
+
+			Toast toast = Toast.makeText(context, text, duration);
+			toast.show();
 		
 		}
 	}
