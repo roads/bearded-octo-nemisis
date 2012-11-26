@@ -46,6 +46,7 @@ public class InspirationList implements Iterable<String> {
 		return inspirations.get(id);
 	}
 	
+	@Override
 	public Iterator<String> iterator() {
 		return inspirations.keySet().iterator();
 	}

@@ -1,9 +1,12 @@
 package com.example.inspirationdraft;
 
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
@@ -11,7 +14,7 @@ import android.widget.TextView;
 
 public class ShakespeareFragment extends Fragment {
     /**
-     * Create a new instance of DetailsFragment, initialized to
+     * Create a new instance of ShakespeareFragment, initialized to
      * show the text at 'index'.
      */
     public static ShakespeareFragment newInstance(int index) {
@@ -28,7 +31,13 @@ public class ShakespeareFragment extends Fragment {
     public int getShownIndex() {
         return getArguments().getInt("index", 0);
     }
-
+    
+    @Override
+	public void onCreate (Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -51,6 +60,22 @@ public class ShakespeareFragment extends Fragment {
         scroller.addView(text);
         text.setText(Shakespeare.DIALOGUE[getShownIndex()]);
         return scroller;
+    }
+
+    @Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.fragment_shakespeare, menu);
+	}
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+            case R.id.menu_cancel:
+        }
+        getActivity().finish();
+        return true;
+        //return super.onOptionsItemSelected(item);
     }
 }
 

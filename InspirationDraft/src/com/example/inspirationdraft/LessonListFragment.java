@@ -39,6 +39,7 @@ public class LessonListFragment extends ListFragment {
 //			edit.setEnabled(false);
 //		}
 //	}
+	
 	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -47,18 +48,18 @@ public class LessonListFragment extends ListFragment {
         setListAdapter(new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_activated_1, Shakespeare.TITLES));
                
-        if (savedInstanceState != null) {
-            // Restore last state for checked position.
-            mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
-        }
+//        if (savedInstanceState != null) {
+//            // Restore last state for checked position.
+//            mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
+//        }
         
     }
 	
-	@Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("curChoice", mCurCheckPosition);
-    }
+//	@Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putInt("curChoice", mCurCheckPosition);
+//    }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {

@@ -18,16 +18,19 @@ public class InspirationListFragment extends ListFragment {
 	private InspirationList inspirations = new InspirationList();
 	private int itemSelected = -1;
 	
+	@Override
 	public void onResume() {
 		super.onResume();
 		setListAdapter(getCurrentInspirations());
 	}
 
+	@Override
 	public void onPause() {
 		super.onPause();
 		inspirations.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
 	}
 	
+	@Override
 	public void onCreate (Bundle savedInstancesState) {
 		super.onCreate(savedInstancesState);
 		setHasOptionsMenu(true);
@@ -40,10 +43,13 @@ public class InspirationListFragment extends ListFragment {
 //    	return inflater.inflate(R.layout.fragment_masterlist, container, false);
 //    }
 	
+	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// menu with new, delete, and edit options
 		inflater.inflate(R.menu.fragment_inspirationlist,menu);
 	}
 	
+	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
 		MenuItem delete = menu.findItem(R.id.menu_delete_inspiration);
@@ -57,6 +63,7 @@ public class InspirationListFragment extends ListFragment {
 		}
 	}
 	
+	@Override
 	public boolean onOptionsItemSelected (MenuItem item) {
         Intent intent = new Intent(getActivity(), EditInspirationActivity.class);
 		if (item.getItemId() == R.id.menu_new_inspiration) {
@@ -76,18 +83,29 @@ public class InspirationListFragment extends ListFragment {
 		return true;
 	}
 	
+	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		itemSelected = position;
 		getActivity().invalidateOptionsMenu();
 	}
 	
+	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        
         setEmptyText("No Inspirations");
+        
         setListAdapter(getCurrentInspirations());
-        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);   
+        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);  
+        
     }
 	
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        //outState.putInt("curChoice", mCurCheckPosition);
+//    }
+    
     public void remove_id(String id) {
     	inspirations.removeID(id);
     	inspirations.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
@@ -107,5 +125,7 @@ public class InspirationListFragment extends ListFragment {
     	}
     	return adapter;
     }
+    
+    
      	
 }

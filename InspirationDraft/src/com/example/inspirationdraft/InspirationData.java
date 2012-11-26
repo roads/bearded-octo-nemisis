@@ -9,7 +9,7 @@ public class InspirationData implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	static int inspirationCount;
+	static int inspirationCount = 1;
 	private String inspirationID;
 	private String content;
 	

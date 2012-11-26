@@ -18,14 +18,16 @@ public class EditInspirationFragment extends Fragment {
 	private String id;
 	private boolean saveData = true;
 	
+	@Override
 	public void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 
 		id = getActivity().getIntent().getStringExtra("id");
-
+		
 	}
 	
+	@Override
 	public void onResume() {
 		super.onResume();
 		saveData = true;
@@ -41,6 +43,7 @@ public class EditInspirationFragment extends Fragment {
 		}
 	}
 
+	@Override
 	public void onPause() {
 		super.onPause();
 		if (saveData) {
@@ -63,18 +66,23 @@ public class EditInspirationFragment extends Fragment {
 		}
 	}
 
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_edit_inspiration,container, false);
 	}
 	
+	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.fragment_edit_inspiration, menu);
 	}
 	
+	@Override
 	public boolean onOptionsItemSelected (MenuItem item) {
 		if (item.getItemId() == R.id.menu_ok) {
 			saveData = true;
 		} else if (item.getItemId() == R.id.menu_cancel) {
+			saveData = false;
+		} else if (item.getItemId() == android.R.id.home){
 			saveData = false;
 		}
 		getActivity().finish();

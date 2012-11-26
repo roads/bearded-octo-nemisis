@@ -28,6 +28,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
+    	//super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState.containsKey(STATE_SELECTED_NAVIGATION_ITEM)) {
             getActionBar().setSelectedNavigationItem(
                     savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
@@ -36,12 +37,14 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+    	//super.onSaveInstanceState(outState);
         outState.putInt(STATE_SELECTED_NAVIGATION_ITEM,
                 getActionBar().getSelectedNavigationIndex());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+    	// an empty menu
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
