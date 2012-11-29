@@ -3,6 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:orientation="horizontal"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content">	
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="12sp"
+	        android:text="@string/label_id" />
+	       
+	    <TextView
+	        android:id="@+id/inspiration_id"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="12sp"
+	        android:text="no ID yet" />
+	    </LinearLayout>
+        
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,4 +35,5 @@
         android:inputType="text|textMultiLine|textCapSentences"
         android:hint="@string/hint_content" />
     
+	
 </LinearLayout>

@@ -12,12 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditInspirationFragment extends Fragment {
 	
 	private InspirationList inspirations = new InspirationList();
-	private String idName;
+	private String idKey;
 	private boolean saveData = true;
 	
 	@Override
@@ -25,8 +26,7 @@ public class EditInspirationFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 
-		idName = getActivity().getIntent().getStringExtra("idName");
-		
+		idKey = getActivity().getIntent().getStringExtra("idKey");
 	}
 	
 	@Override
@@ -35,13 +35,14 @@ public class EditInspirationFragment extends Fragment {
 		saveData = true;
 		inspirations.load(new File(getActivity().getFilesDir(), "inspirations.bin"));
 		
-		if (idName != null) {
-			InspirationData data = inspirations.getInspiration(idName);
+		if (idKey != null) {
+			InspirationData data = inspirations.getInspiration(idKey);		
 			
-			EditText content_field = (EditText) getActivity().findViewById(R.id.content_field);
+			TextView inspiration_id = (TextView) getActivity().findViewById(R.id.inspiration_id);			
+			inspiration_id.setText(idKey);		
 			
-			content_field.setText(data.getContent());
-			
+			EditText content_field = (EditText) getActivity().findViewById(R.id.content_field);			
+			content_field.setText(data.getContent());			
 		}
 	}
 
@@ -50,30 +51,29 @@ public class EditInspirationFragment extends Fragment {
 		super.onPause();
 		if (saveData) {
 			
-			InspirationData data = null;
-			
-			EditText content_field = (EditText) getActivity().findViewById(R.id.content_field);
-			
+			InspirationData data = null;			
+			EditText content_field = (EditText) getActivity().findViewById(R.id.content_field);			
 			String content = content_field.getText().toString();
 			
 			data = new InspirationData(content);
 			
-			if (idName != null) {
+			if (idKey != null) {
 				// editing existing
-				inspirations.removeID(idName);
+				InspirationData oldData = inspirations.getInspiration(idKey);
+				data.setID(oldData.getID());
+				inspirations.removeID(idKey);
 			} else {
 				// new inspiration
-				idName = data.getID();
+				idKey = data.getID();
 			}
 		
-			inspirations.addInspiration(idName, data);
+			inspirations.addInspiration(idKey, data);
 			
 			inspirations.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
 			
 			Context context = getActivity();
 			CharSequence text = getText(R.string.toast_inspiration_saved);
 			int duration = Toast.LENGTH_SHORT;
-
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
 		

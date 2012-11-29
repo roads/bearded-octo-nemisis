@@ -38,9 +38,17 @@ public class InspirationData implements Serializable{
 	public String getID() {
 		return this.inspirationID;
 	}
+
+	public void setID(String newID) {
+		this.inspirationID = newID;
+	}
 	
 	public String getContent() {
 		return this.content;
+	}
+	
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 	public String getLessonAssignmentsString() {
@@ -49,10 +57,6 @@ public class InspirationData implements Serializable{
 	
 	public int getAssignedIcon() {
 		return this.assignedIcon;
-	}
-	
-	public void setContent(String content) {
-		this.content = content;
 	}
 	
 	public void addLesson(String lessonID) {
