@@ -1,7 +1,6 @@
 package com.example.inspirationdraft;
 
-import java.io.File;
-
+//import java.io.File;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
@@ -13,8 +12,8 @@ import android.view.Menu;
 public class MainActivity extends Activity implements ActionBar.TabListener {
 
     private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
-    private InspirationList inspirations = new InspirationList();
-    private LessonList lessons = new LessonList();
+//    private InspirationList inspirations = new InspirationList();
+//    private LessonList lessons = new LessonList();
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,87 +28,90 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         actionBar.addTab(actionBar.newTab().setText(R.string.title_section1).setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText(R.string.title_section2).setTabListener(this));
         
-        // Create some starter inspirations 
-        // Note this overrides any persistent data from the last time the application was run
-        String content1 = "He who doesn't read is no better than one who can't read.";        
-        InspirationData data1 = new InspirationData(content1);
-        String idName1 = data1.getID();
-		inspirations.addInspiration(idName1, data1);
-		
-		String content2 = "Your focus determines your reality.";        
-        InspirationData data2 = new InspirationData(content2);
-        String idName2 = data2.getID();
-		inspirations.addInspiration(idName2, data2);
-
-		String content3 = "If you don't stand for something, you'll fall for anything.";        
-        InspirationData data3 = new InspirationData(content3);
-        String idName3 = data3.getID();
-		inspirations.addInspiration(idName3, data3);
-		
-		String content4 = "Don't complicate it by hesitating.";        
-        InspirationData data4 = new InspirationData(content4);
-        String idName4 = data4.getID();
-		inspirations.addInspiration(idName4, data4);
-		
-		String content5 = "";        
-        InspirationData data5 = new InspirationData(content5);
-        String idName5 = data5.getID();
-		inspirations.addInspiration(idName5, data5);
-		
-		String content6 = "";        
-        InspirationData data6 = new InspirationData(content6);
-        String idName6 = data6.getID();
-		inspirations.addInspiration(idName6, data6);
-		
-		String content7 = "";        
-        InspirationData data7 = new InspirationData(content7);
-        String idName7 = data7.getID();
-		inspirations.addInspiration(idName7, data7);
-		
-		String content8 = "";        
-        InspirationData data8 = new InspirationData(content8);
-        String idName8 = data8.getID();
-		inspirations.addInspiration(idName8, data8);
-		
-		String content9 = "";        
-        InspirationData data9 = new InspirationData(content9);
-        String idName9 = data9.getID();
-		inspirations.addInspiration(idName9, data9);
-		
-		String content10 = "";        
-        InspirationData data10 = new InspirationData(content10);
-        String idName10 = data10.getID();
-		inspirations.addInspiration(idName10, data10);
-		
-		String content11 = "";        
-        InspirationData data11 = new InspirationData(content11);
-        String idName11 = data11.getID();
-		inspirations.addInspiration(idName11, data11);
-		
-		String content12 = "";        
-        InspirationData data12 = new InspirationData(content12);
-        String idName12 = data12.getID();
-		inspirations.addInspiration(idName12, data12);
-		
-		String content13 = "";        
-        InspirationData data13 = new InspirationData(content13);
-        String idName13 = data13.getID();
-		inspirations.addInspiration(idName13, data13);
-		
-		String content14 = "";        
-        InspirationData data14 = new InspirationData(content14);
-        String idName14 = data14.getID();
-		inspirations.addInspiration(idName14, data14);
-		
-		inspirations.save(new File(getFilesDir(), "inspirations.bin"));
-		
-		// Create some starter Lessons
-		String suffixName1 = "Qoutes";        
-        LessonData lessonData1 = new LessonData(suffixName1);
-        String lessonName1 = "Lesson " + lessonData1.getLessonID() + ":  " + lessonData1.getLessonName();
-		lessons.addLesson(lessonName1, lessonData1);
-		
-		lessons.save(new File(getFilesDir(), "lessons.bin"));
+        // Create some starter inspirations and lessons
+        
+//        // Note this overrides any persistent data from the last time the application was run
+//        String content1 = "A man who does not read good books has no advantage over the man who can't read them. -Mark Twain";        
+//        InspirationData data1 = new InspirationData(content1);
+//        String idName1 = data1.getID();
+//		inspirations.addInspiration(idName1, data1);
+//		
+//		String content2 = "Your focus determines your reality.";        
+//        InspirationData data2 = new InspirationData(content2);
+//        String idName2 = data2.getID();
+//		inspirations.addInspiration(idName2, data2);
+//
+//		String content3 = "If you don't stand for something, you'll fall for anything.";        
+//        InspirationData data3 = new InspirationData(content3);
+//        String idName3 = data3.getID();
+//		inspirations.addInspiration(idName3, data3);
+//		
+//		String content4 = "Don't complicate it by hesitating.";        
+//        InspirationData data4 = new InspirationData(content4);
+//        String idName4 = data4.getID();
+//		inspirations.addInspiration(idName4, data4);
+//		
+//		String content5 = "";        
+//        InspirationData data5 = new InspirationData(content5);
+//        String idName5 = data5.getID();
+//		inspirations.addInspiration(idName5, data5);
+//		
+//		String content6 = "";        
+//        InspirationData data6 = new InspirationData(content6);
+//        String idName6 = data6.getID();
+//		inspirations.addInspiration(idName6, data6);
+//		
+//		String content7 = "";        
+//        InspirationData data7 = new InspirationData(content7);
+//        String idName7 = data7.getID();
+//		inspirations.addInspiration(idName7, data7);
+//		
+//		String content8 = "";        
+//        InspirationData data8 = new InspirationData(content8);
+//        String idName8 = data8.getID();
+//		inspirations.addInspiration(idName8, data8);
+//		
+//		String content9 = "";        
+//        InspirationData data9 = new InspirationData(content9);
+//        String idName9 = data9.getID();
+//		inspirations.addInspiration(idName9, data9);
+//		
+//		String content10 = "";        
+//        InspirationData data10 = new InspirationData(content10);
+//        String idName10 = data10.getID();
+//		inspirations.addInspiration(idName10, data10);
+//		
+//		String content11 = "";        
+//        InspirationData data11 = new InspirationData(content11);
+//        String idName11 = data11.getID();
+//		inspirations.addInspiration(idName11, data11);
+//		
+//		String content12 = "";        
+//        InspirationData data12 = new InspirationData(content12);
+//        String idName12 = data12.getID();
+//		inspirations.addInspiration(idName12, data12);
+//		
+//		String content13 = "";        
+//        InspirationData data13 = new InspirationData(content13);
+//        String idName13 = data13.getID();
+//		inspirations.addInspiration(idName13, data13);
+//		
+//		String content14 = "";        
+//        InspirationData data14 = new InspirationData(content14);
+//        String idName14 = data14.getID();
+//		inspirations.addInspiration(idName14, data14);
+//		
+//		inspirations.save(new File(getFilesDir(), "inspirations.bin"));
+//		
+//		// Create some starter Lessons
+//		String suffixName1 = "Qoutes";        
+//        LessonData lessonData1 = new LessonData(suffixName1);
+//        String lessonName1 = "Lesson " + lessonData1.getLessonID() + ":  " + lessonData1.getLessonName();
+//		lessons.addLesson(lessonName1, lessonData1);
+//		
+//		lessons.save(new File(getFilesDir(), "lessons.bin"));
+			
+	
 	
     }
 

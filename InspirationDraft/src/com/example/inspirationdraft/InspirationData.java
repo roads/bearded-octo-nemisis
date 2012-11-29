@@ -15,6 +15,7 @@ public class InspirationData implements Serializable{
 	private String inspirationID;
 	private String content;
 	private ArrayList<String> lessonAssignments;
+	private int assignedIcon;
 	
 	public InspirationData() {
 		this.inspirationID = Integer.toString(inspirationCount);
@@ -22,6 +23,7 @@ public class InspirationData implements Serializable{
 		this.content = "A man who does not read good books has no advantage over the man who can't read them. -Mark Twain";
 		this.lessonAssignments = new ArrayList<String>();
 		this.lessonAssignments.add(UNASSIGNED);
+		this.assignedIcon = R.drawable.question_mark;
 	}
 	
 	public InspirationData(String content){
@@ -30,6 +32,7 @@ public class InspirationData implements Serializable{
 		this.content = content;
 		this.lessonAssignments = new ArrayList<String>();
 		this.lessonAssignments.add(UNASSIGNED);
+		this.assignedIcon = R.drawable.question_mark;
 	}
 
 	public String getID() {
@@ -40,8 +43,12 @@ public class InspirationData implements Serializable{
 		return this.content;
 	}
 	
-	public ArrayList<String> getLessonAssignments() {
-		return this.lessonAssignments;
+	public String getLessonAssignmentsString() {
+		return this.lessonAssignments.toString();
+	}
+	
+	public int getAssignedIcon() {
+		return this.assignedIcon;
 	}
 	
 	public void setContent(String content) {

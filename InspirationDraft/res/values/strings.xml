@@ -8,6 +8,8 @@
     
     <string name="title_activity_details">Shakespeare Details</string>
     
+    <string name="inspirationImage_desc">Inspiration Icon</string>
+ 
     <string name="empty_inspirationlist">No Inspirations</string>
     <string name="title_activity_edit_inspiration">Edit Inspiration</string>
     <string name="menu_new_inspiration">New</string>

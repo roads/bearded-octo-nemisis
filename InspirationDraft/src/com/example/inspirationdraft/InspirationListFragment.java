@@ -7,15 +7,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class InspirationListFragment extends ListFragment {
 	
 	private InspirationList inspirations = new InspirationList();
+	private ArrayList<InspirationData> fetch = new ArrayList<InspirationData>();
+	private InspirationArrayAdapter adapter;
+
 	private int itemSelected = -1;
 	
 	@Override
@@ -63,14 +66,14 @@ public class InspirationListFragment extends ListFragment {
 	        getActivity().startActivity(intent);			
 		}
 		if (item.getItemId() == R.id.menu_edit_inspiration) {
-			TextView text = (TextView) getListView().getChildAt(itemSelected);
+			TextView text = (TextView) getListView().getChildAt(itemSelected).findViewById(R.id.txtInspirationID);
 			intent.putExtra("idName", text.getText().toString());
 	        getActivity().startActivity(intent);
 	        itemSelected = -1;
     			getActivity().invalidateOptionsMenu();
 		}
 		if (item.getItemId() == R.id.menu_delete_inspiration) {
-			TextView text = (TextView) getListView().getChildAt(itemSelected);
+			TextView text = (TextView) getListView().getChildAt(itemSelected).findViewById(R.id.txtInspirationID);
 			remove_id(text.getText().toString());
 		}
 		return true;
@@ -87,8 +90,9 @@ public class InspirationListFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         setEmptyText(getText(R.string.empty_inspirationlist));
         setListAdapter(getCurrentInspirations());
-  //      ListView inspirationListView = getListView(); // added
-//		inspirationListView.setAdapter(getCurrentInspirations());	// added
+    	//adapter = new InspirationArrayAdapter(getActivity(),
+    	//		R.layout.inspiration_listview_item_row, fetch);
+    	//setListAdapter(adapter);
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);  
         
     }
@@ -101,29 +105,16 @@ public class InspirationListFragment extends ListFragment {
     	getActivity().invalidateOptionsMenu();
     }
     
-//    public InspirationArrayAdapter getCurrentInspirations() {
-//    	
-//    	InspirationData[] inspirationArray = new InspirationData[14];
-//    	for (int inspirationID = 1; inspirationID < 15; inspirationID++) {
-//    		inspirationArray[(inspirationID - 1)] = inspirations.getInspiration("" + inspirationID);
-//    	}
-//    	
-//    	InspirationArrayAdapter adapter = new InspirationArrayAdapter(getActivity(), inspirationArray);
-//    	return adapter;
-//    }
-//
-    
-    public ArrayAdapter<String> getCurrentInspirations() {
+    public InspirationArrayAdapter getCurrentInspirations() {
     	
-    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_single_choice);
+    	adapter = new InspirationArrayAdapter(getActivity(), R.layout.inspiration_listview_item_row, fetch);
     	inspirations.clear();
+    	fetch.clear();
     	File appDir = getActivity().getFilesDir();
     	inspirations.load(new File(appDir, "inspirations.bin"));
     	for (String inspirationKey : inspirations) {
-    		String text = inspirationKey;
-    		//InspirationData inspirationData = inspirations.getInspiration(inspirationKey);
-    		//String text = inspirationData.toListFormatting();
-    		adapter.add(text);
+    		InspirationData inspirationData = inspirations.getInspiration(inspirationKey);		
+    		adapter.add(inspirationData);
     	}
     	return adapter;
     }
