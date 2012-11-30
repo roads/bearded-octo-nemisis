@@ -25,7 +25,7 @@
     <string name="menu_new_lesson">New</string>
     <string name="menu_edit_lesson">Edit</string>
     <string name="menu_delete_lesson">Delete</string>
-    <string name="label_suffix_name">Lesson Suffix:</string>
+    <string name="label_lesson_title">Lesson Title:</string>
     <string name="hint_suffix_name">Enter a your lesson suffix here.</string>
     <string name="toast_lesson_saved">Lesson Saved</string>
     

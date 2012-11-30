@@ -12,49 +12,59 @@ public class LessonData implements Serializable{
 	
 	private final String EMPTY = "Empty";
 	static int lessonCount = 1;
-	private String lessonID;
-	private String lessonName;
+	private String lessonId;
+	private String LessonTitle;
 	private ArrayList<String> inspirationAssignments;
+	private int assignedIcon;
 	
 	public LessonData() {
-		this.lessonID = Integer.toString(lessonCount);
+		this.lessonId = Integer.toString(lessonCount);
 		lessonCount++;
-		this.lessonName = ""; //"Lesson " + this.lessonID;
+		this.LessonTitle = ""; //"Lesson " + this.lessonId;
 		this.inspirationAssignments = new ArrayList<String>();
 		this.inspirationAssignments.add(EMPTY);
+		this.assignedIcon = R.drawable.question_mark;
 	}
 	
 	public LessonData(String suffixName){
-		this.lessonID = Integer.toString(lessonCount);
+		this.lessonId = Integer.toString(lessonCount);
 		lessonCount++;
-		this.lessonName = suffixName;//"Lesson " + this.lessonID + ":  " + suffixName;
+		this.LessonTitle = suffixName;//"Lesson " + this.lessonId + ":  " + suffixName;
 		this.inspirationAssignments = new ArrayList<String>();
 		this.inspirationAssignments.add(EMPTY);
+		this.assignedIcon = R.drawable.question_mark;
 	}
 
-	public String getLessonID() {
-		return this.lessonID;
+	public String getLessonId() {
+		return this.lessonId;
+	}
+
+	public void setLessonId(String oldLessonId) {
+		this.lessonId = oldLessonId;
+	}
+	public String getLessonTitle() {
+		return this.LessonTitle;
 	}
 	
-	public String getLessonName() {
-		return this.lessonName;
+	public void setLessonTitle(String LessonTitle) {
+		this.LessonTitle = LessonTitle;
 	}
 	
-	public ArrayList<String> getLessonInspirations() {
-		return this.inspirationAssignments;
+	public String getLessonAssignmentsString() {
+		return this.inspirationAssignments.toString();
 	}
 	
-	public void setLessonName(String lessonName) {
-		this.lessonName = lessonName;
+	public int getAssignedIcon() {
+		return this.assignedIcon;
 	}
 	
-	public void addInspiration(String inspirationID) {
+	public void addInspiration(String inspirationId) {
 		inspirationAssignments.remove(EMPTY);
-		inspirationAssignments.add(lessonID);
+		inspirationAssignments.add(lessonId);
 	}
 	
-	public void removeLesson(String lessonID) {
-		inspirationAssignments.remove(lessonID);
+	public void removeLesson(String lessonId) {
+		inspirationAssignments.remove(lessonId);
 		if (inspirationAssignments.size() == 0) {
 			inspirationAssignments.add(EMPTY);
 		}
@@ -62,14 +72,14 @@ public class LessonData implements Serializable{
 	
 	@SuppressWarnings("unchecked")
 	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
-		this.lessonID = (String) stream.readObject();
-		this.lessonName = (String) stream.readObject();
+		this.lessonId = (String) stream.readObject();
+		this.LessonTitle = (String) stream.readObject();
 		this.inspirationAssignments = (ArrayList<String>) stream.readObject();
 	}
 	
 	private void writeObject(ObjectOutputStream stream) throws IOException {
-		stream.writeObject(this.lessonID);
-		stream.writeObject(this.lessonName);
+		stream.writeObject(this.lessonId);
+		stream.writeObject(this.LessonTitle);
 		stream.writeObject(this.inspirationAssignments);
 	}
 }

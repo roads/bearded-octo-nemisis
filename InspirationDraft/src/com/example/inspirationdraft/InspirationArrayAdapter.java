@@ -38,7 +38,7 @@ public class InspirationArrayAdapter extends ArrayAdapter<InspirationData>{
             holder.inspirationContent = (TextView)row.findViewById(R.id.txtInspirationContent);
             holder.inspirationImgIcon = (ImageView)row.findViewById(R.id.imgInspirationIcon);
             holder.inspirationAssignments = (TextView)row.findViewById(R.id.txtInspirationAssignments);
-            holder.inspirationID = (TextView)row.findViewById(R.id.txtInspirationID);
+            holder.inspirationID = (TextView)row.findViewById(R.id.txtInspirationId);
             
             row.setTag(holder);
         }
@@ -50,7 +50,7 @@ public class InspirationArrayAdapter extends ArrayAdapter<InspirationData>{
         InspirationData inspiration = data.get(position);
         holder.inspirationContent.setText(inspiration.getContent());
         holder.inspirationImgIcon.setImageResource(inspiration.getAssignedIcon());
-        holder.inspirationAssignments.setText(inspiration.getLessonAssignmentsString());
+        holder.inspirationAssignments.setText(inspiration.getLessonAssignments().toString());
         holder.inspirationID.setText(inspiration.getID());
         
         return row;

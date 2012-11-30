@@ -1,10 +1,12 @@
 package com.example.inspirationdraft;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,37 +14,58 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditInspirationFragment extends Fragment {
 	
-	private InspirationList inspirations = new InspirationList();
-	private String idKey;
+	private InspirationList inspirationsForStorage = new InspirationList();
+	private LessonList lessonsForStorage = new LessonList();
+	private ArrayList<LessonData> lessonsForDisplay = new ArrayList<LessonData>();
+	private String inspirationIdKey;
 	private boolean saveData = true;
 	
 	@Override
 	public void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-
-		idKey = getActivity().getIntent().getStringExtra("idKey");
+		
+		inspirationIdKey = getActivity().getIntent().getStringExtra("inspirationIdKey");
+		lessonsForStorage.load(new File(getActivity().getFilesDir(), "lessons.bin"));
 	}
 	
 	@Override
 	public void onResume() {
 		super.onResume();
 		saveData = true;
-		inspirations.load(new File(getActivity().getFilesDir(), "inspirations.bin"));
+		inspirationsForStorage.load(new File(getActivity().getFilesDir(), "inspirations.bin"));
 		
-		if (idKey != null) {
-			InspirationData data = inspirations.getInspiration(idKey);		
+		
+		if (inspirationIdKey != null) {
+			InspirationData data = inspirationsForStorage.getInspiration(inspirationIdKey);		
 			
 			TextView inspiration_id = (TextView) getActivity().findViewById(R.id.inspiration_id);			
-			inspiration_id.setText(idKey);		
+			inspiration_id.setText(inspirationIdKey);		
 			
 			EditText content_field = (EditText) getActivity().findViewById(R.id.content_field);			
-			content_field.setText(data.getContent());			
+			content_field.setText(data.getContent());	
+			
+			//for (String lessonKey : lessonsForStorage) {
+		//	lessonsForDisplay.add(lessonsForStorage.getLesson(lessonKey));
+		//}
+			//Integer.parseInt(lessonId)
+			ListView list_checkable_lessons = (ListView) getActivity().findViewById(R.id.lessonlist);
+			ArrayList<String> lessonAssignments = data.getLessonAssignments();
+			if (lessonAssignments.size() > 0) {
+				int itemLocation = 1;
+				//for (String lessonId : lessonAssignments) {
+					CheckableLinearLayout lessonItem = (CheckableLinearLayout) list_checkable_lessons.getChildAt(itemLocation);
+					lessonItem.setChecked(true);
+				//}
+			}
+			
+			
 		}
 	}
 
@@ -52,24 +75,39 @@ public class EditInspirationFragment extends Fragment {
 		if (saveData) {
 			
 			InspirationData data = null;			
+			
 			EditText content_field = (EditText) getActivity().findViewById(R.id.content_field);			
 			String content = content_field.getText().toString();
 			
+			ListView list_checkable_lessons = (ListView) getActivity().findViewById(R.id.lessonlist);
+			int numLessonsInView = list_checkable_lessons.getCount();
+			ArrayList<String> newChosenAssignments = new ArrayList<String>();
+			SparseBooleanArray chosenLessonsSparseBooleanArray = list_checkable_lessons.getCheckedItemPositions();
+			
+			for(int i =0; i < numLessonsInView; i++) {
+				if(chosenLessonsSparseBooleanArray.get(i) == true) {
+					TextView id_field = (TextView) list_checkable_lessons.getChildAt(i).findViewById(R.id.txtLessonId);
+					newChosenAssignments.add(id_field.getText().toString());
+				}
+				
+			}
+			
 			data = new InspirationData(content);
 			
-			if (idKey != null) {
+			if (inspirationIdKey != null) {
 				// editing existing
-				InspirationData oldData = inspirations.getInspiration(idKey);
+				InspirationData oldData = inspirationsForStorage.getInspiration(inspirationIdKey);
 				data.setID(oldData.getID());
-				inspirations.removeID(idKey);
+				data.setLessonAssignments(newChosenAssignments);
+				inspirationsForStorage.removeID(inspirationIdKey);
 			} else {
 				// new inspiration
-				idKey = data.getID();
+				inspirationIdKey = data.getID();
 			}
 		
-			inspirations.addInspiration(idKey, data);
+			inspirationsForStorage.addInspiration(inspirationIdKey, data);
 			
-			inspirations.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
+			inspirationsForStorage.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
 			
 			Context context = getActivity();
 			CharSequence text = getText(R.string.toast_inspiration_saved);
@@ -101,5 +139,21 @@ public class EditInspirationFragment extends Fragment {
 		}
 		getActivity().finish();
 		return true;
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		
+		for (String lessonKey : lessonsForStorage) {
+			lessonsForDisplay.add(lessonsForStorage.getLesson(lessonKey));
+		}
+        
+        ListView list_checked_lessons = (ListView) getActivity().findViewById(R.id.lessonlist);			
+		
+        LessonArrayAdapter adapter = new LessonArrayAdapter(getActivity(),
+    			R.layout.listview_lesson_row_multiple, lessonsForDisplay);
+		list_checked_lessons.setAdapter(adapter);
+		list_checked_lessons.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 	}
 }

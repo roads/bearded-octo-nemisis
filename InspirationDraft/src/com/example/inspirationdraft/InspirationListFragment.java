@@ -15,10 +15,8 @@ import java.util.ArrayList;
 
 public class InspirationListFragment extends ListFragment {
 	
-	private InspirationList inspirations = new InspirationList();
-	private ArrayList<InspirationData> fetch = new ArrayList<InspirationData>();
-	//private InspirationArrayAdapter adapter;
-
+	private InspirationList inspirationsForStorage = new InspirationList();
+	private ArrayList<InspirationData> inspirationsForDisplay = new ArrayList<InspirationData>();
 	private int itemSelected = -1;
 	
 	@Override
@@ -30,7 +28,7 @@ public class InspirationListFragment extends ListFragment {
 	@Override
 	public void onPause() {
 		super.onPause();
-		inspirations.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
+		inspirationsForStorage.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
 	}
 	
 	@Override
@@ -66,14 +64,16 @@ public class InspirationListFragment extends ListFragment {
 	        getActivity().startActivity(intent);			
 		}
 		if (item.getItemId() == R.id.menu_edit_inspiration) {
-			TextView text = (TextView) getListView().getChildAt(itemSelected).findViewById(R.id.txtInspirationID);
-			intent.putExtra("idKey", text.getText().toString());
+			TextView text = (TextView) getListView().getChildAt(itemSelected).
+					findViewById(R.id.txtInspirationId);
+			intent.putExtra("inspirationIdKey", text.getText().toString());
 	        getActivity().startActivity(intent);
 	        itemSelected = -1;
     			getActivity().invalidateOptionsMenu();
 		}
 		if (item.getItemId() == R.id.menu_delete_inspiration) {
-			TextView text = (TextView) getListView().getChildAt(itemSelected).findViewById(R.id.txtInspirationID);
+			TextView text = (TextView) getListView().getChildAt(itemSelected).
+					findViewById(R.id.txtInspirationId);
 			remove_id(text.getText().toString());
 		}
 		return true;
@@ -90,13 +90,12 @@ public class InspirationListFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         setEmptyText(getText(R.string.empty_inspirationlist));
         setListAdapter(getCurrentInspirations());
-        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);  
-        
+        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);        
     }
     
-    public void remove_id(String idKey) {
-    	inspirations.removeID(idKey);
-    	inspirations.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
+    public void remove_id(String inspirationIdKey) {
+    	inspirationsForStorage.removeID(inspirationIdKey);
+    	inspirationsForStorage.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
     	setListAdapter(getCurrentInspirations());
     	itemSelected = -1;
     	getActivity().invalidateOptionsMenu();
@@ -104,18 +103,18 @@ public class InspirationListFragment extends ListFragment {
     
     public InspirationArrayAdapter getCurrentInspirations() {
     	
-    	InspirationArrayAdapter adapter = new InspirationArrayAdapter(getActivity(), R.layout.inspiration_listview_item_row, fetch);
-    	inspirations.clear();
-    	fetch.clear();
+    	InspirationArrayAdapter adapter = new InspirationArrayAdapter(getActivity(), 
+    			R.layout.listview_inspiration_row, inspirationsForDisplay);
+    	inspirationsForStorage.clear();
+    	inspirationsForDisplay.clear();
     	File appDir = getActivity().getFilesDir();
-    	inspirations.load(new File(appDir, "inspirations.bin"));
-    	for (String inspirationKey : inspirations) {
-    		InspirationData inspirationData = inspirations.getInspiration(inspirationKey);		
+    	inspirationsForStorage.load(new File(appDir, "inspirations.bin"));
+    	for (String inspirationKey : inspirationsForStorage) {
+    		InspirationData inspirationData = inspirationsForStorage.getInspiration(inspirationKey);		
     		adapter.add(inspirationData);
     	}
     	return adapter;
     }
     
-    
-     	
+         	
 }

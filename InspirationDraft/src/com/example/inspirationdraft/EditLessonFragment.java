@@ -12,12 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditLessonFragment extends Fragment {
 
 	private LessonList lessons = new LessonList();
-	private String lessonName;
+	private String idKey;
 	private boolean saveData = true;
 	
 	@Override
@@ -25,7 +26,7 @@ public class EditLessonFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 
-		lessonName = getActivity().getIntent().getStringExtra("lessonName");
+		idKey = getActivity().getIntent().getStringExtra("lessonIdKey");
 		
 	}
 	
@@ -35,13 +36,14 @@ public class EditLessonFragment extends Fragment {
 		saveData = true;
 		lessons.load(new File(getActivity().getFilesDir(), "lessons.bin"));
 		
-		if (lessonName != null) {
-			LessonData data = lessons.getLesson(lessonName);
+		if (idKey != null) {
+			LessonData data = lessons.getLesson(idKey);
+			
+			TextView lesson_id = (TextView) getActivity().findViewById(R.id.lesson_id);			
+			lesson_id.setText(idKey);
 			
 			EditText suffixName_field = (EditText) getActivity().findViewById(R.id.suffix_name_field);
-			
-			suffixName_field.setText(data.getLessonName());
-			
+			suffixName_field.setText(data.getLessonTitle());
 		}
 	}
 
@@ -50,31 +52,30 @@ public class EditLessonFragment extends Fragment {
 		super.onPause();
 		if (saveData) {
 			
-			LessonData data = null;
-			
+			LessonData data = null;			
 			EditText suffixName_field = (EditText) getActivity().findViewById(R.id.suffix_name_field);
-			
 			String suffixName = suffixName_field.getText().toString();
 			
 			data = new LessonData(suffixName);
 			
-			if (lessonName != null) {
+			if (idKey != null) {
 				// editing existing
-				lessons.removeLesson(lessonName);
+				LessonData oldData = lessons.getLesson(idKey);
+				data.setLessonId(oldData.getLessonId());
+				lessons.removeLesson(idKey);
 			} else {
 				// new lesson
-				suffixName = data.getLessonName();
-				lessonName = "Lesson " + data.getLessonID() + ":  " + suffixName;
+				suffixName = data.getLessonTitle();
+				idKey = data.getLessonId();
 			}
 		
-			lessons.addLesson(lessonName, data);
+			lessons.addLesson(idKey, data);
 			
 			lessons.save(new File(getActivity().getFilesDir(), "lessons.bin"));
 			
 			Context context = getActivity();
 			CharSequence text = getText(R.string.toast_lesson_saved);
 			int duration = Toast.LENGTH_SHORT;
-
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
 		

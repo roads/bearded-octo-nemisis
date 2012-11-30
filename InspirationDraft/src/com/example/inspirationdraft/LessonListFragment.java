@@ -7,15 +7,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class LessonListFragment extends ListFragment {
 	
-	private LessonList lessons = new LessonList();
+	private LessonList lessonsForStorage = new LessonList();
+	private ArrayList<LessonData> lessonsForDisplay = new ArrayList<LessonData>();
 	private int itemSelected = -1;
 	
 	@Override
@@ -27,7 +28,7 @@ public class LessonListFragment extends ListFragment {
 	@Override
 	public void onPause() {
 		super.onPause();
-		lessons.save(new File(getActivity().getFilesDir(), "lessons.bin"));
+		lessonsForStorage.save(new File(getActivity().getFilesDir(), "lessons.bin"));
 	}
 	
 	@Override
@@ -63,14 +64,16 @@ public class LessonListFragment extends ListFragment {
 	        getActivity().startActivity(intent);			
 		}
 		if (item.getItemId() == R.id.menu_edit_lesson) {
-			TextView text = (TextView) getListView().getChildAt(itemSelected);
-			intent.putExtra("lessonName", text.getText().toString());
+			TextView text = (TextView) getListView().getChildAt(itemSelected).
+					findViewById(R.id.txtLessonId);
+			intent.putExtra("lessonIdKey", text.getText().toString());
 	        getActivity().startActivity(intent);
 	        itemSelected = -1;
     			getActivity().invalidateOptionsMenu();
 		}
 		if (item.getItemId() == R.id.menu_delete_lesson) {
-			TextView text = (TextView) getListView().getChildAt(itemSelected);
+			TextView text = (TextView) getListView().getChildAt(itemSelected).
+					findViewById(R.id.txtLessonId);
 			remove_id(text.getText().toString());
 		}
 		return true;
@@ -87,87 +90,31 @@ public class LessonListFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         setEmptyText(getText(R.string.empty_lessonlist));
         setListAdapter(getCurrentLessons());
-        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);  
-        
+        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);       
     }
     
-    public void remove_id(String lessonName) {
-    	lessons.removeLesson(lessonName);
-    	lessons.save(new File(getActivity().getFilesDir(), "lessons.bin"));
+    public void remove_id(String lessonIdKey) {
+    	lessonsForStorage.removeLesson(lessonIdKey);
+    	lessonsForStorage.save(new File(getActivity().getFilesDir(), "lessons.bin"));
     	setListAdapter(getCurrentLessons());
     	itemSelected = -1;
     	getActivity().invalidateOptionsMenu();
     }
-    
-//    public TwoLineArrayAdapter getCurrentLessons() {
-//    	
-//    }
-//    
-    public ArrayAdapter<String> getCurrentLessons() {
+     
+    public LessonArrayAdapter getCurrentLessons() {
     	
-    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_single_choice);
-    	lessons.clear();
+    	LessonArrayAdapter adapter = new LessonArrayAdapter(getActivity(),
+    			R.layout.listview_lesson_row, lessonsForDisplay);
+    	lessonsForStorage.clear();
+    	lessonsForDisplay.clear();
     	File appDir = getActivity().getFilesDir();
-    	lessons.load(new File(appDir, "lessons.bin"));
-    	for (String lessonName : lessons) {
-    		adapter.add(lessonName);
+    	lessonsForStorage.load(new File(appDir, "lessons.bin"));
+    	for (String lessonKey : lessonsForStorage) {
+    		LessonData lessonData = lessonsForStorage.getLesson(lessonKey);
+    		adapter.add(lessonData);
     	}
     	return adapter;
     }
     
-    
-     	
+       	
 }
-//import android.app.ListFragment;
-//import android.content.Intent;
-//import android.os.Bundle;
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//import android.widget.ArrayAdapter;
-//import android.widget.ListView;
-//
-//
-//public class LessonListFragment extends ListFragment {
-//	
-//	int mCurCheckPosition = 0;
-////	private int itemSelected = -1;
-//	
-//	@Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container, 
-//    		Bundle savedInstanceState) {
-//        
-//    	// Inflate the layout for this fragment
-//    	return inflater.inflate(R.layout.fragment_lessonlist, container, false);
-//    }
-//	
-//	
-//	@Override
-//    public void onActivityCreated(Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        
-//        // Populate list with our static array of titles.
-//        setListAdapter(new ArrayAdapter<String>(getActivity(),
-//                android.R.layout.simple_list_item_activated_1, Shakespeare.TITLES));
-//               
-//        
-//    }
-//	
-//    @Override
-//    public void onListItemClick(ListView l, View v, int position, long id) {
-//        showDetails(position);
-//    }
-//    
-//    void showDetails(int index) {
-//        mCurCheckPosition = index;
-//        
-//        // launch a new activity to display
-//        // the dialog fragment with selected text.
-//        Intent intent = new Intent();
-//        intent.setClass(getActivity(), ShakespeareActivity.class);
-//        intent.putExtra("index", index);
-//        startActivity(intent);
-//
-//    }
-//        	
-//}

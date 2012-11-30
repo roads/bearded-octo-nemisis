@@ -51,8 +51,12 @@ public class InspirationData implements Serializable{
 		this.content = content;
 	}
 	
-	public String getLessonAssignmentsString() {
-		return this.lessonAssignments.toString();
+	public ArrayList<String> getLessonAssignments() {
+		return this.lessonAssignments;
+	}
+	
+	public void setLessonAssignments(ArrayList<String> newAssignments) {
+		this.lessonAssignments = newAssignments;
 	}
 	
 	public int getAssignedIcon() {
@@ -69,12 +73,6 @@ public class InspirationData implements Serializable{
 		if (lessonAssignments.size() == 0) {
 			lessonAssignments.add(UNASSIGNED);
 		}
-	}
-	
-
-	public String toListFormatting() {
-		String text = this.inspirationID + "\n" + this.content + "\n" + this.lessonAssignments;
-		return text;
 	}
 	
 	@SuppressWarnings("unchecked")
