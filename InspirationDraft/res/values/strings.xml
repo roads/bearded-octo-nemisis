@@ -3,30 +3,32 @@
     <string name="app_name">Inspiration Draft</string>
     <string name="title_section2">Inspirations</string>
     <string name="title_section1">Lessons</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Inspiration Draft</string>
-    <string name="add_activity">Create Lesson  +</string>
-    <string name="activities">Lessons</string>
-    <string name="empty_lessonlist">No Lessons</string>
+    <string name="menu_settings">Settings</string>
+    
     <string name="title_activity_details">Shakespeare Details</string>
-    <string name="add_inspiration">Create Inspiration  +</string>
-    <string name="inspirations">Inspirations</string>
-    <string name="empty_masterlist">No Inspirations</string>
+    
+    <string name="inspirationImage_desc">Inspiration Icon</string>
+ 
+    <string name="empty_inspirationlist">No Inspirations</string>
+    <string name="title_activity_edit_inspiration">Edit Inspiration</string>
     <string name="menu_new_inspiration">New</string>
     <string name="menu_edit_inspiration">Edit</string>
     <string name="menu_delete_inspiration">Delete</string>
-    <string name="menu_ok">OK</string>
-    <string name="menu_cancel">Cancel</string>
+    <string name="label_id">ID:  </string>
+    <string name="label_content">Content:</string>
+    <string name="hint_content">Enter the content of your inspiration.</string>
+    <string name="toast_inspiration_saved">Inspiration Saved</string>
+    
+    <string name="empty_lessonlist">No Lessons</string>
+    <string name="title_activity_edit_lesson">Edit Lesson</string>
     <string name="menu_new_lesson">New</string>
     <string name="menu_edit_lesson">Edit</string>
     <string name="menu_delete_lesson">Delete</string>
-    <string name="label_content">Content:</string>
-    <string name="hint_content">Enter the content of your inspiration.</string>
-    <string name="title_activity_create_inspiration">New Inspiration</string>
-    <string name="inspiration_edit_message">Enter your inspiration here</string>
-    <string name="button_save_inspiration">Save</string>
-    <string name="title_activity_create_grouping">New Lesson</string>
-    <string name="title_activity_edit_inspiration">EditInspiration</string>
-
+    <string name="label_lesson_title">Lesson Title:</string>
+    <string name="hint_suffix_name">Enter a your lesson suffix here.</string>
+    <string name="toast_lesson_saved">Lesson Saved</string>
+    
+	<string name="menu_ok">OK</string>
+    <string name="menu_cancel">Cancel</string>
 </resources>

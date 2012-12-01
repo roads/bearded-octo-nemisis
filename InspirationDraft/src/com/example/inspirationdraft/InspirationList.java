@@ -42,10 +42,11 @@ public class InspirationList implements Iterable<String> {
 		inspirations.remove(id);
 	}
 	
-	public InspirationData getID(String id) {
+	public InspirationData getInspiration(String id) {
 		return inspirations.get(id);
 	}
 	
+	@Override
 	public Iterator<String> iterator() {
 		return inspirations.keySet().iterator();
 	}

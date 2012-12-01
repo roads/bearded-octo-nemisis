@@ -7,43 +7,43 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class InspirationListFragment extends ListFragment {
 	
-	private InspirationList inspirations = new InspirationList();
+	private InspirationList inspirationsForStorage = new InspirationList();
+	private ArrayList<InspirationData> inspirationsForDisplay = new ArrayList<InspirationData>();
 	private int itemSelected = -1;
 	
+	@Override
 	public void onResume() {
 		super.onResume();
 		setListAdapter(getCurrentInspirations());
 	}
 
+	@Override
 	public void onPause() {
 		super.onPause();
-		inspirations.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
+		inspirationsForStorage.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
 	}
 	
+	@Override
 	public void onCreate (Bundle savedInstancesState) {
 		super.onCreate(savedInstancesState);
 		setHasOptionsMenu(true);
 	}
 	
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
-//    		Bundle savedInstanceState) {
-//        
-//    	// Inflate the layout for this fragment
-//    	return inflater.inflate(R.layout.fragment_masterlist, container, false);
-//    }
-	
+	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// menu with new, delete, and edit options
 		inflater.inflate(R.menu.fragment_inspirationlist,menu);
 	}
 	
+	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
 		MenuItem delete = menu.findItem(R.id.menu_delete_inspiration);
@@ -57,55 +57,64 @@ public class InspirationListFragment extends ListFragment {
 		}
 	}
 	
+	@Override
 	public boolean onOptionsItemSelected (MenuItem item) {
         Intent intent = new Intent(getActivity(), EditInspirationActivity.class);
 		if (item.getItemId() == R.id.menu_new_inspiration) {
 	        getActivity().startActivity(intent);			
 		}
 		if (item.getItemId() == R.id.menu_edit_inspiration) {
-			TextView text = (TextView) getListView().getChildAt(itemSelected);
-			intent.putExtra("id", text.getText().toString());
+			TextView text = (TextView) getListView().getChildAt(itemSelected).
+					findViewById(R.id.txtInspirationId);
+			intent.putExtra("inspirationIdKey", text.getText().toString());
 	        getActivity().startActivity(intent);
 	        itemSelected = -1;
     			getActivity().invalidateOptionsMenu();
 		}
 		if (item.getItemId() == R.id.menu_delete_inspiration) {
-			TextView text = (TextView) getListView().getChildAt(itemSelected);
+			TextView text = (TextView) getListView().getChildAt(itemSelected).
+					findViewById(R.id.txtInspirationId);
 			remove_id(text.getText().toString());
 		}
 		return true;
 	}
 	
+	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		itemSelected = position;
 		getActivity().invalidateOptionsMenu();
 	}
 	
+	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setEmptyText("No Inspirations");
+        setEmptyText(getText(R.string.empty_inspirationlist));
         setListAdapter(getCurrentInspirations());
-        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);   
+        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);        
     }
-	
-    public void remove_id(String id) {
-    	inspirations.removeID(id);
-    	inspirations.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
+    
+    public void remove_id(String inspirationIdKey) {
+    	inspirationsForStorage.removeID(inspirationIdKey);
+    	inspirationsForStorage.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
     	setListAdapter(getCurrentInspirations());
     	itemSelected = -1;
     	getActivity().invalidateOptionsMenu();
     }
     
-    public ArrayAdapter<String> getCurrentInspirations() {
+    public InspirationArrayAdapter getCurrentInspirations() {
     	
-    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_single_choice);
-    	inspirations.clear();
+    	InspirationArrayAdapter adapter = new InspirationArrayAdapter(getActivity(), 
+    			R.layout.listview_inspiration_row, inspirationsForDisplay);
+    	inspirationsForStorage.clear();
+    	inspirationsForDisplay.clear();
     	File appDir = getActivity().getFilesDir();
-    	inspirations.load(new File(appDir, "inspirations.bin"));
-    	for (String id : inspirations) {
-    		adapter.add(id);
+    	inspirationsForStorage.load(new File(appDir, "inspirations.bin"));
+    	for (String inspirationKey : inspirationsForStorage) {
+    		InspirationData inspirationData = inspirationsForStorage.getInspiration(inspirationKey);		
+    		adapter.add(inspirationData);
     	}
     	return adapter;
     }
-     	
+    
+         	
 }
