@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,30 +41,30 @@ public class EditInspirationFragment extends Fragment {
 		super.onResume();
 		saveData = true;
 		inspirationsForStorage.load(new File(getActivity().getFilesDir(), "inspirations.bin"));
-		
+		lessonsForStorage.load(new File(getActivity().getFilesDir(), "lessons.bin"));
 		
 		if (inspirationIdKey != null) {
-			InspirationData data = inspirationsForStorage.getInspiration(inspirationIdKey);		
+			InspirationData newInspirationData = inspirationsForStorage.getInspiration(inspirationIdKey);		
 			
 			TextView inspiration_id = (TextView) getActivity().findViewById(R.id.inspiration_id);			
 			inspiration_id.setText(inspirationIdKey);		
 			
 			EditText content_field = (EditText) getActivity().findViewById(R.id.content_field);			
-			content_field.setText(data.getContent());	
+			content_field.setText(newInspirationData.getContent());	
 			
 			//for (String lessonKey : lessonsForStorage) {
-		//	lessonsForDisplay.add(lessonsForStorage.getLesson(lessonKey));
-		//}
+			//	lessonsForDisplay.add(lessonsForStorage.getLesson(lessonKey));
+			//}
 			//Integer.parseInt(lessonId)
-			ListView list_checkable_lessons = (ListView) getActivity().findViewById(R.id.lessonlist);
-			ArrayList<String> lessonAssignments = data.getLessonAssignments();
-			if (lessonAssignments.size() > 0) {
-				int itemLocation = 1;
-				//for (String lessonId : lessonAssignments) {
-					CheckableLinearLayout lessonItem = (CheckableLinearLayout) list_checkable_lessons.getChildAt(itemLocation);
-					lessonItem.setChecked(true);
-				//}
-			}
+//			ListView list_checkable_lessons = (ListView) getActivity().findViewById(R.id.lessonlist);
+//			ArrayList<String> lessonAssignments = data.getLessonAssignments();
+//			if (lessonAssignments.size() > 0) {
+//				int itemLocation = 1;
+//				//for (String lessonId : lessonAssignments) {
+//					CheckableLinearLayout lessonItem = (CheckableLinearLayout) list_checkable_lessons.getChildAt(itemLocation);
+//					CheckBox checkbox = lessonItem.findViewById(R.id.check);// setChecked(true);
+//				//}
+//			}
 			
 			
 		}
@@ -74,7 +75,8 @@ public class EditInspirationFragment extends Fragment {
 		super.onPause();
 		if (saveData) {
 			
-			InspirationData data = null;			
+			InspirationData newInspirationData = null;			
+			LessonData newLessonData = null;
 			
 			EditText content_field = (EditText) getActivity().findViewById(R.id.content_field);			
 			String content = content_field.getText().toString();
@@ -92,20 +94,53 @@ public class EditInspirationFragment extends Fragment {
 				
 			}
 			
-			data = new InspirationData(content);
+			// Update Lessons (by cycling through all lessons and removing and adding as appropriate)
+			for (String lessonIdKey:lessonsForStorage) {
+				LessonData oldLessonData = lessonsForStorage.getLesson(lessonIdKey);
+				newLessonData = new LessonData(oldLessonData.getLessonId(), oldLessonData.getLessonTitle(), oldLessonData.getLessonAssignments());
+//				lessonsForStorage.removeLesson(lessonIdKey);
+				
+				ArrayList<String> oldLessonAssignments = oldLessonData.getLessonAssignments();
+				if (newChosenAssignments.contains(lessonIdKey)) {
+					// inspiration chose this lesson, add to lesson's assignments
+					
+					// check if lesson already contains assignment
+					if (oldLessonAssignments.contains(lessonIdKey)) {
+						// lesson already contains assignment
+					} else {
+						// lesson does not contain assignment
+						newLessonData.addInspirationAssignment(inspirationIdKey);
+					}
+					
+				} else {
+					// inspiration did not choose this lesson, remove from lesson's assignments
+					// check if lesson contains assignment
+					if (oldLessonAssignments.contains(lessonIdKey)) {
+						// lesson contains assignment, remove
+						newLessonData.removeInspirationAssignment(inspirationIdKey);
+					} else {
+						// lesson does not contain assignment
+					}
+					
+				}
+				lessonsForStorage.addLesson(lessonIdKey, newLessonData);
+			}
+			lessonsForStorage.save(new File(getActivity().getFilesDir(), "lessons.bin"));
+			
+			newInspirationData = new InspirationData(content);
 			
 			if (inspirationIdKey != null) {
 				// editing existing
 				InspirationData oldData = inspirationsForStorage.getInspiration(inspirationIdKey);
-				data.setID(oldData.getID());
-				data.setLessonAssignments(newChosenAssignments);
+				newInspirationData.setID(oldData.getID());
+				newInspirationData.setLessonAssignments(newChosenAssignments);
 				inspirationsForStorage.removeID(inspirationIdKey);
 			} else {
 				// new inspiration
-				inspirationIdKey = data.getID();
+				inspirationIdKey = newInspirationData.getID();
 			}
 		
-			inspirationsForStorage.addInspiration(inspirationIdKey, data);
+			inspirationsForStorage.addInspiration(inspirationIdKey, newInspirationData);
 			
 			inspirationsForStorage.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
 			
@@ -151,7 +186,7 @@ public class EditInspirationFragment extends Fragment {
         
         ListView list_checked_lessons = (ListView) getActivity().findViewById(R.id.lessonlist);			
 		
-        LessonArrayAdapter adapter = new LessonArrayAdapter(getActivity(),
+        LessonArrayAdapterMultiple adapter = new LessonArrayAdapterMultiple(getActivity(),
     			R.layout.listview_lesson_row_multiple, lessonsForDisplay);
 		list_checked_lessons.setAdapter(adapter);
 		list_checked_lessons.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);

@@ -15,26 +15,32 @@ public class LessonData implements Serializable{
 	private String lessonId;
 	private String LessonTitle;
 	private ArrayList<String> inspirationAssignments;
-	private int assignedIcon;
 	
 	public LessonData() {
+		super();
 		this.lessonId = Integer.toString(lessonCount);
 		lessonCount++;
 		this.LessonTitle = ""; //"Lesson " + this.lessonId;
 		this.inspirationAssignments = new ArrayList<String>();
 		this.inspirationAssignments.add(EMPTY);
-		this.assignedIcon = R.drawable.question_mark;
 	}
 	
 	public LessonData(String suffixName){
+		super();
 		this.lessonId = Integer.toString(lessonCount);
 		lessonCount++;
 		this.LessonTitle = suffixName;//"Lesson " + this.lessonId + ":  " + suffixName;
 		this.inspirationAssignments = new ArrayList<String>();
 		this.inspirationAssignments.add(EMPTY);
-		this.assignedIcon = R.drawable.question_mark;
 	}
 
+	public LessonData(String lessonId, String suffixName, ArrayList<String> assignments){
+		super();
+		this.lessonId = lessonId;
+		this.LessonTitle = suffixName;
+		this.inspirationAssignments = assignments;
+	}
+	
 	public String getLessonId() {
 		return this.lessonId;
 	}
@@ -50,21 +56,28 @@ public class LessonData implements Serializable{
 		this.LessonTitle = LessonTitle;
 	}
 	
-	public String getLessonAssignmentsString() {
-		return this.inspirationAssignments.toString();
+	public ArrayList<String> getLessonAssignments() {
+		return this.inspirationAssignments;
 	}
 	
 	public int getAssignedIcon() {
-		return this.assignedIcon;
-	}
-	
-	public void addInspiration(String inspirationId) {
 		inspirationAssignments.remove(EMPTY);
-		inspirationAssignments.add(lessonId);
+		if (inspirationAssignments.size() > 0) {
+			return R.drawable.flag_green;
+		} else {
+			inspirationAssignments.add(EMPTY);
+			return R.drawable.flag_red;
+		}
+					
 	}
 	
-	public void removeLesson(String lessonId) {
-		inspirationAssignments.remove(lessonId);
+	public void addInspirationAssignment(String inspirationId) {
+		inspirationAssignments.remove(EMPTY);
+		inspirationAssignments.add(inspirationId);
+	}
+	
+	public void removeInspirationAssignment(String inspiraitonId) {
+		inspirationAssignments.remove(inspiraitonId);
 		if (inspirationAssignments.size() == 0) {
 			inspirationAssignments.add(EMPTY);
 		}
