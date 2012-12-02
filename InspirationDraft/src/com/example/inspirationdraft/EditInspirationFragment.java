@@ -13,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -50,7 +49,7 @@ public class EditInspirationFragment extends Fragment {
 			inspiration_id.setText(inspirationIdKey);		
 			
 			EditText content_field = (EditText) getActivity().findViewById(R.id.content_field);			
-			content_field.setText(newInspirationData.getContent());	
+			content_field.setText(newInspirationData.getInspirationContent());	
 			
 			//for (String lessonKey : lessonsForStorage) {
 			//	lessonsForDisplay.add(lessonsForStorage.getLesson(lessonKey));
@@ -75,74 +74,32 @@ public class EditInspirationFragment extends Fragment {
 		super.onPause();
 		if (saveData) {
 			
-			InspirationData newInspirationData = null;			
-			LessonData newLessonData = null;
+			InspirationData newInspirationData = null;
 			
 			EditText content_field = (EditText) getActivity().findViewById(R.id.content_field);			
 			String content = content_field.getText().toString();
 			
-			ListView list_checkable_lessons = (ListView) getActivity().findViewById(R.id.lessonlist);
-			int numLessonsInView = list_checkable_lessons.getCount();
-			ArrayList<String> newChosenAssignments = new ArrayList<String>();
-			SparseBooleanArray chosenLessonsSparseBooleanArray = list_checkable_lessons.getCheckedItemPositions();
-			
-			for(int i =0; i < numLessonsInView; i++) {
-				if(chosenLessonsSparseBooleanArray.get(i) == true) {
-					TextView id_field = (TextView) list_checkable_lessons.getChildAt(i).findViewById(R.id.txtLessonId);
-					newChosenAssignments.add(id_field.getText().toString());
-				}
-				
-			}
-			
-			// Update Lessons (by cycling through all lessons and removing and adding as appropriate)
-			for (String lessonIdKey:lessonsForStorage) {
-				LessonData oldLessonData = lessonsForStorage.getLesson(lessonIdKey);
-				newLessonData = new LessonData(oldLessonData.getLessonId(), oldLessonData.getLessonTitle(), oldLessonData.getLessonAssignments());
-//				lessonsForStorage.removeLesson(lessonIdKey);
-				
-				ArrayList<String> oldLessonAssignments = oldLessonData.getLessonAssignments();
-				if (newChosenAssignments.contains(lessonIdKey)) {
-					// inspiration chose this lesson, add to lesson's assignments
-					
-					// check if lesson already contains assignment
-					if (oldLessonAssignments.contains(lessonIdKey)) {
-						// lesson already contains assignment
-					} else {
-						// lesson does not contain assignment
-						newLessonData.addInspirationAssignment(inspirationIdKey);
-					}
-					
-				} else {
-					// inspiration did not choose this lesson, remove from lesson's assignments
-					// check if lesson contains assignment
-					if (oldLessonAssignments.contains(lessonIdKey)) {
-						// lesson contains assignment, remove
-						newLessonData.removeInspirationAssignment(inspirationIdKey);
-					} else {
-						// lesson does not contain assignment
-					}
-					
-				}
-				lessonsForStorage.addLesson(lessonIdKey, newLessonData);
-			}
-			lessonsForStorage.save(new File(getActivity().getFilesDir(), "lessons.bin"));
+			ArrayList<String> newChosenLessonAssignments = 
+					getNewChosenLessonAssignments(); 
 			
 			newInspirationData = new InspirationData(content);
 			
 			if (inspirationIdKey != null) {
 				// editing existing
 				InspirationData oldData = inspirationsForStorage.getInspiration(inspirationIdKey);
-				newInspirationData.setID(oldData.getID());
-				newInspirationData.setLessonAssignments(newChosenAssignments);
+				newInspirationData.setInspirationId(oldData.getInspirationId());
+				newInspirationData.setLessonAssignments(newChosenLessonAssignments);
 				inspirationsForStorage.removeID(inspirationIdKey);
 			} else {
 				// new inspiration
-				inspirationIdKey = newInspirationData.getID();
+				inspirationIdKey = newInspirationData.getInspirationId();
+				newInspirationData.setLessonAssignments(newChosenLessonAssignments);
 			}
 		
 			inspirationsForStorage.addInspiration(inspirationIdKey, newInspirationData);
-			
 			inspirationsForStorage.save(new File(getActivity().getFilesDir(), "inspirations.bin"));
+			
+			updateLessons(newChosenLessonAssignments);
 			
 			Context context = getActivity();
 			CharSequence text = getText(R.string.toast_inspiration_saved);
@@ -190,5 +147,59 @@ public class EditInspirationFragment extends Fragment {
     			R.layout.listview_lesson_row_multiple, lessonsForDisplay);
 		list_checked_lessons.setAdapter(adapter);
 		list_checked_lessons.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+	}
+	
+	private ArrayList<String> getNewChosenLessonAssignments(){
+		
+		// Determine which lessons were selected
+		ListView list_checkable_lessons = (ListView) getActivity().findViewById(R.id.lessonlist);
+		int numLessonsInView = list_checkable_lessons.getCount();
+		ArrayList<String> newChosenLessons = new ArrayList<String>();
+		SparseBooleanArray chosenLessonsSparseBooleanArray = list_checkable_lessons.
+				getCheckedItemPositions();
+		
+		for(int i =0; i < numLessonsInView; i++) {
+			if(chosenLessonsSparseBooleanArray.get(i) == true) {
+				TextView id_field = (TextView) list_checkable_lessons.getChildAt(i).
+						findViewById(R.id.txtLessonId);
+				newChosenLessons.add(id_field.getText().toString());
+			}	
+		}
+		return newChosenLessons;
+	}
+	
+	private void updateLessons(ArrayList<String> newChosenAssignments) {
+		LessonData newLessonData = null;
+		// Update Lessons (by cycling through all lessons and removing and adding as appropriate)
+		for (String lessonIdKey:lessonsForStorage) {
+			LessonData oldLessonData = lessonsForStorage.getLesson(lessonIdKey);
+			newLessonData = new LessonData(oldLessonData.getLessonId(), oldLessonData.
+					getLessonTitle(), oldLessonData.getInspirationAssignments());
+			
+			ArrayList<String> oldLessonAssignments = oldLessonData.getInspirationAssignments();
+			if (newChosenAssignments.contains(lessonIdKey)) {
+				// inspiration chose this lesson, add to lesson's assignments
+				// check if lesson already contains assignment
+				if (oldLessonAssignments.contains(lessonIdKey)) {
+					// lesson already contains assignment
+				} else {
+					// lesson does not contain assignment
+					newLessonData.addInspirationAssignment(inspirationIdKey);
+				}
+				
+			} else {
+				// inspiration did not choose this lesson, remove from lesson's assignments
+				// check if lesson contains assignment
+				if (oldLessonAssignments.contains(lessonIdKey)) {
+					// lesson contains assignment, remove
+					newLessonData.removeInspirationAssignment(inspirationIdKey);
+				} else {
+					// lesson does not contain assignment
+				}	
+			}
+			lessonsForStorage.addLesson(lessonIdKey, newLessonData);
+		}
+		lessonsForStorage.save(new File(getActivity().getFilesDir(), "lessons.bin"));
+
 	}
 }

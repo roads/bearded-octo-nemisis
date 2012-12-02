@@ -12,42 +12,48 @@ public class InspirationData implements Serializable{
 	
 	private final String UNASSIGNED = "Unassigned";
 	static int inspirationCount = 1;
-	private String inspirationID;
+	private String inspirationId;
 	private String content;
 	private ArrayList<String> lessonAssignments;
-	private int assignedIcon;
 	
 	public InspirationData() {
-		this.inspirationID = Integer.toString(inspirationCount);
+		super();
+		this.inspirationId = Integer.toString(inspirationCount);
 		inspirationCount++;
 		this.content = "A man who does not read good books has no advantage over the man who can't read them. -Mark Twain";
 		this.lessonAssignments = new ArrayList<String>();
 		this.lessonAssignments.add(UNASSIGNED);
-		this.assignedIcon = R.drawable.question_mark;
 	}
 	
 	public InspirationData(String content){
-		this.inspirationID = Integer.toString(inspirationCount);
+		super();
+		this.inspirationId = Integer.toString(inspirationCount);
 		inspirationCount++;
 		this.content = content;
 		this.lessonAssignments = new ArrayList<String>();
 		this.lessonAssignments.add(UNASSIGNED);
-		this.assignedIcon = R.drawable.question_mark;
-	}
-
-	public String getID() {
-		return this.inspirationID;
-	}
-
-	public void setID(String newID) {
-		this.inspirationID = newID;
 	}
 	
-	public String getContent() {
+	public InspirationData(String inspirationId, String content, ArrayList<String> assignments){
+		super();
+		this.inspirationId = inspirationId;
+		this.content = content;
+		this.lessonAssignments = assignments;
+	}
+
+	public String getInspirationId() {
+		return this.inspirationId;
+	}
+
+	public void setInspirationId(String newId) {
+		this.inspirationId = newId;
+	}
+	
+	public String getInspirationContent() {
 		return this.content;
 	}
 	
-	public void setContent(String content) {
+	public void setInspirationContent(String content) {
 		this.content = content;
 	}
 	
@@ -60,16 +66,22 @@ public class InspirationData implements Serializable{
 	}
 	
 	public int getAssignedIcon() {
-		return this.assignedIcon;
-	}
-	
-	public void addLesson(String lessonID) {
 		lessonAssignments.remove(UNASSIGNED);
-		lessonAssignments.add(lessonID);
+		if (lessonAssignments.size() > 0) {
+			return R.drawable.flag_green;
+		} else {
+			lessonAssignments.add(UNASSIGNED);
+			return R.drawable.flag_red;
+		}
 	}
 	
-	public void removeLesson(String lessonID) {
-		lessonAssignments.remove(lessonID);
+	public void addLessonAssignment(String lessonId) {
+		lessonAssignments.remove(UNASSIGNED);
+		lessonAssignments.add(lessonId);
+	}
+	
+	public void removeLessonAssignment(String lessonId) {
+		lessonAssignments.remove(lessonId);
 		if (lessonAssignments.size() == 0) {
 			lessonAssignments.add(UNASSIGNED);
 		}
@@ -77,13 +89,13 @@ public class InspirationData implements Serializable{
 	
 	@SuppressWarnings("unchecked")
 	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
-		this.inspirationID = (String) stream.readObject();
+		this.inspirationId = (String) stream.readObject();
 		this.content = (String) stream.readObject();
 		this.lessonAssignments = (ArrayList<String>) stream.readObject();
 	}
 	
 	private void writeObject(ObjectOutputStream stream) throws IOException {
-		stream.writeObject(this.inspirationID);
+		stream.writeObject(this.inspirationId);
 		stream.writeObject(this.content);
 		stream.writeObject(this.lessonAssignments);
 	}

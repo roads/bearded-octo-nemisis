@@ -8,16 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.widget.CheckedTextView;
 import android.widget.TextView;
 
-public class InspirationArrayAdapter extends ArrayAdapter<InspirationData>{
+public class InspirationArrayAdapterMultiple extends ArrayAdapter<InspirationData>{
 
 	Context context; 
     int layoutResourceId;    
     ArrayList<InspirationData> data = null;
     
-    public InspirationArrayAdapter(Context context, int layoutResourceId, ArrayList<InspirationData> data) {
+    public InspirationArrayAdapterMultiple(Context context, int layoutResourceId, ArrayList<InspirationData> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -35,11 +35,9 @@ public class InspirationArrayAdapter extends ArrayAdapter<InspirationData>{
             row = inflater.inflate(layoutResourceId, parent, false);
             
             holder = new InspirationDataHolder();
-            holder.inspirationContent = (TextView)row.findViewById(R.id.txtInspirationContent);
-            holder.inspirationImgIcon = (ImageView)row.findViewById(R.id.imgInspirationIcon);
-            holder.inspirationAssignments = (TextView)row.findViewById(R.id.txtInspirationAssignments);
             holder.inspirationID = (TextView)row.findViewById(R.id.txtInspirationId);
-            
+            holder.inspirationContent = (CheckedTextView)row.findViewById(R.id.txtInspirationContent);
+
             row.setTag(holder);
         }
         else
@@ -48,19 +46,16 @@ public class InspirationArrayAdapter extends ArrayAdapter<InspirationData>{
         }
         
         InspirationData inspiration = data.get(position);
-        holder.inspirationContent.setText(inspiration.getInspirationContent());
-        holder.inspirationImgIcon.setImageResource(inspiration.getAssignedIcon());
-        holder.inspirationAssignments.setText(inspiration.getLessonAssignments().toString());
+        
         holder.inspirationID.setText(inspiration.getInspirationId());
+        holder.inspirationContent.setText(inspiration.getInspirationContent());     
         
         return row;
     }
     
     static class InspirationDataHolder
     {
-    	TextView inspirationContent;
-    	ImageView inspirationImgIcon;
-        TextView inspirationAssignments;
-        TextView inspirationID;
+    	TextView inspirationID;
+    	CheckedTextView inspirationContent;        
     }
 }
