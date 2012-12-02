@@ -100,10 +100,6 @@ public final class R {
         public static final int title_section2=0x7f040001;
         public static final int toast_inspiration_saved=0x7f04000f;
         public static final int toast_lesson_saved=0x7f040018;
-        public static final int toast_testfour=0x7f040020;
-        public static final int toast_testone=0x7f04001d;
-        public static final int toast_testthree=0x7f04001f;
-        public static final int toast_testtwo=0x7f04001e;
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;

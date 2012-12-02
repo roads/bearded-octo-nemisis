@@ -17,7 +17,6 @@ public class LessonListFragment extends ListFragment {
 	
 	private LessonList lessonsForStorage = new LessonList();
 	private ArrayList<LessonData> lessonsForDisplay = new ArrayList<LessonData>();
-	private InspirationList inspirationsForStorage = new InspirationList();
 	private int itemSelected = -1;
 	
 	@Override
@@ -95,23 +94,8 @@ public class LessonListFragment extends ListFragment {
     }
     
     public void remove_id(String lessonIdKey) {
-    	//remove lesson and save new lesson list
     	lessonsForStorage.removeLesson(lessonIdKey);
     	lessonsForStorage.save(new File(getActivity().getFilesDir(), "lessons.bin"));
-    	
-    	//update inspirations to reflect removal and save
-    	inspirationsForStorage.load(new File(getActivity().getFilesDir(), "inspirations.bin"));
-    	InspirationData newInspirationData = null;
-    	for (String inspirationIdKey:inspirationsForStorage) {
-			InspirationData oldInspirationData = inspirationsForStorage.getInspiration(inspirationIdKey);
-			newInspirationData = new InspirationData(oldInspirationData.getInspirationId(), oldInspirationData.
-					getInspirationContent(), oldInspirationData.getLessonAssignments());	
-			newInspirationData.removeLessonAssignment(lessonIdKey);
-			inspirationsForStorage.addInspiration(inspirationIdKey, newInspirationData);
-		}
-		inspirationsForStorage.save(new File(getActivity().getFilesDir(), "inspirations.bin"));		
-    	
-		//re-populate lesson list
     	setListAdapter(getCurrentLessons());
     	itemSelected = -1;
     	getActivity().invalidateOptionsMenu();

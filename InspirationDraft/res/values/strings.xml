@@ -34,9 +34,4 @@
     <string name="no_id">no ID yet</string>
 	<string name="menu_ok">OK</string>
     <string name="menu_cancel">Cancel</string>
-    
-    <string name="toast_testone">update insp, if nothing</string>
-    <string name="toast_testtwo">update insp, else add</string>
-    <string name="toast_testthree">update lessons, if nothing</string>
-    <string name="toast_testfour">update lessons, else add</string>
 </resources>
