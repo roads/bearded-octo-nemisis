@@ -13,10 +13,10 @@ import java.util.TreeMap;
 
 import android.util.Log;
 
-public class AlertBehavior implements Iterable<Integer> {
+public class AlertBehavior implements Iterable<String> {
 
-	private Map<Integer,AlertData> alerts;
-	private Integer idCounter;
+	private Map<String,AlertData> alerts;
+	private int idCounter;
 	
 	public AlertBehavior() {
 		alerts = new TreeMap<String, AlertData>();
