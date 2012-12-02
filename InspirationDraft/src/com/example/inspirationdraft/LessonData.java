@@ -15,6 +15,7 @@ public class LessonData implements Serializable{
 	private String lessonId;
 	private String LessonTitle;
 	private ArrayList<String> inspirationAssignments;
+	private AlertBehavior alerts;
 	
 	public LessonData() {
 		super();
@@ -23,6 +24,7 @@ public class LessonData implements Serializable{
 		this.LessonTitle = ""; //"Lesson " + this.lessonId;
 		this.inspirationAssignments = new ArrayList<String>();
 		this.inspirationAssignments.add(EMPTY);
+		this.alerts = new AlertBehavior();
 	}
 	
 	public LessonData(String suffixName){

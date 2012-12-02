@@ -25,7 +25,7 @@ public class AlertBehavior implements Iterable<String> {
 		alerts.put(id, new AlertData());
 	}
 
-	public void addInspiration(String id, AlertData data) {
+	public void addAlert(String id, AlertData data) {
 		alerts.put(id, data);
 	}
 
