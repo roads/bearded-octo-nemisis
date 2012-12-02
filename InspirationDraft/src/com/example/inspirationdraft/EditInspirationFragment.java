@@ -174,32 +174,13 @@ public class EditInspirationFragment extends Fragment {
 		for (String lessonIdKey:lessonsForStorage) {
 			LessonData oldLessonData = lessonsForStorage.getLesson(lessonIdKey);
 			newLessonData = new LessonData(oldLessonData.getLessonId(), oldLessonData.
-					getLessonTitle(), oldLessonData.getInspirationAssignments());
-			
-			ArrayList<String> oldLessonAssignments = oldLessonData.getInspirationAssignments();
-			if (newChosenAssignments.contains(lessonIdKey)) {
-				// inspiration chose this lesson, add to lesson's assignments
-				// check if lesson already contains assignment
-				if (oldLessonAssignments.contains(lessonIdKey)) {
-					// lesson already contains assignment
-				} else {
-					// lesson does not contain assignment
-					newLessonData.addInspirationAssignment(inspirationIdKey);
-				}
-				
-			} else {
-				// inspiration did not choose this lesson, remove from lesson's assignments
-				// check if lesson contains assignment
-				if (oldLessonAssignments.contains(lessonIdKey)) {
-					// lesson contains assignment, remove
-					newLessonData.removeInspirationAssignment(inspirationIdKey);
-				} else {
-					// lesson does not contain assignment
-				}	
+					getLessonTitle(), oldLessonData.getInspirationAssignments());			
+			newLessonData.removeInspirationAssignment(inspirationIdKey);
+			if (newChosenAssignments.contains(lessonIdKey)) {				
+				newLessonData.addInspirationAssignment(inspirationIdKey);
 			}
-			lessonsForStorage.addLesson(lessonIdKey, newLessonData);
+			lessonsForStorage.addLesson(lessonIdKey, newLessonData);			
 		}
 		lessonsForStorage.save(new File(getActivity().getFilesDir(), "lessons.bin"));
-
 	}
 }
