@@ -35,11 +35,12 @@ public class LessonArrayAdapter extends ArrayAdapter<LessonData>{
             row = inflater.inflate(layoutResourceId, parent, false);
             
             holder = new LessonDataHolder();
+            holder.lessonID = (TextView)row.findViewById(R.id.txtLessonId);
             holder.lessonTitle = (TextView)row.findViewById(R.id.txtLessonTitle);
             holder.lessonImgIcon = (ImageView)row.findViewById(R.id.imgLessonIcon);
             holder.labelLessonAssignments = (TextView)row.findViewById(R.string.labelLessonAssignments);
             holder.lessonAssignments = (TextView)row.findViewById(R.id.txtLessonAssignments);
-            holder.lessonID = (TextView)row.findViewById(R.id.txtLessonId);
+            
             
             row.setTag(holder);
         }
@@ -52,7 +53,7 @@ public class LessonArrayAdapter extends ArrayAdapter<LessonData>{
         holder.lessonTitle.setText(lesson.getLessonTitle());
         holder.lessonImgIcon.setImageResource(lesson.getAssignedIcon());
         holder.lessonID.setText(R.string.labelLessonAssignments);
-        holder.lessonAssignments.setText(lesson.getLessonAssignments().toString());
+        holder.lessonAssignments.setText(lesson.getInspirationAssignments().toString());
         holder.lessonID.setText(lesson.getLessonId());
         
         return row;

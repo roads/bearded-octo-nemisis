@@ -1,10 +1,12 @@
 package com.example.inspirationdraft;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,13 +14,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditLessonFragment extends Fragment {
 
-	private LessonList lessons = new LessonList();
-	private String idKey;
+	private LessonList lessonsForStorage = new LessonList();
+	private InspirationList inspirationsForStorage = new InspirationList();
+	private ArrayList<InspirationData> inspirationsForDisplay = new ArrayList<InspirationData>();
+	private String lessonIdKey;
 	private boolean saveData = true;
 	
 	@Override
@@ -26,7 +31,8 @@ public class EditLessonFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 
-		idKey = getActivity().getIntent().getStringExtra("lessonIdKey");
+		lessonIdKey = getActivity().getIntent().getStringExtra("lessonIdKey");
+		inspirationsForStorage.load(new File(getActivity().getFilesDir(), "inspirations.bin"));
 		
 	}
 	
@@ -34,16 +40,17 @@ public class EditLessonFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		saveData = true;
-		lessons.load(new File(getActivity().getFilesDir(), "lessons.bin"));
+		lessonsForStorage.load(new File(getActivity().getFilesDir(), "lessons.bin"));
+		inspirationsForStorage.load(new File(getActivity().getFilesDir(), "inspirations.bin"));
 		
-		if (idKey != null) {
-			LessonData data = lessons.getLesson(idKey);
+		if (lessonIdKey != null) {
+			LessonData newLessonData = lessonsForStorage.getLesson(lessonIdKey);
 			
 			TextView lesson_id = (TextView) getActivity().findViewById(R.id.lesson_id);			
-			lesson_id.setText(idKey);
+			lesson_id.setText(lessonIdKey);
 			
 			EditText suffixName_field = (EditText) getActivity().findViewById(R.id.suffix_name_field);
-			suffixName_field.setText(data.getLessonTitle());
+			suffixName_field.setText(newLessonData.getLessonTitle());
 		}
 	}
 
@@ -52,26 +59,32 @@ public class EditLessonFragment extends Fragment {
 		super.onPause();
 		if (saveData) {
 			
-			LessonData data = null;			
+			LessonData newLessonData = null;
+			
 			EditText suffixName_field = (EditText) getActivity().findViewById(R.id.suffix_name_field);
 			String suffixName = suffixName_field.getText().toString();
 			
-			data = new LessonData(suffixName);
+			ArrayList<String> newChosenInspirationAssignments = 
+					getNewChosenInspirationAssignments(); 
 			
-			if (idKey != null) {
+			newLessonData = new LessonData(suffixName);
+			
+			if (lessonIdKey != null) {
 				// editing existing
-				LessonData oldData = lessons.getLesson(idKey);
-				data.setLessonId(oldData.getLessonId());
-				lessons.removeLesson(idKey);
+				LessonData oldData = lessonsForStorage.getLesson(lessonIdKey);
+				newLessonData.setLessonId(oldData.getLessonId());
+				newLessonData.setInspirationAssignments(newChosenInspirationAssignments);
+				lessonsForStorage.removeLesson(lessonIdKey);
 			} else {
 				// new lesson
-				suffixName = data.getLessonTitle();
-				idKey = data.getLessonId();
+				lessonIdKey = newLessonData.getLessonId();
+				newLessonData.setInspirationAssignments(newChosenInspirationAssignments);
 			}
 		
-			lessons.addLesson(idKey, data);
+			lessonsForStorage.addLesson(lessonIdKey, newLessonData);
+			lessonsForStorage.save(new File(getActivity().getFilesDir(), "lessons.bin"));
 			
-			lessons.save(new File(getActivity().getFilesDir(), "lessons.bin"));
+			updateInspirations(newChosenInspirationAssignments);
 			
 			Context context = getActivity();
 			CharSequence text = getText(R.string.toast_lesson_saved);
@@ -104,4 +117,56 @@ public class EditLessonFragment extends Fragment {
 		getActivity().finish();
 		return true;
 	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		
+		for (String inspirationKey : inspirationsForStorage) {
+			inspirationsForDisplay.add(inspirationsForStorage.getInspiration(inspirationKey));
+		}
+        
+        ListView list_checked_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlist);			
+		
+        InspirationArrayAdapterMultiple adapter = new InspirationArrayAdapterMultiple(getActivity(),
+    			R.layout.listview_inspiration_row_multiple, inspirationsForDisplay);
+		list_checked_inspirations.setAdapter(adapter);
+		list_checked_inspirations.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+	}
+	
+	private ArrayList<String> getNewChosenInspirationAssignments(){
+		
+		// Determine which inspirations were selected
+		ListView list_checkable_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlist);
+		int numInspirationsInView = list_checkable_inspirations.getCount();
+		ArrayList<String> newChosenInspirations = new ArrayList<String>();
+		SparseBooleanArray chosenInspirationsSparseBooleanArray = list_checkable_inspirations.
+				getCheckedItemPositions();
+		
+		for(int i =0; i < numInspirationsInView; i++) {
+			if(chosenInspirationsSparseBooleanArray.get(i) == true) {
+				TextView id_field = (TextView) list_checkable_inspirations.getChildAt(i).
+						findViewById(R.id.txtInspirationId);
+				newChosenInspirations.add(id_field.getText().toString());
+			}	
+		}
+		return newChosenInspirations;
+	} 
+
+	private void updateInspirations(ArrayList<String> newChosenInspirations) {
+		InspirationData newInspirationData = null;
+		// Update Inspirations (by cycling through all inspirations and removing and adding as appropriate)
+		for (String inspirationIdKey:inspirationsForStorage) {
+			InspirationData oldInspirationData = inspirationsForStorage.getInspiration(inspirationIdKey);
+			newInspirationData = new InspirationData(oldInspirationData.getInspirationId(), oldInspirationData.
+					getInspirationContent(), oldInspirationData.getLessonAssignments());
+			newInspirationData.removeLessonAssignment(lessonIdKey);
+			if (newChosenInspirations.contains(inspirationIdKey)) {
+				newInspirationData.addLessonAssignment(lessonIdKey);
+			}
+			inspirationsForStorage.addInspiration(inspirationIdKey, newInspirationData);
+		}
+		inspirationsForStorage.save(new File(getActivity().getFilesDir(), "inspirations.bin"));		
+	}
+
 }

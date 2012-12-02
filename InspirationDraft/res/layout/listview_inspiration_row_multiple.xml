@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:padding="2dp">
    
-    <TextView android:id="@+id/txtLessonId"
+    <TextView android:id="@+id/txtInspirationId"
 	        android:layout_width="wrap_content"
 	        android:layout_height="fill_parent"
 	        android:gravity="center_vertical"
@@ -16,7 +16,7 @@
 	        android:layout_marginTop="2dp"
 	        android:layout_marginBottom="2dp" />
     
-    <CheckedTextView android:id="@+id/txtLessonTitle"
+    <CheckedTextView android:id="@+id/txtInspirationContent"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center_vertical"

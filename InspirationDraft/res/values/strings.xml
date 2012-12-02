@@ -11,11 +11,11 @@
     <string name="inspirationImage_desc">Inspiration Icon</string>
  
     <string name="empty_inspirationlist">No Inspirations</string>
+    <string name="labelInspirationAssignments">Lesson Assignments:</string>
     <string name="title_activity_edit_inspiration">Edit Inspiration</string>
     <string name="menu_new_inspiration">New</string>
     <string name="menu_edit_inspiration">Edit</string>
     <string name="menu_delete_inspiration">Delete</string>
-    <string name="label_id">ID:  </string>
     <string name="label_content">Content:</string>
     <string name="hint_content">Enter the content of your inspiration.</string>
     <string name="toast_inspiration_saved">Inspiration Saved</string>
@@ -30,6 +30,13 @@
     <string name="hint_suffix_name">Enter a your lesson suffix here.</string>
     <string name="toast_lesson_saved">Lesson Saved</string>
     
+    <string name="label_id">ID:  </string>
+    <string name="no_id">no ID yet</string>
 	<string name="menu_ok">OK</string>
     <string name="menu_cancel">Cancel</string>
+    
+    <string name="toast_testone">update insp, if nothing</string>
+    <string name="toast_testtwo">update insp, else add</string>
+    <string name="toast_testthree">update lessons, if nothing</string>
+    <string name="toast_testfour">update lessons, else add</string>
 </resources>

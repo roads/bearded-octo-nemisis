@@ -60,8 +60,12 @@ public class LessonData implements Serializable{
 		this.LessonTitle = LessonTitle;
 	}
 	
-	public ArrayList<String> getLessonAssignments() {
+	public ArrayList<String> getInspirationAssignments() {
 		return this.inspirationAssignments;
+	}
+	
+	public void setInspirationAssignments(ArrayList<String> newAssignments) {
+		this.inspirationAssignments = newAssignments;
 	}
 	
 	public int getAssignedIcon() {
