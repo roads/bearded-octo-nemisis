@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -83,6 +84,10 @@ public class LessonListFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		itemSelected = position;
 		getActivity().invalidateOptionsMenu();
+//		if (v != null) {
+//	        CheckedTextView checkedTextView = (CheckedTextView)v.findViewById(R.id.txtLessonTitle);
+//	        checkedTextView.setChecked(!checkedTextView.isChecked());
+//	    }
 	}
 	
 	@Override

@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
  */
 public class CheckableLinearLayout extends LinearLayout implements Checkable {
 	private CheckedTextView _checkbox;
+	
     	
     public CheckableLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -28,7 +29,10 @@ public class CheckableLinearLayout extends LinearLayout implements Checkable {
 			if (v instanceof CheckedTextView) {
 				_checkbox = (CheckedTextView)v;
 			}
-		}    	
+			
+				
+			    	
+		}
     }
     
     @Override 

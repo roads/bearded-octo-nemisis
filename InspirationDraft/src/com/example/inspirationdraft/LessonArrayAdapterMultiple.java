@@ -8,16 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class LessonArrayAdapter extends ArrayAdapter<LessonData>{
+public class LessonArrayAdapterMultiple extends ArrayAdapter<LessonData>{
 
 	Context context; 
     int layoutResourceId;    
     ArrayList<LessonData> data = null;
     
-    public LessonArrayAdapter(Context context, int layoutResourceId, ArrayList<LessonData> data) {
+    public LessonArrayAdapterMultiple(Context context, int layoutResourceId, ArrayList<LessonData> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -35,9 +36,8 @@ public class LessonArrayAdapter extends ArrayAdapter<LessonData>{
             row = inflater.inflate(layoutResourceId, parent, false);
             
             holder = new LessonDataHolder();
-            holder.lessonTitle = (TextView)row.findViewById(R.id.txtLessonTitle);
+            holder.lessonTitle = (CheckedTextView)row.findViewById(R.id.txtLessonTitle);
             holder.lessonImgIcon = (ImageView)row.findViewById(R.id.imgLessonIcon);
-            holder.labelLessonAssignments = (TextView)row.findViewById(R.string.labelLessonAssignments);
             holder.lessonAssignments = (TextView)row.findViewById(R.id.txtLessonAssignments);
             holder.lessonID = (TextView)row.findViewById(R.id.txtLessonId);
             
@@ -49,9 +49,10 @@ public class LessonArrayAdapter extends ArrayAdapter<LessonData>{
         }
         
         LessonData lesson = data.get(position);
+        
         holder.lessonTitle.setText(lesson.getLessonTitle());
-        holder.lessonImgIcon.setImageResource(lesson.getAssignedIcon());
-        holder.lessonID.setText(R.string.labelLessonAssignments);
+        holder.lessonTitle.setChecked(true);
+        holder.lessonImgIcon.setImageResource(R.drawable.question_mark);
         holder.lessonAssignments.setText(lesson.getLessonAssignments().toString());
         holder.lessonID.setText(lesson.getLessonId());
         
@@ -60,9 +61,8 @@ public class LessonArrayAdapter extends ArrayAdapter<LessonData>{
     
     static class LessonDataHolder
     {
-    	TextView lessonTitle;
+    	CheckedTextView lessonTitle;
     	ImageView lessonImgIcon;
-    	TextView labelLessonAssignments;
         TextView lessonAssignments;
         TextView lessonID;
     }
