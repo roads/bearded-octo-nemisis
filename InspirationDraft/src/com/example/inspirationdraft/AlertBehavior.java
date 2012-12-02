@@ -16,9 +16,11 @@ import android.util.Log;
 public class AlertBehavior implements Iterable<String> {
 
 	private Map<String,AlertData> alerts;
+	private int idCounter;
 	
 	public AlertBehavior() {
 		alerts = new TreeMap<String, AlertData>();
+		this.idCounter = 0;
 	}
 		
 	public void addAlert(String id) {
@@ -27,6 +29,11 @@ public class AlertBehavior implements Iterable<String> {
 
 	public void addAlert(String id, AlertData data) {
 		alerts.put(id, data);
+	}
+	
+	public void addAlert(AlertData data){
+		alerts.put((String)(this.idCounter), data);
+		
 	}
 
 	public void clear() {

@@ -34,6 +34,7 @@ public class LessonData implements Serializable{
 		this.LessonTitle = suffixName;//"Lesson " + this.lessonId + ":  " + suffixName;
 		this.inspirationAssignments = new ArrayList<String>();
 		this.inspirationAssignments.add(EMPTY);
+		this.alerts = new AlertBehavior();
 	}
 
 	public LessonData(String lessonId, String suffixName, ArrayList<String> assignments){
@@ -41,6 +42,7 @@ public class LessonData implements Serializable{
 		this.lessonId = lessonId;
 		this.LessonTitle = suffixName;
 		this.inspirationAssignments = assignments;
+		this.alerts = new AlertBehavior();
 	}
 	
 	public String getLessonId() {
@@ -90,11 +92,29 @@ public class LessonData implements Serializable{
 		this.lessonId = (String) stream.readObject();
 		this.LessonTitle = (String) stream.readObject();
 		this.inspirationAssignments = (ArrayList<String>) stream.readObject();
+		this.alerts = (AlertBehavior) stream.readObject();
 	}
 	
 	private void writeObject(ObjectOutputStream stream) throws IOException {
 		stream.writeObject(this.lessonId);
 		stream.writeObject(this.LessonTitle);
 		stream.writeObject(this.inspirationAssignments);
+		stream.writeObject(this.alerts);
 	}
+
+	public AlertBehavior getAlerts() {
+		return alerts;
+	}
+
+	public void setAlerts(AlertBehavior alerts) {
+		this.alerts = alerts;
+	}
+	
+	public void addAlert(AlertData alert){
+		this.alerts.addAlert(alert);
+	}
+	
+	
+	
+	
 }
