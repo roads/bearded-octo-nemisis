@@ -20,6 +20,9 @@
     <string name="hint_content">Enter the content of your inspiration.</string>
     <string name="toast_inspiration_saved">Inspiration Saved</string>
     
+    <string name="tab_section_content">Edit Assignments</string>
+    <string name="tab_section_time">Edit Alerts</string>
+    
     <string name="empty_lessonlist">No Lessons</string>
     <string name="labelLessonAssignments">Assigned Inspirations:</string>
     <string name="title_activity_edit_lesson">Edit Lesson</string>
@@ -32,7 +35,7 @@
     
     <string name="label_id">ID:  </string>
     <string name="no_id">no ID yet</string>
-	<string name="menu_ok">OK</string>
+	<string name="menu_ok">Save</string>
     <string name="menu_cancel">Cancel</string>
     <string name="lesson_id_generator">lessonIdGeneratorIdentifier</string>
     <string name="inspiration_id_generator">inspirationIdGeneratorIdentifier</string>
