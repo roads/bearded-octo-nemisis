@@ -14,13 +14,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class AlertBehaviorFragment extends ListFragment {
-
-	public AlertBehaviorFragment() {
-		// TODO Auto-generated constructor stub
-	}
 	private AlertBehavior alertBehaviorForStorage = new AlertBehavior();
 	private ArrayList<AlertData> alertsForDisplay = new ArrayList<AlertData>();
 	private int itemSelected = -1;
+	
+	public AlertBehaviorFragment() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	@Override
 	public void onResume() {
@@ -28,11 +28,11 @@ public class AlertBehaviorFragment extends ListFragment {
 		setListAdapter(getCurrentAlerts());
 	}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		alertBehaviorForStorage.save(new File(getActivity().getFilesDir(), "alerts.bin"));
-	}
+//	@Override
+//	public void onPause() {
+//		super.onPause();
+//		//alertBehaviorForStorage.save(new File(getActivity().getFilesDir(), "alerts.bin"));
+//	}
 	
 	@Override
 	public void onCreate (Bundle savedInstancesState) {
@@ -108,8 +108,7 @@ public class AlertBehaviorFragment extends ListFragment {
     	getActivity().invalidateOptionsMenu();
     }
      
-    public LessonArrayAdapter getCurrentLessons() {
-    	
+    public LessonArrayAdapter getCurrentAlerts() {
     	LessonArrayAdapter adapter = new LessonArrayAdapter(getActivity(),
     			R.layout.listview_lesson_row, lessonsForDisplay);
     	lessonsForStorage.clear();

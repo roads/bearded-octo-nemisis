@@ -19,46 +19,48 @@ public final class R {
         public static final int question_mark=0x7f020005;
     }
     public static final class id {
+        public static final int alertlist=0x7f070008;
         public static final int container=0x7f070001;
         public static final int content_field=0x7f070003;
         public static final int detail=0x7f070000;
-        public static final int imgInspirationIcon=0x7f07000a;
-        public static final int imgLessonIcon=0x7f07000f;
+        public static final int imgInspirationIcon=0x7f07000b;
+        public static final int imgLessonIcon=0x7f070010;
         public static final int inspiration_id=0x7f070002;
         public static final int inspirationlist=0x7f070007;
         public static final int lesson_id=0x7f070005;
         public static final int lessonlist=0x7f070004;
-        public static final int list=0x7f070008;
-        public static final int menu_cancel=0x7f070012;
-        public static final int menu_delete_inspiration=0x7f070015;
-        public static final int menu_delete_lesson=0x7f070018;
-        public static final int menu_edit_inspiration=0x7f070016;
-        public static final int menu_edit_lesson=0x7f070019;
-        public static final int menu_new_inspiration=0x7f070014;
-        public static final int menu_new_lesson=0x7f070017;
-        public static final int menu_ok=0x7f070013;
-        public static final int menu_settings=0x7f070011;
+        public static final int list=0x7f070009;
+        public static final int menu_cancel=0x7f070013;
+        public static final int menu_delete_inspiration=0x7f070016;
+        public static final int menu_delete_lesson=0x7f070019;
+        public static final int menu_edit_inspiration=0x7f070017;
+        public static final int menu_edit_lesson=0x7f07001a;
+        public static final int menu_new_inspiration=0x7f070015;
+        public static final int menu_new_lesson=0x7f070018;
+        public static final int menu_ok=0x7f070014;
+        public static final int menu_settings=0x7f070012;
         public static final int suffix_name_field=0x7f070006;
-        public static final int txtInspirationAssignments=0x7f07000b;
-        public static final int txtInspirationContent=0x7f070009;
-        public static final int txtInspirationId=0x7f07000c;
-        public static final int txtLessonAssignments=0x7f070010;
-        public static final int txtLessonId=0x7f07000d;
-        public static final int txtLessonTitle=0x7f07000e;
+        public static final int txtInspirationAssignments=0x7f07000c;
+        public static final int txtInspirationContent=0x7f07000a;
+        public static final int txtInspirationId=0x7f07000d;
+        public static final int txtLessonAssignments=0x7f070011;
+        public static final int txtLessonId=0x7f07000e;
+        public static final int txtLessonTitle=0x7f07000f;
     }
     public static final class layout {
         public static final int activity_edit_inspiration=0x7f030000;
         public static final int activity_edit_lesson=0x7f030001;
         public static final int activity_main=0x7f030002;
-        public static final int fragment_edit_inspiration=0x7f030003;
-        public static final int fragment_edit_lesson=0x7f030004;
-        public static final int fragment_inspirationlist=0x7f030005;
-        public static final int fragment_lessonlist=0x7f030006;
-        public static final int list_inspiration_single_choice=0x7f030007;
-        public static final int listview_inspiration_row=0x7f030008;
-        public static final int listview_inspiration_row_multiple=0x7f030009;
-        public static final int listview_lesson_row=0x7f03000a;
-        public static final int listview_lesson_row_multiple=0x7f03000b;
+        public static final int fragment_alert_behavior=0x7f030003;
+        public static final int fragment_edit_inspiration=0x7f030004;
+        public static final int fragment_edit_lesson=0x7f030005;
+        public static final int fragment_inspirationlist=0x7f030006;
+        public static final int fragment_lessonlist=0x7f030007;
+        public static final int list_inspiration_single_choice=0x7f030008;
+        public static final int listview_inspiration_row=0x7f030009;
+        public static final int listview_inspiration_row_multiple=0x7f03000a;
+        public static final int listview_lesson_row=0x7f03000b;
+        public static final int listview_lesson_row_multiple=0x7f03000c;
     }
     public static final class menu {
         public static final int activity_edit_inspiration=0x7f060000;

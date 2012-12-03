@@ -1,10 +1,8 @@
 package com.example.inspirationdraft;
 
-import java.io.Serializable;
-
 import android.text.format.Time;
 
-public class AlertData implements Serializable{
+public class AlertData{
 	private Boolean isRepeating;
 	private Time time; 
 	private Boolean exists;
