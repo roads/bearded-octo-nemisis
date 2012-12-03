@@ -22,7 +22,7 @@ public final class R {
         public static final int container=0x7f070001;
         public static final int content_field=0x7f070003;
         public static final int detail=0x7f070000;
-        public static final int imgInspirationIcon=0x7f07000a;
+        public static final int imgInspirationIcon=0x7f07000b;
         public static final int imgLessonIcon=0x7f07000f;
         public static final int inspiration_id=0x7f070002;
         public static final int inspirationlist=0x7f070007;
@@ -39,9 +39,9 @@ public final class R {
         public static final int menu_ok=0x7f070013;
         public static final int menu_settings=0x7f070011;
         public static final int suffix_name_field=0x7f070006;
-        public static final int txtInspirationAssignments=0x7f07000b;
-        public static final int txtInspirationContent=0x7f070009;
-        public static final int txtInspirationId=0x7f07000c;
+        public static final int txtInspirationAssignments=0x7f07000c;
+        public static final int txtInspirationContent=0x7f07000a;
+        public static final int txtInspirationId=0x7f070009;
         public static final int txtLessonAssignments=0x7f070010;
         public static final int txtLessonId=0x7f07000d;
         public static final int txtLessonTitle=0x7f07000e;
