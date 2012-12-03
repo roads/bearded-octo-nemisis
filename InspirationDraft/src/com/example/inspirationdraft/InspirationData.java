@@ -16,10 +16,9 @@ public class InspirationData implements Serializable{
 	private String content;
 	private ArrayList<String> lessonAssignments;
 	
-	public InspirationData(String content){
+	public InspirationData(String inspirationId, String content){
 		super();
-		this.inspirationId = Integer.toString(inspirationCount);
-		inspirationCount++;
+		this.inspirationId = inspirationId;
 		this.content = content;
 		this.lessonAssignments = new ArrayList<String>();
 		this.lessonAssignments.add(UNASSIGNED);

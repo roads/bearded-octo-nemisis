@@ -77,11 +77,13 @@ public final class R {
         public static final int hint_content=0x7f04000e;
         public static final int hint_suffix_name=0x7f040017;
         public static final int inspirationImage_desc=0x7f040006;
+        public static final int inspiration_id_generator=0x7f04001e;
         public static final int labelInspirationAssignments=0x7f040008;
         public static final int labelLessonAssignments=0x7f040011;
         public static final int label_content=0x7f04000d;
         public static final int label_id=0x7f040019;
         public static final int label_lesson_title=0x7f040016;
+        public static final int lesson_id_generator=0x7f04001d;
         public static final int menu_cancel=0x7f04001c;
         public static final int menu_delete_inspiration=0x7f04000c;
         public static final int menu_delete_lesson=0x7f040015;
@@ -100,10 +102,10 @@ public final class R {
         public static final int title_section2=0x7f040001;
         public static final int toast_inspiration_saved=0x7f04000f;
         public static final int toast_lesson_saved=0x7f040018;
-        public static final int toast_testfour=0x7f040020;
-        public static final int toast_testone=0x7f04001d;
-        public static final int toast_testthree=0x7f04001f;
-        public static final int toast_testtwo=0x7f04001e;
+        public static final int toast_testfour=0x7f040022;
+        public static final int toast_testone=0x7f04001f;
+        public static final int toast_testthree=0x7f040021;
+        public static final int toast_testtwo=0x7f040020;
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;

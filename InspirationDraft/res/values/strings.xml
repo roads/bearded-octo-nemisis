@@ -34,6 +34,8 @@
     <string name="no_id">no ID yet</string>
 	<string name="menu_ok">OK</string>
     <string name="menu_cancel">Cancel</string>
+    <string name="lesson_id_generator">lessonIdGeneratorIdentifier</string>
+    <string name="inspiration_id_generator">inspirationIdGeneratorIdentifier</string>
     
     <string name="toast_testone">update insp, if nothing</string>
     <string name="toast_testtwo">update insp, else add</string>

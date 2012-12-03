@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 public class EditInspirationFragment extends Fragment {
 	
+	private IdGeneratorList idGeneratorsForStorage = new IdGeneratorList();
 	private InspirationList inspirationsForStorage = new InspirationList();
 	private LessonList lessonsForStorage = new LessonList();
 	private ArrayList<LessonData> lessonsForDisplay = new ArrayList<LessonData>();
@@ -39,6 +40,7 @@ public class EditInspirationFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		saveData = true;
+		idGeneratorsForStorage.load(new File(getActivity().getFilesDir(), "idgenerators.bin"));
 		inspirationsForStorage.load(new File(getActivity().getFilesDir(), "inspirations.bin"));
 		lessonsForStorage.load(new File(getActivity().getFilesDir(), "lessons.bin"));
 		
@@ -83,18 +85,27 @@ public class EditInspirationFragment extends Fragment {
 			ArrayList<String> newChosenLessonAssignments = 
 					getNewChosenLessonAssignments(); 
 			
-			newInspirationData = new InspirationData(content);
+			
 			
 			if (inspirationIdKey != null) {
 				// editing existing
 				InspirationData oldData = inspirationsForStorage.getInspiration(inspirationIdKey);
-				newInspirationData.setInspirationId(oldData.getInspirationId());
-				newInspirationData.setLessonAssignments(newChosenLessonAssignments);
+				String oldInspirationId = oldData.getInspirationId();
+				newInspirationData = new InspirationData(oldInspirationId, content);
+				//newInspirationData.setInspirationId(oldData.getInspirationId());
+				//newInspirationData.setLessonAssignments(newChosenLessonAssignments);
 				inspirationsForStorage.removeID(inspirationIdKey);
 			} else {
 				// new inspiration
+				IdGenerator InspirationIdGenerator = idGeneratorsForStorage.getIdGenerator((String) getText(R.string.inspiration_id_generator));
+				String newUniqueInspirationId = InspirationIdGenerator.getUniqueId();
+				newInspirationData = new InspirationData(newUniqueInspirationId, content);
 				inspirationIdKey = newInspirationData.getInspirationId();
 				newInspirationData.setLessonAssignments(newChosenLessonAssignments);
+				
+				idGeneratorsForStorage.removeIdGenerator((String) getText(R.string.inspiration_id_generator));
+				idGeneratorsForStorage.addIdGenerator((String) getText(R.string.inspiration_id_generator), InspirationIdGenerator);
+				idGeneratorsForStorage.save(new File(getActivity().getFilesDir(), "idgenerators.bin"));
 			}
 		
 			inspirationsForStorage.addInspiration(inspirationIdKey, newInspirationData);

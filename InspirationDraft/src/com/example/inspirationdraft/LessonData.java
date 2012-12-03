@@ -1,6 +1,5 @@
 package com.example.inspirationdraft;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -17,10 +16,9 @@ public class LessonData implements Serializable{
 	private String lessonTitle;
 	private ArrayList<String> inspirationAssignments;
 	
-	public LessonData(String lessonTitle){
+	public LessonData(String lessonId, String lessonTitle){
 		super();
-		this.lessonId = Integer.toString(lessonCount);
-		lessonCount++;
+		this.lessonId = lessonId;
 		this.lessonTitle = lessonTitle;
 		this.inspirationAssignments = new ArrayList<String>();
 		this.inspirationAssignments.add(EMPTY);
