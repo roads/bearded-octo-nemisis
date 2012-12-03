@@ -51,19 +51,20 @@ public class EditInspirationFragment extends Fragment {
 			EditText content_field = (EditText) getActivity().findViewById(R.id.content_field);			
 			content_field.setText(newInspirationData.getInspirationContent());	
 			
-			//for (String lessonKey : lessonsForStorage) {
-			//	lessonsForDisplay.add(lessonsForStorage.getLesson(lessonKey));
-			//}
-			//Integer.parseInt(lessonId)
-//			ListView list_checkable_lessons = (ListView) getActivity().findViewById(R.id.lessonlist);
-//			ArrayList<String> lessonAssignments = data.getLessonAssignments();
-//			if (lessonAssignments.size() > 0) {
-//				int itemLocation = 1;
-//				//for (String lessonId : lessonAssignments) {
-//					CheckableLinearLayout lessonItem = (CheckableLinearLayout) list_checkable_lessons.getChildAt(itemLocation);
-//					CheckBox checkbox = lessonItem.findViewById(R.id.check);// setChecked(true);
-//				//}
-//			}
+			// Awful code to pre-check the CheckedTextView (using setChecked inside adapter does not work!!!)
+			//http://stackoverflow.com/questions/7202581/setting-listview-item-checked-from-adapter
+			//http://stackoverflow.com/questions/12641529/unable-to-check-uncheck-checkedtextview-inside-getview
+			ListView list_checkable_lessons = (ListView) getActivity().findViewById(R.id.lessonlist);
+			ArrayList<String> lessonAssignments = newInspirationData.getLessonAssignments();
+			if (lessonAssignments.size() > 0) {
+				int itemLocation = 0;
+				for (String lessonId : lessonsForStorage) {
+					if (lessonAssignments.contains(lessonId)) {
+						list_checkable_lessons.setItemChecked(itemLocation, true);
+					}
+					itemLocation++;
+				}
+			}
 			
 			
 		}

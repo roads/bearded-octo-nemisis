@@ -16,15 +16,6 @@ public class InspirationData implements Serializable{
 	private String content;
 	private ArrayList<String> lessonAssignments;
 	
-	public InspirationData() {
-		super();
-		this.inspirationId = Integer.toString(inspirationCount);
-		inspirationCount++;
-		this.content = "A man who does not read good books has no advantage over the man who can't read them. -Mark Twain";
-		this.lessonAssignments = new ArrayList<String>();
-		this.lessonAssignments.add(UNASSIGNED);
-	}
-	
 	public InspirationData(String content){
 		super();
 		this.inspirationId = Integer.toString(inspirationCount);

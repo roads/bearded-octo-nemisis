@@ -22,10 +22,6 @@ public class InspirationList implements Iterable<String> {
 		inspirations = new TreeMap<String,InspirationData>();
 	}
 	
-	public void addInspiration(String id) {
-		inspirations.put(id, new InspirationData());
-	}
-	
 	public void addInspiration(String id, InspirationData data) {
 		inspirations.put(id, data);
 	}

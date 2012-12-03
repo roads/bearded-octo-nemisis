@@ -51,6 +51,21 @@ public class EditLessonFragment extends Fragment {
 			
 			EditText suffixName_field = (EditText) getActivity().findViewById(R.id.suffix_name_field);
 			suffixName_field.setText(newLessonData.getLessonTitle());
+			
+			// Awful code to pre-check the CheckedTextView (using setChecked inside adapter does not work!!!)
+			//http://stackoverflow.com/questions/7202581/setting-listview-item-checked-from-adapter
+			//http://stackoverflow.com/questions/12641529/unable-to-check-uncheck-checkedtextview-inside-getview
+			ListView list_checkable_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlist);
+			ArrayList<String> inspirationAssignments = newLessonData.getInspirationAssignments();
+			if (inspirationAssignments.size() > 0) {
+				int itemLocation = 0;
+				for (String inspirationId : inspirationsForStorage) {
+					if (inspirationAssignments.contains(inspirationId)) {
+						list_checkable_inspirations.setItemChecked(itemLocation, true);
+					}
+					itemLocation++;
+				}
+			}
 		}
 	}
 

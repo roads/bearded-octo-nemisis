@@ -24,7 +24,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        // For each of the sections in the app, add a tab to the action bar.
+        // For each of the sections in the application, add a tab to the action bar.
         actionBar.addTab(actionBar.newTab().setText(R.string.title_section1).setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText(R.string.title_section2).setTabListener(this));
         
