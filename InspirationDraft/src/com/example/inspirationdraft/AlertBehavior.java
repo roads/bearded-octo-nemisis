@@ -7,104 +7,38 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
 import android.util.Log;
 
-public class AlertBehavior implements Iterable<String> {
+public class AlertBehavior {
 
-	private Map<String,AlertData> alerts;
-	private String idCounter;
+	private ArrayList<AlertData> alerts;
 	
 	public AlertBehavior() {
-		alerts = new TreeMap<String, AlertData>();
-		this.idCounter = 0;
+		alerts = new ArrayList<AlertData>();
 	}
 		
-	public void addAlert(String id) {
-		alerts.put(id, new AlertData());
-	}
-
-	public void addAlert(String id, AlertData data) {
-		alerts.put(id, data);
-	}
-	
-	public void addAlert(AlertData data){
-		alerts.put((String)(this.idCounter), data);
-		
+	public void addAlert(AlertData data) {
+		alerts.add(data);
 	}
 
 	public void clear() {
 		alerts.clear();
 	}
-
-	public boolean containsID(String id) {
-		return alerts.keySet().contains(id);
+	
+	public void removeByIndex(int index) {
+		alerts.remove(index);
+	}
+	
+	public void removeByObject(AlertData data){
+		alerts.remove(data);
 	}
 
-	public void removeID(String id) {
-		alerts.remove(id);
+	public AlertData getAlertByIndex(int index) {
+		return alerts.get(index);
 	}
-
-	public AlertData getAlert(String id) {
-		return alerts.get(id);
-	}
-
-	@Override
-	public Iterator<String> iterator() {
-		return alerts.keySet().iterator();
-	}
-
-	public void save(File f) {
-		try {
-			ObjectOutputStream output =
-					new ObjectOutputStream(
-							new FileOutputStream(f));
-
-			output.writeObject(alerts);
-
-			output.close();
-
-			Log.i("Inspiration Viewer", "alerts saved to " + f);
-
-		} catch (FileNotFoundException ex) {
-			Log.i("Inspiration Viewer", "Error:  File Can Not Be Created: " + f);
-			Log.i("Inspiration Viewer", "Attempt to save alerts aborted.");
-		} catch (IOException ex) {
-			Log.i("Inspiration Viewer", "Fatal error while saving alerts.");
-			Log.i("Inspiration Viewer", "Attempt to save alerts aborted.");
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	public void load(File f) {
-		try {
-			ObjectInputStream input = 
-					new ObjectInputStream(
-							new FileInputStream(f));
-
-			alerts = (TreeMap<String,AlertData>) input.readObject();
-
-			input.close();
-
-			Log.i("Inspiration Viewer", "alerts loaded from " + f);
-
-		} catch (FileNotFoundException ex) {
-			Log.i("Inspiration Viewer", "File Not Found: " + f);
-			Log.i("Inspiration Viewer", "Creating an empty set of alerts.");
-			alerts.clear();
-		} catch (IOException ex) {
-			Log.i("Inspiration Viewer", "Fatal error while loading alerts.");
-			Log.i("Inspiration Viewer", "Creating an empty set of alerts.");
-			alerts.clear();
-		} catch (ClassNotFoundException ex) {
-			Log.i("Inspiration Viewer", "Fatal error while loading alerts.");
-			Log.i("Inspiration Viewer", "Creating an empty set of alerts.");
-			alerts.clear();
-		}
-		
-	}
-
 }
