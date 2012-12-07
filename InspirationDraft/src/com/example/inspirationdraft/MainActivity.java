@@ -124,8 +124,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 //		
 //		lessons.save(new File(getFilesDir(), "lessons.bin"));
 			
-	
-	
     }
 
     @Override
