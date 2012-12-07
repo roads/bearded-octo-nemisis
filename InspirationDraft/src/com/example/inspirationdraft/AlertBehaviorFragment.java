@@ -62,17 +62,17 @@ public class AlertBehaviorFragment extends ListFragment {
 			// Awful code to pre-check the CheckedTextView (using setChecked inside adapter does not work!!!)
 			//http://stackoverflow.com/questions/7202581/setting-listview-item-checked-from-adapter
 			//http://stackoverflow.com/questions/12641529/unable-to-check-uncheck-checkedtextview-inside-getview
-			ListView list_checkable_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlist);
-			ArrayList<String> inspirationAssignments = newLessonData.getInspirationAssignments();
-			if (inspirationAssignments.size() > 0) {
-				int itemLocation = 0;
-				for (String inspirationId : inspirationsForStorage) {
-					if (inspirationAssignments.contains(inspirationId)) {
-						list_checkable_inspirations.setItemChecked(itemLocation, true);
-					}
-					itemLocation++;
-				}
-			}
+//			ListView list_checkable_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlist);
+//			ArrayList<String> inspirationAssignments = newLessonData.getInspirationAssignments();
+//			if (inspirationAssignments.size() > 0) {
+//				int itemLocation = 0;
+//				for (String inspirationId : inspirationsForStorage) {
+//					if (inspirationAssignments.contains(inspirationId)) {
+//						list_checkable_inspirations.setItemChecked(itemLocation, true);
+//					}
+//					itemLocation++;
+//				}
+//			}
 		}
 	}
 
@@ -151,16 +151,16 @@ public class AlertBehaviorFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		for (String inspirationKey : inspirationsForStorage) {
-			inspirationsForDisplay.add(inspirationsForStorage.getInspiration(inspirationKey));
-		}
+//		for (String inspirationKey : inspirationsForStorage) {
+//			inspirationsForDisplay.add(inspirationsForStorage.getInspiration(inspirationKey));
+//		}
         
-        ListView list_checked_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlist);			
-		
-        InspirationArrayAdapterMultiple adapter = new InspirationArrayAdapterMultiple(getActivity(),
-    			R.layout.listview_inspiration_row_multiple, inspirationsForDisplay);
-		list_checked_inspirations.setAdapter(adapter);
-		list_checked_inspirations.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+//        ListView list_checked_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlist);			
+//		
+//        InspirationArrayAdapterMultiple adapter = new InspirationArrayAdapterMultiple(getActivity(),
+//    			R.layout.listview_inspiration_row_multiple, inspirationsForDisplay);
+//		list_checked_inspirations.setAdapter(adapter);
+//		list_checked_inspirations.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 	}
 	
 	private ArrayList<String> getNewChosenInspirationAssignments(){
@@ -185,15 +185,16 @@ public class AlertBehaviorFragment extends ListFragment {
 	private void updateInspirations(ArrayList<String> newChosenInspirations) {
 		InspirationData newInspirationData = null;
 		// Update Inspirations (by cycling through all inspirations and removing and adding as appropriate)
-		for (String inspirationIdKey:inspirationsForStorage) {
-			InspirationData oldInspirationData = inspirationsForStorage.getInspiration(inspirationIdKey);
-			newInspirationData = new InspirationData(oldInspirationData.getInspirationId(), oldInspirationData.
-					getInspirationContent(), oldInspirationData.getLessonAssignments());
-			newInspirationData.removeLessonAssignment(lessonIdKey);
-			if (newChosenInspirations.contains(inspirationIdKey)) {
-				newInspirationData.addLessonAssignment(lessonIdKey);
-			}
-			inspirationsForStorage.addInspiration(inspirationIdKey, newInspirationData);
-		}
-		inspirationsForStorage.save(new File(getActivity().getFilesDir(), "inspirations.bin"));		
+//		for (String inspirationIdKey:inspirationsForStorage) {
+//			InspirationData oldInspirationData = inspirationsForStorage.getInspiration(inspirationIdKey);
+//			newInspirationData = new InspirationData(oldInspirationData.getInspirationId(), oldInspirationData.
+//					getInspirationContent(), oldInspirationData.getLessonAssignments());
+//			newInspirationData.removeLessonAssignment(lessonIdKey);
+//			if (newChosenInspirations.contains(inspirationIdKey)) {
+//				newInspirationData.addLessonAssignment(lessonIdKey);
+//			}
+//			inspirationsForStorage.addInspiration(inspirationIdKey, newInspirationData);
+//		}
+//		inspirationsForStorage.save(new File(getActivity().getFilesDir(), "inspirations.bin"));		
 	}
+}
