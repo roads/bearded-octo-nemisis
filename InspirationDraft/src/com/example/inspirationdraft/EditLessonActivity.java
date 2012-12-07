@@ -30,6 +30,7 @@ public class EditLessonActivity extends Activity implements ActionBar.TabListene
     	//super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState.containsKey(STATE_SELECTED_NAVIGATION_ITEM)) {
             getActionBar().setSelectedNavigationItem(
+            		
                     savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
         }
     }
@@ -63,7 +64,7 @@ public class EditLessonActivity extends Activity implements ActionBar.TabListene
 	                .commit();
     	} else {
     		
-	        TimeBehaviorFragment fragment = new TimeBehaviorFragment();	    	
+	        AlertBehaviorFragment fragment = new AlertBehaviorFragment();	    	
 	        getFragmentManager().beginTransaction()
 	                .replace(R.id.detail, fragment)
 	                .commit();

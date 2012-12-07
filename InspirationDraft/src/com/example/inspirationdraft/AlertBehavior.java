@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,8 +15,12 @@ import java.util.TreeMap;
 
 import android.util.Log;
 
-public class AlertBehavior {
+public class AlertBehavior implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<AlertData> alerts;
 	
 	public AlertBehavior() {
@@ -41,4 +46,5 @@ public class AlertBehavior {
 	public AlertData getAlertByIndex(int index) {
 		return alerts.get(index);
 	}
+	
 }

@@ -1,8 +1,14 @@
 package com.example.inspirationdraft;
 
+import java.io.Serializable;
+
 import android.text.format.Time;
 
-public class AlertData{
+public class AlertData implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Boolean isRepeating;
 	private Time time; 
 	private Boolean exists;
