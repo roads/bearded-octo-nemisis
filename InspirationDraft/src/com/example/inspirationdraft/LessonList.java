@@ -22,12 +22,8 @@ public class LessonList implements Iterable<String> {
 		lessons = new TreeMap<String,LessonData>();
 	}
 	
-	public void addLesson(String lessonName) {
-		lessons.put(lessonName, new LessonData());
-	}
-	
-	public void addLesson(String lessonName, LessonData data) {
-		lessons.put(lessonName, data);
+	public void addLesson(String lessonIdKey, LessonData data) {
+		lessons.put(lessonIdKey, data);
 	}
 	
 	public void clear() {

@@ -16,6 +16,7 @@ public class LessonArrayAdapterMultiple extends ArrayAdapter<LessonData>{
 	Context context; 
     int layoutResourceId;    
     ArrayList<LessonData> data = null;
+    String inspirationIdKey;
     
     public LessonArrayAdapterMultiple(Context context, int layoutResourceId, ArrayList<LessonData> data) {
         super(context, layoutResourceId, data);
@@ -48,8 +49,7 @@ public class LessonArrayAdapterMultiple extends ArrayAdapter<LessonData>{
         LessonData lesson = data.get(position);
         
         holder.lessonID.setText(lesson.getLessonId());
-        holder.lessonTitle.setText(lesson.getLessonTitle());     
-        
+        holder.lessonTitle.setText(lesson.getLessonTitle());
         return row;
     }
     

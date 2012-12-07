@@ -1,6 +1,8 @@
 package com.example.inspirationdraft;
 
 //import java.io.File;
+import java.io.File;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
@@ -14,6 +16,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
 //    private InspirationList inspirations = new InspirationList();
 //    private LessonList lessons = new LessonList();
+    private IdGeneratorList idGeneratorsForStorage = new IdGeneratorList();
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,9 +27,19 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        // For each of the sections in the app, add a tab to the action bar.
+        // For each of the sections in the application, add a tab to the action bar.
         actionBar.addTab(actionBar.newTab().setText(R.string.title_section1).setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText(R.string.title_section2).setTabListener(this));
+        
+        idGeneratorsForStorage.load(new File(getFilesDir(), "idgenerators.bin"));
+        // Initiate IdGenerators as necessary
+        if (!idGeneratorsForStorage.containsIdGenerator((String) getText(R.string.inspiration_id_generator))) {
+        	idGeneratorsForStorage.addIdGenerator((String) getText(R.string.inspiration_id_generator), new IdGenerator((String) getText(R.string.inspiration_id_generator)));
+        }	
+        if (!idGeneratorsForStorage.containsIdGenerator((String) getText(R.string.lesson_id_generator))) {
+        	idGeneratorsForStorage.addIdGenerator((String) getText(R.string.lesson_id_generator), new IdGenerator((String) getText(R.string.lesson_id_generator)));
+        }
+        idGeneratorsForStorage.save(new File(getFilesDir(), "idgenerators.bin"));
         
         // Create some starter inspirations and lessons
         

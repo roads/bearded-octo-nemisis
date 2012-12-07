@@ -13,25 +13,14 @@ public class LessonData implements Serializable{
 	private final String EMPTY = "Empty";
 	static int lessonCount = 1;
 	private String lessonId;
-	private String LessonTitle;
+	private String lessonTitle;
 	private ArrayList<String> inspirationAssignments;
 	private AlertBehavior alerts;
 	
-	public LessonData() {
+	public LessonData(String lessonId, String lessonTitle){
 		super();
-		this.lessonId = Integer.toString(lessonCount);
-		lessonCount++;
-		this.LessonTitle = ""; //"Lesson " + this.lessonId;
-		this.inspirationAssignments = new ArrayList<String>();
-		this.inspirationAssignments.add(EMPTY);
-		this.alerts = new AlertBehavior();
-	}
-	
-	public LessonData(String suffixName){
-		super();
-		this.lessonId = Integer.toString(lessonCount);
-		lessonCount++;
-		this.LessonTitle = suffixName;//"Lesson " + this.lessonId + ":  " + suffixName;
+		this.lessonId = lessonId;
+		this.lessonTitle = lessonTitle;
 		this.inspirationAssignments = new ArrayList<String>();
 		this.inspirationAssignments.add(EMPTY);
 		this.alerts = new AlertBehavior();
@@ -40,7 +29,7 @@ public class LessonData implements Serializable{
 	public LessonData(String lessonId, String suffixName, ArrayList<String> assignments){
 		super();
 		this.lessonId = lessonId;
-		this.LessonTitle = suffixName;
+		this.lessonTitle = suffixName;
 		this.inspirationAssignments = assignments;
 		this.alerts = new AlertBehavior();
 	}
@@ -53,11 +42,11 @@ public class LessonData implements Serializable{
 		this.lessonId = oldLessonId;
 	}
 	public String getLessonTitle() {
-		return this.LessonTitle;
+		return this.lessonTitle;
 	}
 	
 	public void setLessonTitle(String LessonTitle) {
-		this.LessonTitle = LessonTitle;
+		this.lessonTitle = LessonTitle;
 	}
 	
 	public ArrayList<String> getInspirationAssignments() {
@@ -94,14 +83,14 @@ public class LessonData implements Serializable{
 	@SuppressWarnings("unchecked")
 	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
 		this.lessonId = (String) stream.readObject();
-		this.LessonTitle = (String) stream.readObject();
+		this.lessonTitle = (String) stream.readObject();
 		this.inspirationAssignments = (ArrayList<String>) stream.readObject();
 		this.alerts = (AlertBehavior) stream.readObject();
 	}
 	
 	private void writeObject(ObjectOutputStream stream) throws IOException {
 		stream.writeObject(this.lessonId);
-		stream.writeObject(this.LessonTitle);
+		stream.writeObject(this.lessonTitle);
 		stream.writeObject(this.inspirationAssignments);
 		stream.writeObject(this.alerts);
 	}

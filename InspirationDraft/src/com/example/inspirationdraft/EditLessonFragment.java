@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 public class EditLessonFragment extends Fragment {
 
+	private IdGeneratorList idGeneratorsForStorage = new IdGeneratorList();
 	private LessonList lessonsForStorage = new LessonList();
 	private InspirationList inspirationsForStorage = new InspirationList();
 	private ArrayList<InspirationData> inspirationsForDisplay = new ArrayList<InspirationData>();
@@ -33,15 +34,16 @@ public class EditLessonFragment extends Fragment {
 
 		lessonIdKey = getActivity().getIntent().getStringExtra("lessonIdKey");
 		inspirationsForStorage.load(new File(getActivity().getFilesDir(), "inspirations.bin"));
-		
 	}
 	
 	@Override
 	public void onResume() {
 		super.onResume();
 		saveData = true;
+		idGeneratorsForStorage.load(new File(getActivity().getFilesDir(), "idgenerators.bin"));
 		lessonsForStorage.load(new File(getActivity().getFilesDir(), "lessons.bin"));
 		inspirationsForStorage.load(new File(getActivity().getFilesDir(), "inspirations.bin"));
+		
 		
 		if (lessonIdKey != null) {
 			LessonData newLessonData = lessonsForStorage.getLesson(lessonIdKey);
@@ -51,6 +53,21 @@ public class EditLessonFragment extends Fragment {
 			
 			EditText suffixName_field = (EditText) getActivity().findViewById(R.id.suffix_name_field);
 			suffixName_field.setText(newLessonData.getLessonTitle());
+			
+			// Awful code to pre-check the CheckedTextView (using setChecked inside adapter does not work!!!)
+			//http://stackoverflow.com/questions/7202581/setting-listview-item-checked-from-adapter
+			//http://stackoverflow.com/questions/12641529/unable-to-check-uncheck-checkedtextview-inside-getview
+			ListView list_checkable_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlist);
+			ArrayList<String> inspirationAssignments = newLessonData.getInspirationAssignments();
+			if (inspirationAssignments.size() > 0) {
+				int itemLocation = 0;
+				for (String inspirationId : inspirationsForStorage) {
+					if (inspirationAssignments.contains(inspirationId)) {
+						list_checkable_inspirations.setItemChecked(itemLocation, true);
+					}
+					itemLocation++;
+				}
+			}
 		}
 	}
 
@@ -67,18 +84,25 @@ public class EditLessonFragment extends Fragment {
 			ArrayList<String> newChosenInspirationAssignments = 
 					getNewChosenInspirationAssignments(); 
 			
-			newLessonData = new LessonData(suffixName);
-			
 			if (lessonIdKey != null) {
 				// editing existing
 				LessonData oldData = lessonsForStorage.getLesson(lessonIdKey);
-				newLessonData.setLessonId(oldData.getLessonId());
-				newLessonData.setInspirationAssignments(newChosenInspirationAssignments);
+				String oldLessonId = oldData.getLessonId();
+				newLessonData = new LessonData(oldLessonId, suffixName, newChosenInspirationAssignments);
+				//newLessonData.setLessonId(oldData.getLessonId());
+				//newLessonData.setInspirationAssignments(newChosenInspirationAssignments);
 				lessonsForStorage.removeLesson(lessonIdKey);
 			} else {
 				// new lesson
+				IdGenerator LessonIdGenerator = idGeneratorsForStorage.getIdGenerator((String) getText(R.string.lesson_id_generator));
+				String newUniqueLessonId = LessonIdGenerator.getUniqueId();
+				newLessonData = new LessonData(newUniqueLessonId, suffixName);
 				lessonIdKey = newLessonData.getLessonId();
 				newLessonData.setInspirationAssignments(newChosenInspirationAssignments);
+								
+				idGeneratorsForStorage.removeIdGenerator((String) getText(R.string.lesson_id_generator));
+				idGeneratorsForStorage.addIdGenerator((String) getText(R.string.lesson_id_generator), LessonIdGenerator);
+				idGeneratorsForStorage.save(new File(getActivity().getFilesDir(), "idgenerators.bin"));
 			}
 		
 			lessonsForStorage.addLesson(lessonIdKey, newLessonData);
