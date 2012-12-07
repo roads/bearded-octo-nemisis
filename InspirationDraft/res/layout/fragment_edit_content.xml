@@ -38,8 +38,8 @@
         android:hint="@string/hint_suffix_name" />
     
     <ListView
-            android:id="@+id/inspirationlist"
-        	android:layout_width="fill_parent"
-        	android:layout_height="wrap_content" />
+        android:id="@+id/inspirationlist"
+       	android:layout_width="fill_parent"
+       	android:layout_height="wrap_content" />
     
 </LinearLayout>

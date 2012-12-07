@@ -20,8 +20,9 @@
     <string name="hint_content">Enter the content of your inspiration.</string>
     <string name="toast_inspiration_saved">Inspiration Saved</string>
     
-    <string name="tab_section_content">Edit Assignments</string>
-    <string name="tab_section_time">Edit Alerts</string>
+    <string name="tab_section_content">Content</string>
+    <string name="tab_section_time">Alert Behavior</string>
+     <string name="tab_section_selection">Selection Behavior</string>
     
     <string name="empty_lessonlist">No Lessons</string>
     <string name="labelLessonAssignments">Assigned Inspirations:</string>

@@ -18,7 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class EditLessonFragment extends Fragment {
+public class EditContentFragment extends Fragment {
 
 	private IdGeneratorList idGeneratorsForStorage = new IdGeneratorList();
 	private LessonList lessonsForStorage = new LessonList();
@@ -121,12 +121,12 @@ public class EditLessonFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_edit_lesson,container, false);
+		return inflater.inflate(R.layout.fragment_edit_content,container, false);
 	}
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.fragment_edit_lesson, menu);
+		inflater.inflate(R.menu.fragment_cancel_save, menu);
 	}
 	
 	@Override

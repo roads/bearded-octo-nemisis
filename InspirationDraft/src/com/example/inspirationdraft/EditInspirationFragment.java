@@ -129,7 +129,7 @@ public class EditInspirationFragment extends Fragment {
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.fragment_edit_inspiration, menu);
+		inflater.inflate(R.menu.fragment_cancel_save, menu);
 	}
 	
 	@Override

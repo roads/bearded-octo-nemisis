@@ -22,7 +22,7 @@ public class EditLessonActivity extends Activity implements ActionBar.TabListene
         // For each of the sections in the application, add a tab to the action bar.
         actionBar.addTab(actionBar.newTab().setText(R.string.tab_section_content).setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText(R.string.tab_section_time).setTabListener(this));
-        
+        actionBar.addTab(actionBar.newTab().setText(R.string.tab_section_selection).setTabListener(this));
     }
 
     @Override
@@ -57,13 +57,19 @@ public class EditLessonActivity extends Activity implements ActionBar.TabListene
     	
     	if (tab.getPosition() == 0) {
 	        // When the given tab is selected, show the tab contents in the container
-	        EditLessonFragment fragment = new EditLessonFragment();	  
+	        EditContentFragment fragment = new EditContentFragment();	  
+	        getFragmentManager().beginTransaction()
+	                .replace(R.id.detail, fragment)
+	                .commit();
+    	} else if (tab.getPosition() == 1) {
+    		
+	        TimeBehaviorFragment fragment = new TimeBehaviorFragment();	    	
 	        getFragmentManager().beginTransaction()
 	                .replace(R.id.detail, fragment)
 	                .commit();
     	} else {
     		
-	        TimeBehaviorFragment fragment = new TimeBehaviorFragment();	    	
+	        SelectionBehaviorFragment fragment = new SelectionBehaviorFragment();	    	
 	        getFragmentManager().beginTransaction()
 	                .replace(R.id.detail, fragment)
 	                .commit();
