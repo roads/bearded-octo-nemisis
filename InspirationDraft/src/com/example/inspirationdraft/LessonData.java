@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class LessonData implements Serializable{
 	
@@ -16,6 +17,7 @@ public class LessonData implements Serializable{
 	private ArrayList<String> inspirationAssignments;
 	private Integer selectionBehavior;
 	private int inspirationCounter;
+	private Random randGenerator = new Random();
 	
 	public LessonData(String lessonId, String lessonTitle){
 		super();
@@ -30,9 +32,15 @@ public class LessonData implements Serializable{
 		int numInspirations = inspirationAssignments.size();
 		
 		String nextInspirationId = null;
-		if (numInspirations > 1) {
-			nextInspirationId = inspirationAssignments.get(inspirationCounter);
-			inspirationCounter = (inspirationCounter + 1)%numInspirations;
+		if (numInspirations > 0) {
+			if (selectionBehavior == 0) {
+				 int randomInt = randGenerator.nextInt(numInspirations);
+				 nextInspirationId = Integer.toString(randomInt);
+			} else if (selectionBehavior == 1) {
+				nextInspirationId = inspirationAssignments.get(inspirationCounter);
+				inspirationCounter = (inspirationCounter + 1)%numInspirations;
+			}
+			
 		}
 		
 		return nextInspirationId;
