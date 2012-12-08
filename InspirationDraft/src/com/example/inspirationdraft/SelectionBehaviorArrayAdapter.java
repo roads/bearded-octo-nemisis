@@ -44,8 +44,8 @@ public class SelectionBehaviorArrayAdapter extends ArrayAdapter<SelectionBehavio
             holder = (SelectionBehaviorDataHolder)row.getTag();
         }
         
-        SelectionBehaviorData lesson = data.get(position);
-        holder.selectionBehaviorName.setText(lesson.getSelectionBehaviorName());
+        SelectionBehaviorData selectionBehavior = data.get(position);
+        holder.selectionBehaviorName.setText(selectionBehavior.getSelectionBehaviorName());
         
         return row;
     }

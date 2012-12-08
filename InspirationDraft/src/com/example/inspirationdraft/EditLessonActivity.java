@@ -63,7 +63,7 @@ public class EditLessonActivity extends Activity implements ActionBar.TabListene
 	                .commit();
     	} else if (tab.getPosition() == 1) {
     		
-	        TimeBehaviorFragment fragment = new TimeBehaviorFragment();	    	
+	        AlertBehaviorFragment fragment = new AlertBehaviorFragment();	    	
 	        getFragmentManager().beginTransaction()
 	                .replace(R.id.detail, fragment)
 	                .commit();

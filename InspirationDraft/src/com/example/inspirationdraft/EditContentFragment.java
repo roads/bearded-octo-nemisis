@@ -76,7 +76,7 @@ public class EditContentFragment extends Fragment {
 		super.onPause();
 		if (saveData) {
 			
-			LessonData newLessonData = null;
+			LessonData lessonData = null;
 			
 			EditText suffixName_field = (EditText) getActivity().findViewById(R.id.suffix_name_field);
 			String suffixName = suffixName_field.getText().toString();
@@ -86,26 +86,24 @@ public class EditContentFragment extends Fragment {
 			
 			if (lessonIdKey != null) {
 				// editing existing
-				LessonData oldData = lessonsForStorage.getLesson(lessonIdKey);
-				String oldLessonId = oldData.getLessonId();
-				newLessonData = new LessonData(oldLessonId, suffixName, newChosenInspirationAssignments);
-				//newLessonData.setLessonId(oldData.getLessonId());
-				//newLessonData.setInspirationAssignments(newChosenInspirationAssignments);
+				lessonData = lessonsForStorage.getLesson(lessonIdKey);
+				lessonData.setLessonTitle(suffixName);
+				lessonData.setInspirationAssignments(newChosenInspirationAssignments);
 				lessonsForStorage.removeLesson(lessonIdKey);
 			} else {
 				// new lesson
 				IdGenerator LessonIdGenerator = idGeneratorsForStorage.getIdGenerator((String) getText(R.string.lesson_id_generator));
 				String newUniqueLessonId = LessonIdGenerator.getUniqueId();
-				newLessonData = new LessonData(newUniqueLessonId, suffixName);
-				lessonIdKey = newLessonData.getLessonId();
-				newLessonData.setInspirationAssignments(newChosenInspirationAssignments);
+				lessonData = new LessonData(newUniqueLessonId, suffixName);
+				lessonIdKey = lessonData.getLessonId();
+				lessonData.setInspirationAssignments(newChosenInspirationAssignments);
 								
 				idGeneratorsForStorage.removeIdGenerator((String) getText(R.string.lesson_id_generator));
 				idGeneratorsForStorage.addIdGenerator((String) getText(R.string.lesson_id_generator), LessonIdGenerator);
 				idGeneratorsForStorage.save(new File(getActivity().getFilesDir(), "idgenerators.bin"));
 			}
 		
-			lessonsForStorage.addLesson(lessonIdKey, newLessonData);
+			lessonsForStorage.addLesson(lessonIdKey, lessonData);
 			lessonsForStorage.save(new File(getActivity().getFilesDir(), "lessons.bin"));
 			
 			updateInspirations(newChosenInspirationAssignments);

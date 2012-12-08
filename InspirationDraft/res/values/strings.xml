@@ -36,6 +36,7 @@
     
     <string name="label_id">ID:  </string>
     <string name="no_id">no ID yet</string>
+	<string name="no_title">no lesson title yet</string>
 	<string name="menu_ok">Save</string>
     <string name="menu_cancel">Cancel</string>
     <string name="lesson_id_generator">lessonIdGeneratorIdentifier</string>

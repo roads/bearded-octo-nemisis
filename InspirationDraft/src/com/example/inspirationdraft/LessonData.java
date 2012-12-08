@@ -11,10 +11,11 @@ public class LessonData implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private final String EMPTY = "Empty";
-	static int lessonCount = 1;
 	private String lessonId;
 	private String lessonTitle;
 	private ArrayList<String> inspirationAssignments;
+	private Integer selectionBehavior;
+	private int inspirationCounter;
 	
 	public LessonData(String lessonId, String lessonTitle){
 		super();
@@ -22,13 +23,19 @@ public class LessonData implements Serializable{
 		this.lessonTitle = lessonTitle;
 		this.inspirationAssignments = new ArrayList<String>();
 		this.inspirationAssignments.add(EMPTY);
+		this.selectionBehavior = 0;
 	}
-
-	public LessonData(String lessonId, String suffixName, ArrayList<String> assignments){
-		super();
-		this.lessonId = lessonId;
-		this.lessonTitle = suffixName;
-		this.inspirationAssignments = assignments;
+	
+	public String getNextInspiration() {
+		int numInspirations = inspirationAssignments.size();
+		
+		String nextInspirationId = null;
+		if (numInspirations > 1) {
+			nextInspirationId = inspirationAssignments.get(inspirationCounter);
+			inspirationCounter = (inspirationCounter + 1)%numInspirations;
+		}
+		
+		return nextInspirationId;
 	}
 	
 	public String getLessonId() {
@@ -52,6 +59,7 @@ public class LessonData implements Serializable{
 	
 	public void setInspirationAssignments(ArrayList<String> newAssignments) {
 		this.inspirationAssignments = newAssignments;
+		inspirationCounter = 0;
 	}
 	
 	public int getAssignedIcon() {
@@ -65,9 +73,18 @@ public class LessonData implements Serializable{
 					
 	}
 	
+	public Integer getSelectionBehavior() {
+		return this.selectionBehavior;
+	}
+	
+	public void setSelectionBehavior(Integer behavior) {
+		this.selectionBehavior = behavior;
+	}
+	
 	public void addInspirationAssignment(String inspirationId) {
 		inspirationAssignments.remove(EMPTY);
 		inspirationAssignments.add(inspirationId);
+		inspirationCounter = 0;
 	}
 	
 	public void removeInspirationAssignment(String inspiraitonId) {
@@ -75,6 +92,7 @@ public class LessonData implements Serializable{
 		if (inspirationAssignments.size() == 0) {
 			inspirationAssignments.add(EMPTY);
 		}
+		inspirationCounter = 0;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -82,11 +100,15 @@ public class LessonData implements Serializable{
 		this.lessonId = (String) stream.readObject();
 		this.lessonTitle = (String) stream.readObject();
 		this.inspirationAssignments = (ArrayList<String>) stream.readObject();
+		this.selectionBehavior = (Integer) stream.readObject();
+		this.inspirationCounter = (Integer) stream.readObject();
 	}
 	
 	private void writeObject(ObjectOutputStream stream) throws IOException {
 		stream.writeObject(this.lessonId);
 		stream.writeObject(this.lessonTitle);
 		stream.writeObject(this.inspirationAssignments);
+		stream.writeObject(this.selectionBehavior);
+		stream.writeObject(this.inspirationCounter);
 	}
 }
