@@ -15,6 +15,14 @@ public class AlertBehavior implements Serializable, Iterable<AlertData>{
 	public AlertBehavior() {
 		alerts = new ArrayList<AlertData>();
 	}
+	
+	public AlertBehavior(ArrayList<AlertData> alerts){
+		alerts = new ArrayList<AlertData>(alerts);
+	}
+	
+	public ArrayList<AlertData> getAlertArrayList(){
+		return alerts;
+	}
 		
 	public void addAlert(AlertData data) {
 		alerts.add(data);

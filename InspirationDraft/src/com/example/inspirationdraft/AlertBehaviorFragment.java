@@ -33,6 +33,7 @@ public class AlertBehaviorFragment extends ListFragment {
 	private String lessonIdKey;
 	private String inspirationIdKey;
 	private boolean saveData = true;
+	int itemSelected = -1;
 	
 	@Override
 	public void onCreate (Bundle savedInstancesState) {
@@ -64,7 +65,7 @@ public class AlertBehaviorFragment extends ListFragment {
 				}
 			}
 		}
-		//setListAdapter(getCurrentAlerts());
+		setListAdapter(getCurrentAlerts());
 	}
 
 	@Override
@@ -73,16 +74,30 @@ public class AlertBehaviorFragment extends ListFragment {
 		if(saveData) {
 			AlertData newAlertData = null;
 			
-			ArrayList<AlertData> newChosenAlertAssignments = 
-					getNewChosenAlertAssignments();
+			AlertBehavior newChosenAlertAssignments = getNewChosenAlertAssignments();
 			if (lessonIdKey != null){
-				
-			} else {
-				
+				// editing existing
+				LessonData oldData = lessonsForStorage.getLesson(lessonIdKey);
+				String oldLessonId = oldData.getLessonId();
+				newLessonData = new LessonData(oldLessonId, suffixName, );
+				//newLessonData.setLessonId(oldData.getLessonId());
+				//newLessonData.setInspirationAssignments(newChosenInspirationAssignments);
+				lessonsForStorage.removeLesson(lessonIdKey);
 			}
 			
 		}
 		//alerts.save(new File(getActivity().getFilesDir(), "lessons.bin"));
+	}
+	
+	private AlertBehavior getNewChosenAlertAssignments(){
+		ListView list_checkable_alerts = (ListView) getActivity().findViewById(R.id.alertlist);
+		int numAlertsInView = list_checkable_alerts.getCount();
+		ArrayList<AlertData> newChosenAlerts = new ArrayList<AlertData>();
+		for(int i=0; i<numInspirationsInView; i++){
+			
+		}
+		AlertBehavior alerts = new AlertBehavior(newChosenAlerts);
+		return alerts;
 	}
 	
 	
@@ -98,43 +113,35 @@ public class AlertBehaviorFragment extends ListFragment {
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected (MenuItem item) {
-		if (item.getItemId() == R.id.menu_ok) {
-			saveData = true;
-		} else if (item.getItemId() == R.id.menu_cancel) {
-			saveData = false;
-		} else if (item.getItemId() == android.R.id.home){
-			saveData = false;
-		}
-		getActivity().finish();
-		return true;
-	}
-	
-	@Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        
-        for (Alert a: al)
-        setEmptyText(getText(R.string.empty_lessonlist));
-        setListAdapter(getCurrentLessons());
-        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);       
-    }
-	
-	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
-		MenuItem delete = menu.findItem(R.id.menu_delete_lesson);
-		MenuItem edit = menu.findItem(R.id.menu_edit_lesson);
+		MenuItem delete = menu.findItem(R.id.menu_delete_alert);
+		MenuItem edit = menu.findItem(R.id.menu_edit_alert);
+		MenuItem new_ = menu.findItem(R.id.menu_new_alert);
 		if (itemSelected != -1) {
 			delete.setEnabled(true);
 			edit.setEnabled(true);
+			new_.setEnabled(true);
 		} else {
 			delete.setEnabled(false);
 			edit.setEnabled(false);
+			new_.setEnabled(true);
 		}
 	}
 	
-	
+	@Override
+	public boolean onOptionsItemSelected (MenuItem item) {
+		
+//		if (item.getItemId() == R.id.menu_ok) {
+//			saveData = true;
+//		} else if (item.getItemId() == R.id.menu_cancel) {
+//			saveData = false;
+//		} else if (item.getItemId() == android.R.id.home){
+//			saveData = false;
+//		}
+//		getActivity().finish();
+		return true;
+	}
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
@@ -142,43 +149,18 @@ public class AlertBehaviorFragment extends ListFragment {
 		getActivity().invalidateOptionsMenu();
 	}
 	
-	
-    
-    public void remove_id(String lessonIdKey) {
-    	//remove lesson and save new lesson list
-    	lessonsForStorage.removeLesson(lessonIdKey);
-    	lessonsForStorage.save(new File(getActivity().getFilesDir(), "lessons.bin"));
-    	
-    	//update inspirations to reflect removal and save
-    	inspirationsForStorage.load(new File(getActivity().getFilesDir(), "inspirations.bin"));
-    	InspirationData newInspirationData = null;
-    	for (String inspirationIdKey:inspirationsForStorage) {
-			InspirationData oldInspirationData = inspirationsForStorage.getInspiration(inspirationIdKey);
-			newInspirationData = new InspirationData(oldInspirationData.getInspirationId(), oldInspirationData.
-					getInspirationContent(), oldInspirationData.getLessonAssignments());	
-			newInspirationData.removeLessonAssignment(lessonIdKey);
-			inspirationsForStorage.addInspiration(inspirationIdKey, newInspirationData);
-		}
-		inspirationsForStorage.save(new File(getActivity().getFilesDir(), "inspirations.bin"));		
-    	
-		//re-populate lesson list
-    	setListAdapter(getCurrentLessons());
-    	itemSelected = -1;
-    	getActivity().invalidateOptionsMenu();
+	@Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setListAdapter(getCurrentAlerts());
+        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);     
     }
+	
      
     public AlertArrayAdapter getCurrentAlerts() {
     	
     	AlertArrayAdapter adapter = new AlertArrayAdapter(getActivity(),
-    			R.layout.listview_alert_row, alerts);
-    	alerts.clear();
-    	File appDir = getActivity().getFilesDir();
-    	lessonsForStorage.load(new File(appDir, "lessons.bin"));
-    	AlertBehavior alertBehavior = lessonsForStorage.
-    	for (String lessonKey : lessonsForStorage) {
-    		LessonData lessonData = lessonsForStorage.getLesson(lessonKey);
-    		adapter.add(lessonData);
-    	}
+    			R.layout.listview_alert_row, myAlerts.getAlertArrayList());
     	return adapter;
     }
     
