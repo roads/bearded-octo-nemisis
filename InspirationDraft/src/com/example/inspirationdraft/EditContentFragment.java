@@ -13,12 +13,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class EditLessonFragment extends Fragment {
+public class EditContentFragment extends Fragment {
 
 	private IdGeneratorList idGeneratorsForStorage = new IdGeneratorList();
 	private LessonList lessonsForStorage = new LessonList();
@@ -76,7 +77,7 @@ public class EditLessonFragment extends Fragment {
 		super.onPause();
 		if (saveData) {
 			
-			LessonData newLessonData = null;
+			LessonData lessonData = null;
 			
 			EditText suffixName_field = (EditText) getActivity().findViewById(R.id.suffix_name_field);
 			String suffixName = suffixName_field.getText().toString();
@@ -86,26 +87,24 @@ public class EditLessonFragment extends Fragment {
 			
 			if (lessonIdKey != null) {
 				// editing existing
-				LessonData oldData = lessonsForStorage.getLesson(lessonIdKey);
-				String oldLessonId = oldData.getLessonId();
-				newLessonData = new LessonData(oldLessonId, suffixName, newChosenInspirationAssignments);
-				//newLessonData.setLessonId(oldData.getLessonId());
-				//newLessonData.setInspirationAssignments(newChosenInspirationAssignments);
+				lessonData = lessonsForStorage.getLesson(lessonIdKey);
+				lessonData.setLessonTitle(suffixName);
+				lessonData.setInspirationAssignments(newChosenInspirationAssignments);
 				lessonsForStorage.removeLesson(lessonIdKey);
 			} else {
 				// new lesson
 				IdGenerator LessonIdGenerator = idGeneratorsForStorage.getIdGenerator((String) getText(R.string.lesson_id_generator));
 				String newUniqueLessonId = LessonIdGenerator.getUniqueId();
-				newLessonData = new LessonData(newUniqueLessonId, suffixName);
-				lessonIdKey = newLessonData.getLessonId();
-				newLessonData.setInspirationAssignments(newChosenInspirationAssignments);
+				lessonData = new LessonData(newUniqueLessonId, suffixName);
+				lessonIdKey = lessonData.getLessonId();
+				lessonData.setInspirationAssignments(newChosenInspirationAssignments);
 								
 				idGeneratorsForStorage.removeIdGenerator((String) getText(R.string.lesson_id_generator));
 				idGeneratorsForStorage.addIdGenerator((String) getText(R.string.lesson_id_generator), LessonIdGenerator);
 				idGeneratorsForStorage.save(new File(getActivity().getFilesDir(), "idgenerators.bin"));
 			}
 		
-			lessonsForStorage.addLesson(lessonIdKey, newLessonData);
+			lessonsForStorage.addLesson(lessonIdKey, lessonData);
 			lessonsForStorage.save(new File(getActivity().getFilesDir(), "lessons.bin"));
 			
 			updateInspirations(newChosenInspirationAssignments);
@@ -121,12 +120,12 @@ public class EditLessonFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_edit_lesson,container, false);
+		return inflater.inflate(R.layout.fragment_edit_content,container, false);
 	}
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.fragment_edit_lesson, menu);
+		inflater.inflate(R.menu.fragment_cancel_save, menu);
 	}
 	
 	@Override
@@ -155,7 +154,7 @@ public class EditLessonFragment extends Fragment {
         InspirationArrayAdapterMultiple adapter = new InspirationArrayAdapterMultiple(getActivity(),
     			R.layout.listview_inspiration_row_multiple, inspirationsForDisplay);
 		list_checked_inspirations.setAdapter(adapter);
-		list_checked_inspirations.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		list_checked_inspirations.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
 	}
 	
 	private ArrayList<String> getNewChosenInspirationAssignments(){

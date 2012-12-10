@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -135,7 +136,7 @@ public class AlertBehaviorFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setListAdapter(getAlertAdaptor());
-        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);     
+        getListView().setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);     
     }
 	
      

@@ -1,7 +1,5 @@
 package com.example.inspirationdraft;
 
-import java.io.File;
-
 import android.app.Fragment;
 import android.os.Bundle;
 

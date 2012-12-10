@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -91,7 +92,7 @@ public class LessonListFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         setEmptyText(getText(R.string.empty_lessonlist));
         setListAdapter(getCurrentLessons());
-        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);       
+        getListView().setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);       
     }
     
     public void remove_id(String lessonIdKey) {

@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -129,7 +130,7 @@ public class EditInspirationFragment extends Fragment {
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.fragment_edit_inspiration, menu);
+		inflater.inflate(R.menu.fragment_cancel_save, menu);
 	}
 	
 	@Override
@@ -158,7 +159,7 @@ public class EditInspirationFragment extends Fragment {
         LessonArrayAdapterMultiple adapter = new LessonArrayAdapterMultiple(getActivity(),
     			R.layout.listview_lesson_row_multiple, lessonsForDisplay);
 		list_checked_lessons.setAdapter(adapter);
-		list_checked_lessons.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		list_checked_lessons.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
 	}
 	
 	private ArrayList<String> getNewChosenLessonAssignments(){
