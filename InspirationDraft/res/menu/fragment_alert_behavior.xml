@@ -3,6 +3,9 @@
     <item android:id="@+id/menu_new_alert" android:title="New"></item>
     <item android:id="@+id/menu_delete_alert" android:title="Delete"></item>
     <item android:id="@+id/menu_edit_alert" android:title="Edit"></item>
+    <item android:id="@+id/menu_ok" android:title="Ok"></item>
+    <item android:id="@+id/menu_cancel" android:title="Cancel"></item>
+  
     
 
 </menu>

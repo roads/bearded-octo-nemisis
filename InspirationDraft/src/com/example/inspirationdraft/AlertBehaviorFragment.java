@@ -40,8 +40,10 @@ public class AlertBehaviorFragment extends ListFragment {
 	public void onCreate (Bundle savedInstancesState) {
 		super.onCreate(savedInstancesState);
 		setHasOptionsMenu(true);
-		
 		lessonIdKey = getActivity().getIntent().getStringExtra("lessonIdKey");
+		idGeneratorsForStorage.load(new File(getActivity().getFilesDir(), "idgenerators.bin"));
+		lessonsForStorage.load(new File(getActivity().getFilesDir(), "lessons.bin"));
+		
 	}
 	
 	@Override
@@ -53,7 +55,6 @@ public class AlertBehaviorFragment extends ListFragment {
 		
 		if(lessonIdKey != null){
 			LessonData newLessonData = lessonsForStorage.getLesson(lessonIdKey);
-			
 			ListView list_checkable_alerts = (ListView) getActivity().findViewById(R.id.alertlist);
 			myAlerts = newLessonData.getAlerts();
 			if(myAlerts.getNumberOfAlerts() > 0){
@@ -98,30 +99,55 @@ public class AlertBehaviorFragment extends ListFragment {
 		MenuItem delete = menu.findItem(R.id.menu_delete_alert);
 		MenuItem edit = menu.findItem(R.id.menu_edit_alert);
 		MenuItem new_ = menu.findItem(R.id.menu_new_alert);
+		MenuItem ok = menu.findItem(R.id.menu_ok);
+		MenuItem cancel = menu.findItem(R.id.menu_cancel);
 		if (itemSelected != -1) {
 			delete.setEnabled(true);
 			edit.setEnabled(true);
-			new_.setEnabled(true);
+			new_.setEnabled(false);
+			ok.setEnabled(true);
+			cancel.setEnabled(true);
 		} else {
 			delete.setEnabled(false);
 			edit.setEnabled(false);
 			new_.setEnabled(true);
+			ok.setEnabled(true);
+			cancel.setEnabled(true);
 		}
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected (MenuItem item) {
+		Intent intent = new Intent(getActivity(), EditAlertActivity.class);
 		if(item.getItemId() == R.id.menu_edit_alert){
-			
-			EditAlertFragment fragment = new EditAlertFragment();	  
-	        getFragmentManager().beginTransaction()
-	                .replace(R.id.container, fragment)
-	                .commit();
-		}else if (item.getItemId() == R.id.menu_new_alert){
-			EditAlertFragment fragment = new EditAlertFragment();	  
-	        getFragmentManager().beginTransaction()
-	                .replace(R.id.container, fragment)
-	                .commit();
+			//itemSelected = position in arraylist
+			intent.putExtra("alertIndex", itemSelected);
+			intent.putExtra("lessonIdKey", lessonIdKey);
+			getActivity().startActivity(intent);
+			itemSelected = -1;
+			getActivity().invalidateOptionsMenu();
+		}
+		if (item.getItemId() == R.id.menu_new_alert){
+			intent.putExtra("alertIndex", -1);
+			intent.putExtra("lessonIdKey", lessonIdKey);
+			getActivity().startActivity(intent);
+			itemSelected = -1;
+			getActivity().invalidateOptionsMenu();
+		}
+		if(item.getItemId() == R.id.menu_delete_alert){
+			myAlerts.removeByIndex(itemSelected);
+			itemSelected = -1;
+			getActivity().invalidateOptionsMenu();
+		}
+		if(item.getItemId() == R.id.menu_ok){
+			saveData = true;
+			getActivity().finish();
+		}else if(item.getItemId() == R.id.menu_cancel){
+			saveData = false;
+			getActivity().finish();
+		}else if(item.getItemId() == android.R.id.home){
+			saveData = false;
+			getActivity().finish();
 		}
 		return true;
 	}
@@ -136,7 +162,7 @@ public class AlertBehaviorFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setListAdapter(getAlertAdaptor());
-        getListView().setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);     
+        getListView().setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);     
     }
 	
      
