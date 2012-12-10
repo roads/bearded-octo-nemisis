@@ -19,6 +19,8 @@ public final class R {
         public static final int question_mark=0x7f020005;
     }
     public static final class id {
+        public static final int alert_days=0x7f07000b;
+        public static final int alert_time_picker=0x7f07000a;
         public static final int alertlist=0x7f070008;
         public static final int container=0x7f070001;
         public static final int content_field=0x7f070003;
@@ -40,8 +42,6 @@ public final class R {
         public static final int menu_ok=0x7f070016;
         public static final int menu_settings=0x7f070014;
         public static final int suffix_name_field=0x7f070006;
-        public static final int textView1=0x7f07000b;
-        public static final int textView2=0x7f07000a;
         public static final int txtInspirationAssignments=0x7f07000f;
         public static final int txtInspirationContent=0x7f07000d;
         public static final int txtInspirationId=0x7f07000c;
@@ -69,11 +69,12 @@ public final class R {
         public static final int activity_edit_inspiration=0x7f060000;
         public static final int activity_edit_lesson=0x7f060001;
         public static final int activity_main=0x7f060002;
-        public static final int fragment_edit_inspiration=0x7f060003;
-        public static final int fragment_edit_lesson=0x7f060004;
-        public static final int fragment_inspirationlist=0x7f060005;
-        public static final int fragment_lessonlist=0x7f060006;
-        public static final int fragment_shakespeare=0x7f060007;
+        public static final int fragment_alert_behavior=0x7f060003;
+        public static final int fragment_edit_inspiration=0x7f060004;
+        public static final int fragment_edit_lesson=0x7f060005;
+        public static final int fragment_inspirationlist=0x7f060006;
+        public static final int fragment_lessonlist=0x7f060007;
+        public static final int fragment_shakespeare=0x7f060008;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
@@ -90,10 +91,14 @@ public final class R {
         public static final int label_lesson_title=0x7f040018;
         public static final int lesson_id_generator=0x7f04001f;
         public static final int menu_cancel=0x7f04001e;
+        public static final int menu_cancel_alert_edit=0x7f040027;
+        public static final int menu_delete_alert=0x7f040028;
         public static final int menu_delete_inspiration=0x7f04000c;
         public static final int menu_delete_lesson=0x7f040017;
+        public static final int menu_edit_alert=0x7f040026;
         public static final int menu_edit_inspiration=0x7f04000b;
         public static final int menu_edit_lesson=0x7f040016;
+        public static final int menu_new_alert=0x7f040025;
         public static final int menu_new_inspiration=0x7f04000a;
         public static final int menu_new_lesson=0x7f040015;
         public static final int menu_ok=0x7f04001d;
