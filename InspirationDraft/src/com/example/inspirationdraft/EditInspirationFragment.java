@@ -181,17 +181,15 @@ public class EditInspirationFragment extends Fragment {
 	}
 	
 	private void updateLessons(ArrayList<String> newChosenAssignments) {
-		LessonData newLessonData = null;
+		LessonData lessonData = null;
 		// Update Lessons (by cycling through all lessons and removing and adding as appropriate)
 		for (String lessonIdKey:lessonsForStorage) {
-			LessonData oldLessonData = lessonsForStorage.getLesson(lessonIdKey);
-			newLessonData = new LessonData(oldLessonData.getLessonId(), oldLessonData.
-					getLessonTitle(), oldLessonData.getInspirationAssignments());			
-			newLessonData.removeInspirationAssignment(inspirationIdKey);
+			lessonData = lessonsForStorage.getLesson(lessonIdKey);		
+			lessonData.removeInspirationAssignment(inspirationIdKey);
 			if (newChosenAssignments.contains(lessonIdKey)) {				
-				newLessonData.addInspirationAssignment(inspirationIdKey);
+				lessonData.addInspirationAssignment(inspirationIdKey);
 			}
-			lessonsForStorage.addLesson(lessonIdKey, newLessonData);			
+			lessonsForStorage.addLesson(lessonIdKey, lessonData);			
 		}
 		lessonsForStorage.save(new File(getActivity().getFilesDir(), "lessons.bin"));
 	}

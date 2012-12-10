@@ -101,13 +101,11 @@ public class InspirationListFragment extends ListFragment {
     	
     	//update lessons to reflect removal and save
     	lessonsForStorage.load(new File(getActivity().getFilesDir(), "lessons.bin"));
-    	LessonData newLessonData = null;
+    	LessonData lessonData = null;
     	for (String lessonIdKey:lessonsForStorage) {
-			LessonData oldLessonData = lessonsForStorage.getLesson(lessonIdKey);
-			newLessonData = new LessonData(oldLessonData.getLessonId(), oldLessonData.
-					getLessonTitle(), oldLessonData.getInspirationAssignments());	
-			newLessonData.removeInspirationAssignment(inspirationIdKey);
-			lessonsForStorage.addLesson(lessonIdKey, newLessonData);
+			lessonData = lessonsForStorage.getLesson(lessonIdKey);
+			lessonData.removeInspirationAssignment(inspirationIdKey);
+			lessonsForStorage.addLesson(lessonIdKey, lessonData);
 		}
 		lessonsForStorage.save(new File(getActivity().getFilesDir(), "lessons.bin"));	
 		
