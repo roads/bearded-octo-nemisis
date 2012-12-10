@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <ToggleButton
+        android:id="@+id/sunday_switch"
+        android:layout_height="wrap_content"
+        android:text="@string/sunday"
+        android:textOff="@string/sunday"
+        android:textOn="@string/sunday"
+        android:layout_width="0px" 
+        android:layout_weight="1" />
+
+    <ToggleButton
+        android:id="@+id/monday_switch"
+		android:layout_width="0px" 
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="@string/monday"
+        android:textOff="@string/monday"
+        android:textOn="@string/monday" />
+
+    <ToggleButton
+        android:id="@+id/tuesday_switch"
+        android:layout_width="0px" 
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="@string/tuesday"
+        android:textOff="@string/tuesday"
+        android:textOn="@string/tuesday" />
+
+    <ToggleButton
+        android:id="@+id/wednesday_switch"
+        android:layout_width="0px" 
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="@string/wednesday"
+        android:textOff="@string/wednesday"
+        android:textOn="@string/wednesday" />
+
+    <ToggleButton
+        android:id="@+id/thursday_switch"
+        android:layout_width="0px" 
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="@string/thursday"
+        android:textOff="@string/thursday"
+        android:textOn="@string/thursday" />
+
+    <ToggleButton
+        android:id="@+id/friday_switch"
+        android:layout_width="0px" 
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="@string/friday"
+        android:textOff="@string/friday"
+        android:textOn="@string/friday" />
+
+    <ToggleButton
+        android:id="@+id/saturday_switch"
+        android:layout_width="0px" 
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="@string/saturday"
+        android:textOff="@string/saturday"
+        android:textOn="@string/saturday" />
+
+</LinearLayout>

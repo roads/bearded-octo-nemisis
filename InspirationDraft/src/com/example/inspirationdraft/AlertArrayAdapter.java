@@ -57,6 +57,6 @@ public class AlertArrayAdapter extends ArrayAdapter<AlertData> {
     static class AlertDataHolder
     {
     	TextView days;
-    	CheckedTextView time;        
+    	CheckedTextView time;
     }
 }

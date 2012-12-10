@@ -65,7 +65,7 @@ public class AlertBehaviorFragment extends ListFragment {
 				}
 			}
 		}
-		setListAdapter(getCurrentAlerts());
+		setListAdapter(getAlertAdaptor());
 	}
 
 	@Override
@@ -74,31 +74,10 @@ public class AlertBehaviorFragment extends ListFragment {
 		if(saveData) {
 			AlertData newAlertData = null;
 			
-			AlertBehavior newChosenAlertAssignments = getNewChosenAlertAssignments();
-			if (lessonIdKey != null){
-				// editing existing
-				LessonData oldData = lessonsForStorage.getLesson(lessonIdKey);
-				String oldLessonId = oldData.getLessonId();
-				newLessonData = new LessonData(oldLessonId, suffixName, );
-				//newLessonData.setLessonId(oldData.getLessonId());
-				//newLessonData.setInspirationAssignments(newChosenInspirationAssignments);
-				lessonsForStorage.removeLesson(lessonIdKey);
-			}
 			
 		}
 		//alerts.save(new File(getActivity().getFilesDir(), "lessons.bin"));
-	}
-	
-	private AlertBehavior getNewChosenAlertAssignments(){
-		ListView list_checkable_alerts = (ListView) getActivity().findViewById(R.id.alertlist);
-		int numAlertsInView = list_checkable_alerts.getCount();
-		ArrayList<AlertData> newChosenAlerts = new ArrayList<AlertData>();
-		for(int i=0; i<numInspirationsInView; i++){
-			
-		}
-		AlertBehavior alerts = new AlertBehavior(newChosenAlerts);
-		return alerts;
-	}
+	}	
 	
 	
 	@Override
@@ -131,15 +110,18 @@ public class AlertBehaviorFragment extends ListFragment {
 	
 	@Override
 	public boolean onOptionsItemSelected (MenuItem item) {
-		
-//		if (item.getItemId() == R.id.menu_ok) {
-//			saveData = true;
-//		} else if (item.getItemId() == R.id.menu_cancel) {
-//			saveData = false;
-//		} else if (item.getItemId() == android.R.id.home){
-//			saveData = false;
-//		}
-//		getActivity().finish();
+		if(item.getItemId() == R.id.menu_edit_alert){
+			
+			EditAlertFragment fragment = new EditAlertFragment();	  
+	        getFragmentManager().beginTransaction()
+	                .replace(R.id.container, fragment)
+	                .commit();
+		}else if (item.getItemId() == R.id.menu_new_alert){
+			EditAlertFragment fragment = new EditAlertFragment();	  
+	        getFragmentManager().beginTransaction()
+	                .replace(R.id.container, fragment)
+	                .commit();
+		}
 		return true;
 	}
 	
@@ -152,16 +134,22 @@ public class AlertBehaviorFragment extends ListFragment {
 	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setListAdapter(getCurrentAlerts());
+        setListAdapter(getAlertAdaptor());
         getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);     
     }
 	
      
-    public AlertArrayAdapter getCurrentAlerts() {
+    public AlertArrayAdapter getAlertAdaptor() {
     	
     	AlertArrayAdapter adapter = new AlertArrayAdapter(getActivity(),
     			R.layout.listview_alert_row, myAlerts.getAlertArrayList());
     	return adapter;
+    }
+    
+    public AlertBehavior getCurrentAlertBehavior(){
+    	//get size of list
+    	//loop through list and get view
+    	return new AlertBehavior();
     }
     
        	
