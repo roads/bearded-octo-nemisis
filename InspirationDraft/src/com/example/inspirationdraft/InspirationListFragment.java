@@ -8,7 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -65,17 +64,15 @@ public class InspirationListFragment extends ListFragment {
 	        getActivity().startActivity(intent);			
 		}
 		if (item.getItemId() == R.id.menu_edit_inspiration) {
-			TextView text = (TextView) getListView().getChildAt(itemSelected).
-					findViewById(R.id.txtInspirationId);
-			intent.putExtra("inspirationIdKey", text.getText().toString());
+			String selectedInspirationId = inspirationsForDisplay.get(itemSelected).getInspirationId();
+			intent.putExtra("inspirationIdKey", selectedInspirationId);
 	        getActivity().startActivity(intent);
 	        itemSelected = -1;
     			getActivity().invalidateOptionsMenu();
 		}
 		if (item.getItemId() == R.id.menu_delete_inspiration) {
-			TextView text = (TextView) getListView().getChildAt(itemSelected).
-					findViewById(R.id.txtInspirationId);
-			remove_id(text.getText().toString());
+			String selectedInspirationId = inspirationsForDisplay.get(itemSelected).getInspirationId();
+			remove_id(selectedInspirationId);			
 		}
 		return true;
 	}
