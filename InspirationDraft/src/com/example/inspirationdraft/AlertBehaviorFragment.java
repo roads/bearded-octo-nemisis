@@ -43,7 +43,7 @@ public class AlertBehaviorFragment extends Fragment {
 			TextView lesson_title = (TextView) getActivity().findViewById(R.id.lesson_title);			
 			lesson_title.setText(lessonData.getLessonTitle());
 	
-			//ListView stuff
+			//ListView pre-check stuff
 			//
 			//
 		}
@@ -86,6 +86,19 @@ public class AlertBehaviorFragment extends Fragment {
 			saveData = false;
 			getActivity().finish();
 		}
+		if (item.getItemId() == R.id.menu_new_alert){
+			saveData = false;
+			getActivity().finish();
+		}
+		if (item.getItemId() == R.id.menu_delete_alert){
+			saveData = false;
+			getActivity().finish();
+		}
+		if (item.getItemId() == R.id.menu_edit_alert){
+			saveData = false;
+			getActivity().finish();
+		}
+		
 		
 		return true;
 	}
