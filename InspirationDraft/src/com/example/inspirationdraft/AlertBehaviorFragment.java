@@ -54,7 +54,7 @@ public class AlertBehaviorFragment extends Fragment {
 		super.onPause();
 		if (saveData) {
 			
-			//handle saveing
+			//handle saving
 			//
 			//
 			//
