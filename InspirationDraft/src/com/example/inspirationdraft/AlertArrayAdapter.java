@@ -37,8 +37,9 @@ public class AlertArrayAdapter extends ArrayAdapter<AlertData> {
             row = inflater.inflate(layoutResourceId, parent, false);
             
             holder = new AlertDataHolder();
-            //holder.days = (TextView)row.findViewById(R.id.txtLessonId);
+            
             holder.time = (CheckedTextView)row.findViewById(R.id.alert_time_picker);
+            //holder.days = (TextView)row.findViewById(R.id.txtLessonId);
 
             row.setTag(holder);
         }
@@ -48,16 +49,17 @@ public class AlertArrayAdapter extends ArrayAdapter<AlertData> {
         }
         
         AlertData alert = data.get(position);
-        
-        holder.time.setText((CharSequence) alert.getTime());
-      //  holder.lessonTitle.setText(alert.getLessonTitle());
+        String theTime = (alert.getHour() +  ":" + alert.getMinute());
+        holder.time.setText(theTime);
+        //holder.time.setText((CharSequence) alert.getTime());
+        //holder.days.setText(alert.getDays());
         return row;
     }
     
     static class AlertDataHolder
     {
-    	TextView days;
     	CheckedTextView time;
+    	//TextView days;
     }
 }
 

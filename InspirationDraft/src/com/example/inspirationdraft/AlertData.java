@@ -10,7 +10,9 @@ public class AlertData implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Boolean isRepeating;
-	private Time time; 
+	//private Time time; 
+	private String hour;
+	private String minute;
 	private Boolean exists;
 	
 	public AlertData() {
@@ -18,16 +20,24 @@ public class AlertData implements Serializable{
 		setIsRepeating(false);
 		setExists(false);
 	}
-	public AlertData(Time time){
-		setTime(time);
+	
+	public AlertData(String hour, String minute){
+		this.hour = hour;
+		this.minute = minute;
 		setIsRepeating(false);
-		setExists(true);
+		setExists(false);
 	}
-	public AlertData(Time time, Boolean isRepeating){
-		setTime(time);
-		setIsRepeating(isRepeating);
-		setExists(true);
-	}
+	
+//	public AlertData(Time time){
+//		setTime(time);
+//		setIsRepeating(false);
+//		setExists(true);
+//	}
+//	public AlertData(Time time, Boolean isRepeating){
+//		setTime(time);
+//		setIsRepeating(isRepeating);
+//		setExists(true);
+//	}
 	
 	public Boolean getIsRepeating() {
 		return isRepeating;
@@ -37,13 +47,20 @@ public class AlertData implements Serializable{
 		this.isRepeating = isRepeating;
 	}
 
-	public Time getTime() {
-		return time;
+	public String getHour() {
+		return this.hour;
 	}
-
-	public void setTime(Time time) {
-		this.time = time;
+	
+	public String getMinute() {
+		return this.minute;
 	}
+//	public Time getTime() {
+//		return time;
+//	}
+//
+//	public void setTime(Time time) {
+//		this.time = time;
+//	}
 
 	public Boolean getExists() {
 		return exists;

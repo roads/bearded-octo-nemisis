@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name=".EditInspirationActivity"
             android:label="@string/title_activity_edit_inspiration" >
@@ -32,6 +31,15 @@
         <activity
             android:name=".EditLessonActivity"
             android:label="@string/title_activity_edit_lesson" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".EditAlertActivity"
+            android:label="@string/title_activity_edit_alert" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

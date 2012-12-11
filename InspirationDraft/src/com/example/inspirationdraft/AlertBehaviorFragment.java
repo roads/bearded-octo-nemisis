@@ -1,8 +1,10 @@
 package com.example.inspirationdraft;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,12 +12,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class AlertBehaviorFragment extends Fragment {
 
 	private LessonList lessonsForStorage = new LessonList();
+	private ArrayList<AlertData> myAlerts = new ArrayList<AlertData>(); 
 	private String lessonIdKey;
 	private boolean saveData = true;
 	
@@ -78,6 +82,7 @@ public class AlertBehaviorFragment extends Fragment {
 	
 	@Override
 	public boolean onOptionsItemSelected (MenuItem item) {
+		Intent intent = new Intent(getActivity(), EditLessonActivity.class);
 		if (item.getItemId() == R.id.menu_ok) {
 			saveData = true;
 			getActivity().finish();
@@ -112,8 +117,15 @@ public class AlertBehaviorFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 	
-		//stub
-		//
-		//
+		myAlerts.add(new AlertData("08", "00"));
+		myAlerts.add(new AlertData("08", "15"));
+		myAlerts.add(new AlertData("08", "30"));
+		
+		ListView list_checked_alerts = (ListView) getActivity().findViewById(R.id.alertlist);
+		
+		AlertArrayAdapter adapter = new AlertArrayAdapter(getActivity(),
+    			R.layout.listview_alert_row, myAlerts);
+		list_checked_alerts.setAdapter(adapter);
+		list_checked_alerts.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 	}
 }
