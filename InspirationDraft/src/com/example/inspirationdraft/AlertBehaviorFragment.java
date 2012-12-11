@@ -54,6 +54,11 @@ public class AlertBehaviorFragment extends Fragment {
 		super.onPause();
 		if (saveData) {
 			
+			//handle saveing
+			//
+			//
+			//
+			
 			CharSequence text = getText(R.string.toast_lesson_saved);
 			Toast toast = Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT);
 			toast.show();
