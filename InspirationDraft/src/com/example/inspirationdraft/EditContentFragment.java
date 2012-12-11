@@ -140,6 +140,8 @@ public class EditContentFragment extends Fragment {
 		return true;
 	}
 	
+	
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);

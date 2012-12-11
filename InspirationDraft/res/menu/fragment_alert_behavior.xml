@@ -7,15 +7,15 @@
         android:title="@string/menu_ok"
         android:showAsAction="ifRoom|withText" />
     
-    <item android:id="@+id/menu_new_alert"
-        android:title="@string/menu_new_alert"
-        android:showAsAction="ifRoom|withText" />
+<!--     <item android:id="@+id/menu_new_alert" -->
+<!--         android:title="@string/menu_new_alert" -->
+<!--         android:showAsAction="ifRoom|withText" /> -->
     
-    <item android:id="@+id/menu_delete_alert"
-        android:title="@string/menu_delete_alert"
-        android:showAsAction="ifRoom|withText" />
+<!--     <item android:id="@+id/menu_delete_alert" -->
+<!--         android:title="@string/menu_delete_alert" -->
+<!--         android:showAsAction="ifRoom|withText" /> -->
     
-    <item android:id="@+id/menu_edit_alert"
-        android:title="@string/menu_edit_alert"
-        android:showAsAction="ifRoom|withText" />
+<!--     <item android:id="@+id/menu_edit_alert" -->
+<!--         android:title="@string/menu_edit_alert" -->
+<!--         android:showAsAction="ifRoom|withText" /> -->
 </menu>

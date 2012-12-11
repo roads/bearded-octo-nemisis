@@ -34,15 +34,12 @@ public final class R {
         public static final int lessonlist=0x7f070009;
         public static final int list=0x7f07000a;
         public static final int menu_cancel=0x7f070018;
-        public static final int menu_delete_alert=0x7f07001b;
-        public static final int menu_delete_inspiration=0x7f07001e;
-        public static final int menu_delete_lesson=0x7f070021;
-        public static final int menu_edit_alert=0x7f07001c;
-        public static final int menu_edit_inspiration=0x7f07001f;
-        public static final int menu_edit_lesson=0x7f070022;
-        public static final int menu_new_alert=0x7f07001a;
-        public static final int menu_new_inspiration=0x7f07001d;
-        public static final int menu_new_lesson=0x7f070020;
+        public static final int menu_delete_inspiration=0x7f07001b;
+        public static final int menu_delete_lesson=0x7f07001e;
+        public static final int menu_edit_inspiration=0x7f07001c;
+        public static final int menu_edit_lesson=0x7f07001f;
+        public static final int menu_new_inspiration=0x7f07001a;
+        public static final int menu_new_lesson=0x7f07001d;
         public static final int menu_ok=0x7f070019;
         public static final int menu_settings=0x7f070017;
         public static final int selectionlist=0x7f07000b;
@@ -90,7 +87,7 @@ public final class R {
         public static final int app_name=0x7f040000;
         public static final int empty_inspirationlist=0x7f040007;
         public static final int empty_lessonlist=0x7f040013;
-        public static final int hello_world=0x7f04002a;
+        public static final int hello_world=0x7f040026;
         public static final int hint_content=0x7f04000e;
         public static final int hint_suffix_name=0x7f04001a;
         public static final int inspirationImage_desc=0x7f040006;
@@ -102,13 +99,13 @@ public final class R {
         public static final int label_lesson_title=0x7f040019;
         public static final int lesson_id_generator=0x7f040021;
         public static final int menu_cancel=0x7f040020;
-        public static final int menu_delete_alert=0x7f040029;
+        public static final int menu_delete_alert=0x7f040025;
         public static final int menu_delete_inspiration=0x7f04000c;
         public static final int menu_delete_lesson=0x7f040018;
-        public static final int menu_edit_alert=0x7f040028;
+        public static final int menu_edit_alert=0x7f040024;
         public static final int menu_edit_inspiration=0x7f04000b;
         public static final int menu_edit_lesson=0x7f040017;
-        public static final int menu_new_alert=0x7f040027;
+        public static final int menu_new_alert=0x7f040023;
         public static final int menu_new_inspiration=0x7f04000a;
         public static final int menu_new_lesson=0x7f040016;
         public static final int menu_ok=0x7f04001f;
@@ -119,7 +116,7 @@ public final class R {
         public static final int tab_section_selection=0x7f040012;
         public static final int tab_section_time=0x7f040011;
         public static final int title_activity_details=0x7f040005;
-        public static final int title_activity_edit_alert=0x7f04002b;
+        public static final int title_activity_edit_alert=0x7f040027;
         public static final int title_activity_edit_inspiration=0x7f040009;
         public static final int title_activity_edit_lesson=0x7f040015;
         public static final int title_activity_main=0x7f040003;
@@ -127,10 +124,6 @@ public final class R {
         public static final int title_section2=0x7f040001;
         public static final int toast_inspiration_saved=0x7f04000f;
         public static final int toast_lesson_saved=0x7f04001b;
-        public static final int toast_testfour=0x7f040026;
-        public static final int toast_testone=0x7f040023;
-        public static final int toast_testthree=0x7f040025;
-        public static final int toast_testtwo=0x7f040024;
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;

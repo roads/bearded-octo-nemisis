@@ -27,7 +27,7 @@ public class EditLessonActivity extends Activity implements ActionBar.TabListene
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
-    	//super.onRestoreInstanceState(savedInstanceState);
+    	super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState.containsKey(STATE_SELECTED_NAVIGATION_ITEM)) {
             getActionBar().setSelectedNavigationItem(
                     savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
@@ -36,7 +36,7 @@ public class EditLessonActivity extends Activity implements ActionBar.TabListene
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-    	//super.onSaveInstanceState(outState);
+    	super.onSaveInstanceState(outState);
         outState.putInt(STATE_SELECTED_NAVIGATION_ITEM,
                 getActionBar().getSelectedNavigationIndex());
     }

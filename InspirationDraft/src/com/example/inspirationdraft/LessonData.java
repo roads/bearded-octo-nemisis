@@ -16,6 +16,7 @@ public class LessonData implements Serializable{
 	private String lessonTitle;
 	private ArrayList<String> inspirationAssignments;
 	private Integer selectionBehavior;
+	private ArrayList<Integer> alertBehavior;
 	private int inspirationCounter;
 	private Random randGenerator = new Random();
 	
@@ -26,6 +27,7 @@ public class LessonData implements Serializable{
 		this.inspirationAssignments = new ArrayList<String>();
 		this.inspirationAssignments.add(EMPTY);
 		this.selectionBehavior = 0;
+		this.alertBehavior = new ArrayList<Integer>();
 	}
 	
 	public String getNextInspiration() {
@@ -89,6 +91,14 @@ public class LessonData implements Serializable{
 		this.selectionBehavior = behavior;
 	}
 	
+	public ArrayList<Integer> getAlertBehavior() {
+		return this.alertBehavior;
+	}
+	
+	public void setAlertBehavior(ArrayList<Integer> behavior) {
+		this.alertBehavior = behavior;
+	}
+	
 	public void addInspirationAssignment(String inspirationId) {
 		inspirationAssignments.remove(EMPTY);
 		inspirationAssignments.add(inspirationId);
@@ -110,6 +120,7 @@ public class LessonData implements Serializable{
 		this.inspirationAssignments = (ArrayList<String>) stream.readObject();
 		this.selectionBehavior = (Integer) stream.readObject();
 		this.inspirationCounter = (Integer) stream.readObject();
+		this.alertBehavior = (ArrayList<Integer>) stream.readObject();
 	}
 	
 	private void writeObject(ObjectOutputStream stream) throws IOException {
@@ -118,5 +129,6 @@ public class LessonData implements Serializable{
 		stream.writeObject(this.inspirationAssignments);
 		stream.writeObject(this.selectionBehavior);
 		stream.writeObject(this.inspirationCounter);
+		stream.writeObject(this.alertBehavior);
 	}
 }
