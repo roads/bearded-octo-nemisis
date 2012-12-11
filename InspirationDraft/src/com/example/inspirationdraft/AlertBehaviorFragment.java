@@ -75,9 +75,12 @@ public class AlertBehaviorFragment extends Fragment {
 	public boolean onOptionsItemSelected (MenuItem item) {
 		if (item.getItemId() == R.id.menu_ok) {
 			saveData = true;
-		} else if (item.getItemId() == R.id.menu_cancel) {
+		}
+		if (item.getItemId() == R.id.menu_cancel) {
 			saveData = false;
-		} else if (item.getItemId() == android.R.id.home){
+		}
+		
+		if (item.getItemId() == android.R.id.home){
 			saveData = false;
 		}
 		getActivity().finish();
