@@ -96,6 +96,9 @@ public class EditContentFragment extends Fragment {
 				String newUniqueLessonId = LessonIdGenerator.getUniqueId();
 				lessonData = new LessonData(newUniqueLessonId, suffixName);
 				lessonIdKey = lessonData.getLessonId();
+				
+				getActivity().getIntent().putExtra("lessonIdKey", lessonIdKey);
+				
 				lessonData.setInspirationAssignments(newChosenInspirationAssignments);
 								
 				idGeneratorsForStorage.removeIdGenerator((String) getText(R.string.lesson_id_generator));

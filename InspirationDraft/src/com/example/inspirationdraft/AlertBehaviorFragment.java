@@ -63,7 +63,7 @@ public class AlertBehaviorFragment extends Fragment {
 		super.onPause();
 		if (saveData) {
 			
-LessonData lessonData = null;
+			LessonData lessonData = null;
 			
 			ArrayList<Integer> newSelectedAlertBehavior = getNewSelectedAlertBehavior();
 			
@@ -71,6 +71,7 @@ LessonData lessonData = null;
 				// editing existing
 				lessonData = lessonsForStorage.getLesson(lessonIdKey);
 				lessonData.setAlertBehavior(newSelectedAlertBehavior);
+				setAlarms(newSelectedAlertBehavior);
 				lessonsForStorage.removeLesson(lessonIdKey);
 			} 
 			
@@ -158,4 +159,14 @@ LessonData lessonData = null;
 		}
 		return newSelectedAlerts;
 	} 
+	
+	private void setAlarms(ArrayList<Integer> selectedAlertBehavior) {
+	
+		if (selectedAlertBehavior.size() > 0) {
+			
+			
+		}
+		
+	}
+	
 }
