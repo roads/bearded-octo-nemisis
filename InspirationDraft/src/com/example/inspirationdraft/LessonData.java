@@ -15,7 +15,7 @@ public class LessonData implements Serializable{
 	private String lessonId;
 	private String lessonTitle;
 	private ArrayList<String> inspirationAssignments;
-	private AlertBehavior alerts;
+	private AlertBehavior alerts = new AlertBehavior();
 	private Integer selectionBehavior;
 	private int inspirationCounter;
 	private Random randGenerator = new Random();
@@ -28,6 +28,7 @@ public class LessonData implements Serializable{
 		this.inspirationAssignments = new ArrayList<String>();
 		this.inspirationAssignments.add(EMPTY);
 		this.selectionBehavior = 0;
+		this.alerts = new AlertBehavior();
 	}
 	
 	public String getNextInspiration() {
@@ -124,7 +125,15 @@ public class LessonData implements Serializable{
 		stream.writeObject(this.inspirationCounter);
 	}
 
+	public boolean doIHaveAlerts(){
+		if(alerts.isEmpty()){
+			return false;
+		}
+		return true;
+	}
+	
 	public AlertBehavior getAlerts() {
+		
 		return alerts;
 	}
 

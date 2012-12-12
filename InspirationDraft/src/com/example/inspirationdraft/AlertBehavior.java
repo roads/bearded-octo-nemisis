@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import android.util.Log;
+
 public class AlertBehavior implements Serializable, Iterable<AlertData>{
 
 	/**
@@ -11,9 +13,10 @@ public class AlertBehavior implements Serializable, Iterable<AlertData>{
 	 */
 	private static final long serialVersionUID = 1L;
 	private ArrayList<AlertData> alerts;
+	private static final String TAG = "AlertBehavior";
 	
 	public AlertBehavior() {
-		alerts = new ArrayList<AlertData>();
+		alerts = new ArrayList<AlertData>(); 
 	}
 	
 	public AlertBehavior(ArrayList<AlertData> alerts){
@@ -22,6 +25,16 @@ public class AlertBehavior implements Serializable, Iterable<AlertData>{
 	
 	public ArrayList<AlertData> getAlertArrayList(){
 		return alerts;
+	}
+	
+	public boolean isEmpty(){
+		Log.v(TAG, "isEmpty"+alerts.isEmpty());
+		Log.v(TAG, "alerts equals"+alerts);
+		
+		if (alerts == null | alerts.isEmpty()){
+			return false;
+		}
+		return true;
 	}
 		
 	public void addAlert(AlertData data) {
@@ -45,7 +58,10 @@ public class AlertBehavior implements Serializable, Iterable<AlertData>{
 	}
 	
 	public int getNumberOfAlerts(){
-		return alerts.size();
+		Log.v(TAG, "in getNumberOfAlerts");
+		int temp = alerts.size();
+		Log.v(TAG, "in getNumberOfAlerts 2");
+		return temp;
 	}
 
 	@Override

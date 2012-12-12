@@ -20,7 +20,7 @@ public final class R {
     }
     public static final class id {
         public static final int alert_days=0x7f07000e;
-        public static final int alert_time_picker=0x7f07000d;
+        public static final int alert_time=0x7f07000d;
         public static final int alertlist=0x7f070002;
         public static final int container=0x7f070001;
         public static final int content_field=0x7f070008;

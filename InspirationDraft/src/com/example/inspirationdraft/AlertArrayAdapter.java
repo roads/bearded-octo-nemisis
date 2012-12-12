@@ -38,7 +38,7 @@ public class AlertArrayAdapter extends ArrayAdapter<AlertData> {
             
             holder = new AlertDataHolder();
             //holder.days = (TextView)row.findViewById(R.id.txtLessonId);
-            holder.time = (CheckedTextView)row.findViewById(R.id.alert_time_picker);
+            holder.time = (CheckedTextView)row.findViewById(R.id.alert_time);
 
             row.setTag(holder);
         }

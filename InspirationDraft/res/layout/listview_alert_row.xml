@@ -9,7 +9,7 @@
         android:layout_height="wrap_content" >
 
         <CheckedTextView
-            android:id="@+id/alert_time_picker"
+            android:id="@+id/alert_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checkMark="?android:attr/listChoiceIndicatorMultiple"/>
