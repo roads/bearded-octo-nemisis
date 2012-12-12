@@ -139,6 +139,7 @@ public class AlertBehaviorFragment extends Fragment {
 		myAlerts.add(new AlertData("in 7 seconds", ""));
 		myAlerts.add(new AlertData("02", "05"));
 		myAlerts.add(new AlertData("02", "10"));
+		myAlerts.add(new AlertData("09", "30"));
 		
 		ListView list_checked_alerts = (ListView) getActivity().findViewById(R.id.alertlist);
 		
@@ -201,6 +202,21 @@ public class AlertBehaviorFragment extends Fragment {
 		    PendingIntent pendingIntent3 = PendingIntent.getBroadcast(getActivity(), 3, intent3, 0);
 		    AlarmManager alarmManager3 = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 		    alarmManager3.set(AlarmManager.RTC_WAKEUP,  timeOff.getTimeInMillis(), pendingIntent3);		
+		}
+		
+		if (selectedAlertBehavior.contains(3)) {
+			Calendar timeOff = Calendar.getInstance();
+			//int days = Calendar.WEDNESDAY + (7 - timeOff.get(Calendar.DAY_OF_WEEK)); // how many days until Sunday
+			timeOff.add(Calendar.DATE, 0);
+			timeOff.set(Calendar.HOUR, 9);
+			timeOff.set(Calendar.MINUTE, 30);
+			timeOff.set(Calendar.SECOND, 0);
+			
+			Intent intent4 = new Intent(getActivity(), SimpleAlarm.class);
+		    intent4.putExtra("lessonIdKey", lessonIdKey);
+		    PendingIntent pendingIntent4 = PendingIntent.getBroadcast(getActivity(), 4, intent4, 0);
+		    AlarmManager alarmManager4 = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+		    alarmManager4.set(AlarmManager.RTC_WAKEUP,  timeOff.getTimeInMillis(), pendingIntent4);		
 		}
 //	 	public void CancelAlarm(Context context) {
 //	     Intent intent = new Intent(context, SimpleAlarm.class);

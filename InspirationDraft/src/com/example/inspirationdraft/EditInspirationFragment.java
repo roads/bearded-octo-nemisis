@@ -96,9 +96,8 @@ public class EditInspirationFragment extends Fragment {
 			} else {
 				// new inspiration
 				IdGenerator InspirationIdGenerator = idGeneratorsForStorage.getIdGenerator((String) getText(R.string.inspiration_id_generator));
-				String newUniqueInspirationId = InspirationIdGenerator.getUniqueId();
-				inspirationData = new InspirationData(newUniqueInspirationId, content);
-				inspirationIdKey = inspirationData.getInspirationId();
+				inspirationIdKey = InspirationIdGenerator.getUniqueId();
+				inspirationData = new InspirationData(inspirationIdKey, content);
 				inspirationData.setLessonAssignments(newChosenLessonAssignments);
 				
 				idGeneratorsForStorage.removeIdGenerator((String) getText(R.string.inspiration_id_generator));
@@ -163,7 +162,7 @@ public class EditInspirationFragment extends Fragment {
 		
 		// Determine which lessons were selected
 		ListView list_checkable_lessons = (ListView) getActivity().findViewById(R.id.lessonlist);
-		int numLessonsInView = list_checkable_lessons.getCount();
+		int numLessonsInView = list_checkable_lessons.getChildCount();
 		ArrayList<String> newChosenLessons = new ArrayList<String>();
 		SparseBooleanArray chosenLessonsSparseBooleanArray = list_checkable_lessons.
 				getCheckedItemPositions();

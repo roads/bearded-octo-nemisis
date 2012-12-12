@@ -30,7 +30,7 @@ public final class R {
         public static final int imgInspirationIcon=0x7f070012;
         public static final int imgLessonIcon=0x7f070016;
         public static final int inspiration_id=0x7f070009;
-        public static final int inspirationlist=0x7f070008;
+        public static final int inspirationlistmultiple=0x7f070008;
         public static final int lesson_id=0x7f070004;
         public static final int lesson_title=0x7f070005;
         public static final int lessonlist=0x7f07000b;

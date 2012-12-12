@@ -57,7 +57,7 @@ public class EditContentFragment extends Fragment {
 			// Awful code to pre-check the CheckedTextView (using setChecked inside adapter does not work!!!)
 			//http://stackoverflow.com/questions/7202581/setting-listview-item-checked-from-adapter
 			//http://stackoverflow.com/questions/12641529/unable-to-check-uncheck-checkedtextview-inside-getview
-			ListView list_checkable_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlist);
+			ListView list_checkable_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlistmultiple);
 			ArrayList<String> inspirationAssignments = newLessonData.getInspirationAssignments();
 			if (inspirationAssignments.size() > 0) {
 				int itemLocation = 0;
@@ -81,8 +81,7 @@ public class EditContentFragment extends Fragment {
 			EditText suffixName_field = (EditText) getActivity().findViewById(R.id.suffix_name_field);
 			String suffixName = suffixName_field.getText().toString();
 			
-			ArrayList<String> newChosenInspirationAssignments = 
-					getNewChosenInspirationAssignments(); 
+			ArrayList<String> newChosenInspirationAssignments = getNewChosenInspirationAssignments(); 
 			
 			if (lessonIdKey != null) {
 				// editing existing
@@ -93,9 +92,8 @@ public class EditContentFragment extends Fragment {
 			} else {
 				// new lesson
 				IdGenerator LessonIdGenerator = idGeneratorsForStorage.getIdGenerator((String) getText(R.string.lesson_id_generator));
-				String newUniqueLessonId = LessonIdGenerator.getUniqueId();
-				lessonData = new LessonData(newUniqueLessonId, suffixName);
-				lessonIdKey = lessonData.getLessonId();
+				lessonIdKey = LessonIdGenerator.getUniqueId();
+				lessonData = new LessonData(lessonIdKey, suffixName);
 				
 				getActivity().getIntent().putExtra("lessonIdKey", lessonIdKey);
 				
@@ -153,7 +151,7 @@ public class EditContentFragment extends Fragment {
 			inspirationsForDisplay.add(inspirationsForStorage.getInspiration(inspirationKey));
 		}
         
-        ListView list_checked_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlist);			
+        ListView list_checked_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlistmultiple);			
 		
         InspirationArrayAdapterMultiple adapter = new InspirationArrayAdapterMultiple(getActivity(),
     			R.layout.listview_inspiration_row_multiple, inspirationsForDisplay);
@@ -164,19 +162,21 @@ public class EditContentFragment extends Fragment {
 	private ArrayList<String> getNewChosenInspirationAssignments(){
 		
 		// Determine which inspirations were selected
-		ListView list_checkable_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlist);
-		int numInspirationsInView = list_checkable_inspirations.getCount();
+		ListView list_checkable_inspirations = (ListView) getActivity().findViewById(R.id.inspirationlistmultiple);
+		int numInspirationsInView = list_checkable_inspirations.getChildCount();
 		ArrayList<String> newChosenInspirations = new ArrayList<String>();
 		SparseBooleanArray chosenInspirationsSparseBooleanArray = list_checkable_inspirations.
 				getCheckedItemPositions();
 		
 		for(int i =0; i < numInspirationsInView; i++) {
 			if(chosenInspirationsSparseBooleanArray.get(i) == true) {
+			//if(list_checkable_inspirations.isItemChecked(i)) {
 				TextView id_field = (TextView) list_checkable_inspirations.getChildAt(i).
 						findViewById(R.id.txtInspirationId);
 				newChosenInspirations.add(id_field.getText().toString());
 			}	
 		}
+				
 		return newChosenInspirations;
 	} 
 
