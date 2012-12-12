@@ -35,11 +35,11 @@
     <string name="menu_cancel">Cancel</string>
     <string name="lesson_id_generator">lessonIdGeneratorIdentifier</string>
     <string name="inspiration_id_generator">inspirationIdGeneratorIdentifier</string>
-    
     <string name="menu_new_alert">New</string>
     <string name="menu_edit_alert">Edit</string>
     <string name="menu_delete_alert">Delete</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_edit_alert">EditAlertActivity</string>
+    <string name="title_activity_alarm">AlarmActivity</string>
 
 </resources>

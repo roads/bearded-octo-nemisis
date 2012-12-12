@@ -18,7 +18,6 @@ public class LessonData implements Serializable{
 	private Integer selectionBehavior;
 	private ArrayList<Integer> alertBehavior;
 	private int inspirationCounter;
-	private Random randGenerator = new Random();
 	
 	public LessonData(String lessonId, String lessonTitle) {
 		super();
@@ -36,13 +35,17 @@ public class LessonData implements Serializable{
 		String nextInspirationId = null;
 		if (numInspirations > 0) {
 			if (selectionBehavior == 0) {
-				nextInspirationId = "1";
-//				 int randomInt = randGenerator.nextInt(numInspirations);
-//				 nextInspirationId = Integer.toString(randomInt);
+//				nextInspirationId = "4";
+				Random randGenerator = new Random();
+				 int randomInt = randGenerator.nextInt(numInspirations);
+				 nextInspirationId = inspirationAssignments.get(randomInt);
 			} else if (selectionBehavior == 1) {
-				//nextInspirationId = "2";
-				nextInspirationId = inspirationAssignments.get(inspirationCounter);
-				inspirationCounter = (inspirationCounter + 1)%numInspirations;
+				//nextInspirationId = "3";
+				if(this.inspirationCounter >= (numInspirations)) {
+					this.inspirationCounter = 0;
+				}
+				nextInspirationId = inspirationAssignments.get(this.inspirationCounter);
+				this.inspirationCounter = this.inspirationCounter + 1;
 			}			
 		} else {
 			nextInspirationId = EMPTY;
@@ -72,7 +75,6 @@ public class LessonData implements Serializable{
 	
 	public void setInspirationAssignments(ArrayList<String> newAssignments) {
 		this.inspirationAssignments = newAssignments;
-		inspirationCounter = 0;
 	}
 	
 	public int getAssignedIcon() {
@@ -105,7 +107,6 @@ public class LessonData implements Serializable{
 	public void addInspirationAssignment(String inspirationId) {
 		inspirationAssignments.remove(EMPTY);
 		inspirationAssignments.add(inspirationId);
-		inspirationCounter = 0;
 	}
 	
 	public void removeInspirationAssignment(String inspiraitonId) {
@@ -113,7 +114,6 @@ public class LessonData implements Serializable{
 		if (inspirationAssignments.size() == 0) {
 			inspirationAssignments.add(EMPTY);
 		}
-		inspirationCounter = 0;
 	}
 	
 	@SuppressWarnings("unchecked")

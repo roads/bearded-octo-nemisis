@@ -2,6 +2,7 @@ package com.example.inspirationdraft;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.app.AlarmManager;
 import android.app.Fragment;
@@ -136,8 +137,8 @@ public class AlertBehaviorFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 	
 		myAlerts.add(new AlertData("in 7 seconds", ""));
+		myAlerts.add(new AlertData("02", "05"));
 		myAlerts.add(new AlertData("02", "10"));
-		myAlerts.add(new AlertData("02", "14"));
 		
 		ListView list_checked_alerts = (ListView) getActivity().findViewById(R.id.alertlist);
 		
@@ -169,10 +170,44 @@ public class AlertBehaviorFragment extends Fragment {
 		if (selectedAlertBehavior.contains(0)) {
 			Intent intent = new Intent(getActivity(), SimpleAlarm.class);
 		    intent.putExtra("lessonIdKey", lessonIdKey);
-		    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 999, intent, 0);
+		    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 1, intent, 0);
 		    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 		    alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+7000, pendingIntent);		
 		}
+		if (selectedAlertBehavior.contains(1)) {
+			Calendar timeOff = Calendar.getInstance();
+			//int days = Calendar.WEDNESDAY + (7 - timeOff.get(Calendar.DAY_OF_WEEK)); // how many days until Sunday
+			timeOff.add(Calendar.DATE, 0);
+			timeOff.set(Calendar.HOUR, 14);
+			timeOff.set(Calendar.MINUTE, 5);
+			timeOff.set(Calendar.SECOND, 0);
+			
+			Intent intent2 = new Intent(getActivity(), SimpleAlarm.class);
+		    intent2.putExtra("lessonIdKey", lessonIdKey);
+		    PendingIntent pendingIntent2 = PendingIntent.getBroadcast(getActivity(), 2, intent2, 0);
+		    AlarmManager alarmManager2 = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+		    alarmManager2.set(AlarmManager.RTC_WAKEUP,  timeOff.getTimeInMillis(), pendingIntent2);		
+		}
+		if (selectedAlertBehavior.contains(2)) {
+			Calendar timeOff = Calendar.getInstance();
+			//int days = Calendar.WEDNESDAY + (7 - timeOff.get(Calendar.DAY_OF_WEEK)); // how many days until Sunday
+			timeOff.add(Calendar.DATE, 0);
+			timeOff.set(Calendar.HOUR, 14);
+			timeOff.set(Calendar.MINUTE, 10);
+			timeOff.set(Calendar.SECOND, 0);
+			
+			Intent intent3 = new Intent(getActivity(), SimpleAlarm.class);
+		    intent3.putExtra("lessonIdKey", lessonIdKey);
+		    PendingIntent pendingIntent3 = PendingIntent.getBroadcast(getActivity(), 3, intent3, 0);
+		    AlarmManager alarmManager3 = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+		    alarmManager3.set(AlarmManager.RTC_WAKEUP,  timeOff.getTimeInMillis(), pendingIntent3);		
+		}
+//	 	public void CancelAlarm(Context context) {
+//	     Intent intent = new Intent(context, SimpleAlarm.class);
+//	     PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
+//	     AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//	     alarmManager.cancel(sender);
+//	 	}
 		
 	}
 	
