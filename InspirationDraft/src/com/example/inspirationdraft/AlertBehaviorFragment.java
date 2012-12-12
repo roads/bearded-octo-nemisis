@@ -3,7 +3,11 @@ package com.example.inspirationdraft;
 import java.io.File;
 import java.util.ArrayList;
 
+import android.app.AlarmManager;
 import android.app.Fragment;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -131,7 +135,7 @@ public class AlertBehaviorFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 	
-		myAlerts.add(new AlertData("in 30 seconds", ""));
+		myAlerts.add(new AlertData("in 7 seconds", ""));
 		myAlerts.add(new AlertData("02", "10"));
 		myAlerts.add(new AlertData("02", "14"));
 		
@@ -162,9 +166,12 @@ public class AlertBehaviorFragment extends Fragment {
 	
 	private void setAlarms(ArrayList<Integer> selectedAlertBehavior) {
 	
-		if (selectedAlertBehavior.size() > 0) {
-			
-			
+		if (selectedAlertBehavior.contains(0)) {
+			Intent intent = new Intent(getActivity(), SimpleAlarm.class);
+		    intent.putExtra("lessonIdKey", lessonIdKey);
+		    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 999, intent, 0);
+		    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+		    alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+7000, pendingIntent);		
 		}
 		
 	}

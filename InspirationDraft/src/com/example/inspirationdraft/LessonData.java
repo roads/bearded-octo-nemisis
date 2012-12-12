@@ -20,7 +20,7 @@ public class LessonData implements Serializable{
 	private int inspirationCounter;
 	private Random randGenerator = new Random();
 	
-	public LessonData(String lessonId, String lessonTitle){
+	public LessonData(String lessonId, String lessonTitle) {
 		super();
 		this.lessonId = lessonId;
 		this.lessonTitle = lessonTitle;
@@ -36,13 +36,16 @@ public class LessonData implements Serializable{
 		String nextInspirationId = null;
 		if (numInspirations > 0) {
 			if (selectionBehavior == 0) {
-				 int randomInt = randGenerator.nextInt(numInspirations);
-				 nextInspirationId = Integer.toString(randomInt);
+				nextInspirationId = "1";
+//				 int randomInt = randGenerator.nextInt(numInspirations);
+//				 nextInspirationId = Integer.toString(randomInt);
 			} else if (selectionBehavior == 1) {
+				//nextInspirationId = "2";
 				nextInspirationId = inspirationAssignments.get(inspirationCounter);
 				inspirationCounter = (inspirationCounter + 1)%numInspirations;
-			}
-			
+			}			
+		} else {
+			nextInspirationId = EMPTY;
 		}
 		
 		return nextInspirationId;
